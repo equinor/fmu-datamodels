@@ -1,0 +1,116 @@
+[build-system]
+requires = ["pip>=19.1.1", "setuptools", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fmu-datamodels"
+description = "FMU data standard, including models and schemas"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache 2.0" }
+authors = [{ name = "Equinor", email = "fg-fmu_atlas@equinor.com" }]
+keywords = ["fmu", "sumo"]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+]
+dynamic = ["version"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/equinor/fmu-datamodels"
+Repository = "https://github.com/equinor/fmu-datamodels"
+Issues = "https://github.com/equinor/fmu-datamodels/issues"
+Documentation = "https://fmu-dataio.readthedocs.io"
+
+[project.optional-dependencies]
+dev = [
+    "coverage>=4.1",    
+    "mypy",
+    "ruff" 
+]
+docs = [
+    "pydocstyle",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-runner",
+    "pytest-xdist",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = "tests"
+
+[tool.coverage.run]
+omit = [
+    "version.py",
+    "tests/**",
+]
+
+[tool.pydocstyle]
+convention = "google"
+match = '(?!(test_|_)).*\.py'
+
+[tool.ruff]
+line-length = 88
+exclude = ["version.py", "docs/ext/**"]
+
+[tool.ruff.lint]
+ignore = [
+    "C901",
+]
+select = [
+    "B",  # flake-8-bugbear
+    "C",  # pylint-convention
+    "C90",  # mccabe
+    "D",  # pydocstyle
+    "E",  # pycodestyle-error
+    "F",  # pyflakes
+    "I",  # isort
+    "NPY",  # numpy
+    "PD",  # pandas-vet
+    "PIE",  # flake8-pie
+    "PL",  # pylint
+    "Q",  # flake-8 quotes
+    "Q",  # flake8-quotes
+    "RET",  # flake8-return
+    "RSE",  # flake8-raise
+    "SIM",  # flake8-simplify
+    "TCH",  # flake8-type-checking
+    "TID",  # flake8-tidy-imports
+    "UP",  # pyupgrade
+    "W",  # pylint-warnings
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[tool.mypy]
+check_untyped_defs = true
+exclude = "^(build)"
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+disallow_untyped_calls = true
+disallow_subclassing_any = true
+extra_checks = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unused_ignores = true

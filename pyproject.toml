@@ -1,15 +1,14 @@
-# NOTE: you have to use single-quoted strings in TOML for regular expressions.
 [build-system]
 requires = ["pip>=19.1.1", "setuptools", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fmu-dataiomodels"
+name = "fmu-datamodels"
 description = "FMU data standard, including models and schemas"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache 2.0" }
-authors = [{ name = "Equinor", email = "xxxxx@equinor.com" }]
+authors = [{ name = "Equinor", email = "fg-fmu_atlas@equinor.com" }]
 keywords = ["fmu", "sumo"]
 
 classifiers = [
@@ -70,30 +69,27 @@ exclude = ["version.py", "docs/ext/**"]
 
 [tool.ruff.lint]
 ignore = [
-    "B028",  # No explicit `stacklevel` keyword argument found
-    "C901",  # mccabe complex-structure
-    "PD901",  # Avoid using the generic variable name `df` for dataframes
-    "PD011",  # Avoid using .values on dataframes (gives false positives)
-    "TC001",  # Move imports under TYPE_CHECKING. Breaks Pydantic annotations
-    "TC003",  # Move stdlib imports under TYPE_CHECKING. Breaks Pydantic annotations
+    "C901",
 ]
 select = [
     "B",  # flake-8-bugbear
     "C",  # pylint-convention
     "C90",  # mccabe
+    "D",  # pydocstyle
     "E",  # pycodestyle-error
     "F",  # pyflakes
     "I",  # isort
     "NPY",  # numpy
     "PD",  # pandas-vet
     "PIE",  # flake8-pie
-    # "PL",  # pylint
+    "PL",  # pylint
+    "Q",  # flake-8 quotes
     "Q",  # flake8-quotes
     "RET",  # flake8-return
     "RSE",  # flake8-raise
     "SIM",  # flake8-simplify
     "TCH",  # flake8-type-checking
-    # "TID",  # flake8-tidy-imports
+    "TID",  # flake8-tidy-imports
     "UP",  # pyupgrade
     "W",  # pylint-warnings
 ]
@@ -105,11 +101,15 @@ convention = "google"
 combine-as-imports = true
 
 [tool.mypy]
+check_untyped_defs = true
+exclude = "^(build)"
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
 disallow_untyped_defs = true
-exclude = "^((tests|docs|examples|build|tools)/|conftest.py?)"
+disallow_untyped_calls = true
+disallow_subclassing_any = true
 extra_checks = true
-ignore_missing_imports = true
-python_version = 3.11
 strict_equality = true
 warn_redundant_casts = true
 warn_unused_configs = true

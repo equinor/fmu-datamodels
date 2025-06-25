@@ -1,1 +1,1 @@
-"""Top-level package for fmu-datamodels"""
+"""Top-level package for fmu-datamodels."""

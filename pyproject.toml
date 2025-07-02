@@ -26,7 +26,9 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+    "pydantic",
+]
 
 [project.urls]
 Homepage = "https://github.com/equinor/fmu-datamodels"
@@ -36,9 +38,12 @@ Documentation = "https://fmu-dataio.readthedocs.io"
 
 [project.optional-dependencies]
 dev = [
-    "coverage>=4.1",    
+    "coverage>=4.1",
+    "hypothesis",    
     "mypy",
-    "ruff" 
+    "pytest",
+    "ruff",
+    "xtgeo>=2.16",    
 ]
 docs = [
     "pydocstyle",
@@ -48,6 +53,9 @@ docs = [
     "pytest-runner",
     "pytest-xdist",
 ]
+
+[tool.setuptools_scm]
+write_to = "src/fmu/datamodels/version.py"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -69,13 +77,15 @@ exclude = ["version.py", "docs/ext/**"]
 
 [tool.ruff.lint]
 ignore = [
-    "C901",
+    "B028",  # No explicit `stacklevel` keyword argument found
+    "C901",   # mccabe complex-structure
+    "TC001",  # Move imports under TYPE_CHECKING. Breaks Pydantic annotations
+    "TC003",  # Move stdlib imports under TYPE_CHECKING. Breaks Pydantic annotations    
 ]
 select = [
     "B",  # flake-8-bugbear
     "C",  # pylint-convention
     "C90",  # mccabe
-    "D",  # pydocstyle
     "E",  # pycodestyle-error
     "F",  # pyflakes
     "I",  # isort
@@ -103,7 +113,6 @@ combine-as-imports = true
 [tool.mypy]
 check_untyped_defs = true
 exclude = "^(build)"
-disallow_any_generics = true
 disallow_incomplete_defs = true
 disallow_untyped_decorators = true
 disallow_untyped_defs = true

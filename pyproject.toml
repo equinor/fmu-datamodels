@@ -42,16 +42,15 @@ dev = [
     "hypothesis",    
     "mypy",
     "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-runner",
+    "pytest-xdist",
     "ruff",
     "xtgeo>=2.16",    
 ]
 docs = [
     "pydocstyle",
-    "pytest",
-    "pytest-cov",
-    "pytest-mock",
-    "pytest-runner",
-    "pytest-xdist",
 ]
 
 [tool.setuptools_scm]

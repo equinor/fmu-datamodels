@@ -92,3 +92,29 @@ def test_access_classification_logic() -> None:
                 "ssdl": {"rep_include": False},
             }
         )
+
+
+# --------------------------------------------------------------------------------------
+# Stratigraphy
+# --------------------------------------------------------------------------------------
+
+
+def test_stratigraphy_dunder_iter(
+    testdata_stratigraphy: global_configuration.Stratigraphy,
+) -> None:
+    try:
+        count = 0
+        for _ in testdata_stratigraphy:
+            count += 1
+        assert count == len(testdata_stratigraphy.root)
+    except Exception:
+        pytest.fail("Stratigraphy class does not have __iter__()")
+
+
+def test_stratigraphy_dunder_getitem(
+    testdata_stratigraphy: global_configuration.Stratigraphy,
+) -> None:
+    try:
+        testdata_stratigraphy["TopStratUnit2"]
+    except Exception:
+        pytest.fail("Stratigraphy class does not have __getitem__()")

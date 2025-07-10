@@ -80,7 +80,7 @@ ignore = [
     "B028",  # No explicit `stacklevel` keyword argument found
     "C901",   # mccabe complex-structure
     "TC001",  # Move imports under TYPE_CHECKING. Breaks Pydantic annotations
-    "TC003",  # Move stdlib imports under TYPE_CHECKING. Breaks Pydantic annotations    
+    "TC003",  # Move stdlib imports under TYPE_CHECKING. Breaks Pydantic annotations
 ]
 select = [
     "B",  # flake-8-bugbear

@@ -29,4 +29,9 @@ jobs:
 
       - name: Run tests
         run: |
-          echo "No tests to run yet..."
+
+          if [[ "${{ github.event.pull_request.base.ref }}" == "staging" ]]; then
+            pytest -n auto -v --cov --cov-report term-missing --prod
+          else
+            pytest -n auto -v --cov --cov-report term-missing
+          fi

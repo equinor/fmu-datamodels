@@ -59,7 +59,7 @@ from fmu.datamodels.fmu_results.specification import (
     TableSpecification,
 )
 from fmu.datamodels.types import MD5HashStr
-from tests.test_utils import _get_nested_pydantic_models
+from tests.utils import _get_nested_pydantic_models
 
 
 @pytest.fixture(scope="session")

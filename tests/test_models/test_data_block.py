@@ -10,7 +10,7 @@ from fmu.datamodels.fmu_results.fmu_results import (
     FmuResultsSchema,
     ObjectMetadata,
 )
-from tests.test_utils import _get_pydantic_models_from_annotation
+from tests.utils import _get_pydantic_models_from_annotation
 
 
 def test_all_content_enums_in_anydata() -> None:
@@ -166,7 +166,7 @@ def test_content_seismic(seismic_metadata: dict) -> None:
         FmuResults.model_validate(_metadata)
 
 
-def test_schema_data_top_base(seismic_metadata: dict) -> None:
+def test_data_top_and_base(seismic_metadata: dict) -> None:
     """Test require data.top and data.base.
 
     * Require both data.top and data.base, or none.
@@ -199,7 +199,7 @@ def test_schema_data_top_base(seismic_metadata: dict) -> None:
     FmuResults.model_validate(seismic_metadata)
 
 
-def test_schema_data_time(seismic_metadata: dict) -> None:
+def test_data_time(seismic_metadata: dict) -> None:
     """Test schema logic for data.time."""
 
     # assert validation as-is

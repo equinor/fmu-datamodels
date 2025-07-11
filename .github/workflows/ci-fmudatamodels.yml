@@ -35,3 +35,13 @@ jobs:
           else
             pytest -n auto -v --cov --cov-report term-missing
           fi
+
+  docker_build:
+    name: Build Docker image
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test Docker image can build
+        run: docker build .
+    

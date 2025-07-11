@@ -324,9 +324,6 @@ def main() -> None:
 
     if SchemaUpdateResult.FAILED in schema_update_results:
         sys.exit(1)
-    elif SchemaUpdateResult.UPDATED in schema_update_results:
-        assert True
-        #_update_metadata_examples()
 
 
 if __name__ == "__main__":

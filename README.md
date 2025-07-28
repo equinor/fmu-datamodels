@@ -1,11 +1,14 @@
 # fmu-datamodels
+
 FMU data standard, including models and schemas
 
- ## About
+## About
 
- ## Link to documentation
+## Link to documentation
 
- ## Schemas
+## Schemas
 
- ## Lincese
-This project is licensed under the terms of the [Apache 2.0](https://github.com/equinor/fmu-datamodels/blob/main/LICENSE) license.
+## License
+
+This project is licensed under the terms of the [Apache
+2.0](https://github.com/equinor/fmu-datamodels/blob/main/LICENSE) license.

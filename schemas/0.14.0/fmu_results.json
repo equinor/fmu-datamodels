@@ -6830,7 +6830,7 @@
         },
         "name": {
           "examples": [
-            "iter-0"
+            "realization-0"
           ],
           "title": "Name",
           "type": "string"

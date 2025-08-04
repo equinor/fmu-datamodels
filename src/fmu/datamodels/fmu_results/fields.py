@@ -262,7 +262,7 @@ class Realization(BaseModel):
     id: int = Field(ge=0)
     """The internal ID of the realization, represented by an integer."""
 
-    name: str = Field(examples=["iter-0"])
+    name: str = Field(examples=["realization-0"])
     """The name of the realization. This is typically reflecting the folder name on
     scratch. We recommend to use ``fmu.realization.id`` for all usage except purely
     visual appearance."""

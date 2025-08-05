@@ -50,6 +50,8 @@ class FmuResultsSchema(SchemaBase):
     VERSION_CHANGELOG: str = """
     #### 0.14.0
 
+    - Correct example name for realization class
+
     #### 0.13.0
 
     - Content 'fault_triangulated_surface' renamed to 'fault_surface'

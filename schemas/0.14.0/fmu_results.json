@@ -222,6 +222,9 @@
           "$ref": "#/$defs/StructureDepthSurfaceStandardResult"
         },
         {
+          "$ref": "#/$defs/StructureDepthFaultSurfaceStandardResult"
+        },
+        {
           "$ref": "#/$defs/StructureTimeSurfaceStandardResult"
         },
         {
@@ -8338,6 +8341,32 @@
         "name"
       ],
       "title": "StructureDepthFaultLinesStandardResult",
+      "type": "object"
+    },
+    "StructureDepthFaultSurfaceStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represent.\nThis class contains metadata for the 'structure_depth_fault_surface'\nstandard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "structure_depth_fault_surface",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "StructureDepthFaultSurfaceStandardResult",
       "type": "object"
     },
     "StructureDepthIsochoreStandardResult": {

@@ -51,6 +51,7 @@ class FmuResultsSchema(SchemaBase):
     #### 0.14.0
 
     - Correct example name for realization class
+    - Add new standard result type `StructureDepthFaultSurfaceStandardResult`
 
     #### 0.13.0
 

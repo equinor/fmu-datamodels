@@ -45,9 +45,12 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.14.0"
+    VERSION: VersionStr = "0.15.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.15.0
+
+
     #### 0.14.0
 
     - Correct example name for realization class

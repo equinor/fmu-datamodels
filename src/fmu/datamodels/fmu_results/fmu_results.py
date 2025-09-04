@@ -50,6 +50,9 @@ class FmuResultsSchema(SchemaBase):
     VERSION_CHANGELOG: str = """
     #### 0.15.0
 
+    - 'ObjectMetadataClass.triangulated_surface' is removed,
+      replaced by 'ObjectMetadataClass.surface'
+    - 'Layout.triangulated_surface' is renamed to 'Layout.triangulated'
 
     #### 0.14.0
 
@@ -314,7 +317,6 @@ class ObjectMetadata(MetadataBase):
 
     class_: Literal[
         ObjectMetadataClass.surface,
-        ObjectMetadataClass.triangulated_surface,
         ObjectMetadataClass.table,
         ObjectMetadataClass.cpgrid,
         ObjectMetadataClass.cpgrid_property,

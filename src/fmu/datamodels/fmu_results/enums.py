@@ -79,7 +79,6 @@ class ObjectMetadataClass(MetadataClass):
     """The class of a data object (typically originating from an RMS model)."""
 
     surface = "surface"
-    triangulated_surface = "triangulated_surface"
     table = "table"
     cpgrid = "cpgrid"
     cpgrid_property = "cpgrid_property"
@@ -108,7 +107,7 @@ class Layout(StrEnum):
     table = "table"
     dictionary = "dictionary"
     faultroom_triangulated = "faultroom_triangulated"
-    triangulated_surface = "triangulated_surface"
+    triangulated = "triangulated"
 
 
 class FMUContext(str, Enum):

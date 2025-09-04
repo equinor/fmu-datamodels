@@ -4324,7 +4324,7 @@
         "table",
         "dictionary",
         "faultroom_triangulated",
-        "triangulated_surface"
+        "triangulated"
       ],
       "title": "Layout",
       "type": "string"
@@ -4997,7 +4997,6 @@
         "class": {
           "enum": [
             "surface",
-            "triangulated_surface",
             "table",
             "cpgrid",
             "cpgrid_property",

@@ -5,13 +5,13 @@ environment.
 
 To prepare the schemas for release first check the changes with the --prod flag:
 
-    $ ./tools/update-schemas --prod --diff
+    $ ./tools/update-schemas.py --prod --diff
 
 This will compare the schemas with all `$id` and `url` fields URLs removed which
 in theory can be present anywhere in any schema. If the output looks as expected
 you can write the production schemas:
 
-    $ ./tools/update-schemas --prod --force
+    $ ./tools/update-schemas.py --prod --force
 
 """
 
@@ -26,7 +26,7 @@ import sys
 from copy import deepcopy
 from enum import Enum, auto
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Dict, List, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 if TYPE_CHECKING:
     from fmu.datamodels._schema_base import SchemaBase
@@ -40,7 +40,7 @@ PASS = f"[{BOLD}{GREEN}✔{NC}]"
 FAIL = f"[{BOLD}{RED}✖{NC}]"
 INFO = f"[{BOLD}{YELLOW}+{NC}]"
 
-T = TypeVar("T", Dict, List, object)
+T = TypeVar("T", dict, list, object)
 
 
 def _get_parser() -> argparse.ArgumentParser:
@@ -82,7 +82,7 @@ def _get_parser() -> argparse.ArgumentParser:
 def _show_git_diff(output_filepath: Path) -> None:
     command = ["git", "diff", str(output_filepath)]
     print(INFO, f"running `{' '.join(command)}` ...")
-    output = subprocess.run(command, capture_output=True, text=True)
+    output = subprocess.run(command, check=False, capture_output=True, text=True)
     diff_str = "\n      ".join(output.stdout.split("\n"))
     print(f"      {diff_str}")  # To indent the first line too
 
@@ -155,7 +155,7 @@ class SchemaWriter:
         show_diff: bool = False,
         is_test: bool = False,
         force_overwrite: bool = False,
-        force_contractual: bool = False
+        force_contractual: bool = False,
     ) -> None:
         self.force_overwrite = force_overwrite
         self.is_test = is_test
@@ -165,7 +165,7 @@ class SchemaWriter:
 
     def write_schema(
         self,
-        schema_base: SchemaBase,
+        schema_base: type[SchemaBase],
     ) -> SchemaUpdateResult:
         """Write schema to file after some checking."""
         output_filepath = self._get_output_filepath(schema_base.PATH)
@@ -190,7 +190,7 @@ class SchemaWriter:
             output_filepath,
         )
 
-    def contractual_item_removed(self, fmu_result_schema: SchemaBase) -> bool:    
+    def contractual_item_removed(self, fmu_result_schema: type[SchemaBase]) -> bool:
         newest_existing_schema = self._load_existing_schema(
             self._find_newest_existing_schema_path(fmu_result_schema)
         )
@@ -199,9 +199,9 @@ class SchemaWriter:
         if not set(existing_contractual).issubset(set(new_contractional)):
             print(
                 FAIL,
-                f"🚨 A contractual item has been removed from the new schema. "
+                "🚨 A contractual item has been removed from the new schema. "
                 "This is not supported, unless you force the removal by running the "
-                "script with the '--force-contractual' argument."
+                "script with the '--force-contractual' argument.",
             )
             return True
         return False
@@ -228,16 +228,23 @@ class SchemaWriter:
         with open(filepath, encoding="utf-8") as f:
             return json.load(f)
 
-
-    def _find_newest_existing_schema_path(self, fmu_result_schema: SchemaBase) -> Path:
-        output_filepath = self._get_output_filepath(fmu_result_schema.PATH)        
+    def _find_newest_existing_schema_path(
+        self, fmu_result_schema: type[SchemaBase]
+    ) -> Path:
+        output_filepath = self._get_output_filepath(fmu_result_schema.PATH)
         if output_filepath.exists():
             newest_existing_schema_path = output_filepath
         else:
-            versions = [line.strip("#### ") for line in fmu_result_schema.VERSION_CHANGELOG.splitlines() if line.strip().startswith("####")]
+            versions = [
+                line.strip("# ")
+                for line in fmu_result_schema.VERSION_CHANGELOG.splitlines()
+                if line.strip().startswith("####")
+            ]
             current_version = versions[0]
             previous_version = versions[1]
-            previous_schema_path = str(output_filepath).replace(current_version, previous_version)
+            previous_schema_path = str(output_filepath).replace(
+                current_version, previous_version
+            )
             newest_existing_schema_path = Path(previous_schema_path)
         return newest_existing_schema_path
 
@@ -245,7 +252,7 @@ class SchemaWriter:
         self,
         existing_schema: dict[str, Any],
         new_schema: dict[str, Any],
-        schema_base: SchemaBase,
+        schema_base: type[SchemaBase],
         output_filepath: Path,
     ) -> SchemaUpdateResult:
         """Handles the case when a schema version we're writing to already exists.
@@ -275,7 +282,7 @@ class SchemaWriter:
                 FAIL,
                 f"🚨 {BOLD}{schema_base.FILENAME}{NC} version "
                 f"{BOLD}{schema_base.VERSION}{NC}: mismatch in '$id'. "
-                "you probably need to run `./tools/update-schema --prod --force`",
+                "you probably need to run `./tools/update-schemas.py --prod --force`",
             )
             if self.show_diff:
                 _show_py_diff(existing_schema, new_schema)
@@ -294,7 +301,7 @@ class SchemaWriter:
         self,
         output_filepath: Path,
         schema: dict[str, Any],
-        schema_base: SchemaBase,
+        schema_base: type[SchemaBase],
     ) -> SchemaUpdateResult:
         """Writes the schema to disk."""
         if not self.is_test:
@@ -321,17 +328,19 @@ def main() -> None:
 
     os.environ["DEV_SCHEMA"] = "" if args.prod else "1"
     # Ensures URLs will differ based on above
-    import fmu.datamodels as models
+    import fmu.datamodels as models  # noqa
 
     writer = SchemaWriter(
         is_release=args.prod,
         show_diff=args.diff,
         is_test=args.test,
         force_overwrite=args.force,
-        force_contractual = args.force_contractual
+        force_contractual=args.force_contractual,
     )
 
-    if not writer.force_contractual and writer.contractual_item_removed(models.FmuResultsSchema):
+    if not writer.force_contractual and writer.contractual_item_removed(
+        models.FmuResultsSchema
+    ):
         sys.exit(1)
 
     schema_update_results = []

@@ -1,5 +1,7 @@
 """Top-level package for fmu-datamodels."""
 
+from fmu.datamodels._schema_base import SchemaBase
+
 from .fmu_results import FmuResults, FmuResultsSchema
 from .standard_results import (
     FieldOutlineResult,
@@ -28,7 +30,7 @@ __all__ = [
     "StructureDepthFaultLinesSchema",
 ]
 
-schemas = [
+schemas: list[type[SchemaBase]] = [
     FmuResultsSchema,
     FieldOutlineSchema,
     InplaceVolumesSchema,

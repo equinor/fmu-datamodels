@@ -37,11 +37,11 @@ def test_schemas_uptodate(schema: SchemaBase) -> None:
 
     To get more feedback or generate new schemas run:
 
-        ./tools/update-schemas --diff
+        ./tools/update-schemas.py --diff
 
     If you are generating a production release try running:
 
-        ./tools/update-schemas --diff --prod
+        ./tools/update-schemas.py --diff --prod
     """
 
     with open(schema.PATH) as f:

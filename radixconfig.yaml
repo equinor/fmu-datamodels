@@ -34,6 +34,8 @@ spec:
                     limits:
                         memory: "2Gi"
                         cpu: "1000m"
+                variables:
+                    PROD_URL: false
               - environment: staging
                 horizontalScaling:
                     minReplicas: 1
@@ -45,6 +47,8 @@ spec:
                     limits:
                         memory: "2Gi"
                         cpu: "1000m"
+                variables:
+                    PROD_URL: true
               - environment: prod
                 horizontalScaling:
                     minReplicas: 1
@@ -56,3 +60,5 @@ spec:
                     limits:
                         memory: "2Gi"
                         cpu: "1000m"
+                variables:
+                    PROD_URL: true

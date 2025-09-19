@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, Field, RootModel
 
-from fmu.datamodels._schema_base import FmuSchemas, SchemaBase
+from fmu.datamodels._schema_base import FMU_SCHEMA_PATH, SchemaBase
 from fmu.datamodels.standard_results.enums import InplaceVolumes
 from fmu.datamodels.types import VersionStr
 
@@ -90,7 +90,7 @@ class InplaceVolumesSchema(SchemaBase):
     FILENAME: str = "inplace_volumes.json"
     """The filename this schema is written to."""
 
-    PATH: Path = FmuSchemas.PATH / "file_formats" / VERSION / FILENAME
+    PATH: Path = FMU_SCHEMA_PATH / "file_formats" / VERSION / FILENAME
     """The local and URL path of this schema."""
 
     @classmethod

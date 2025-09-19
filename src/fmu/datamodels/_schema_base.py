@@ -14,22 +14,13 @@ from typing import (
 from pydantic import BaseModel, ValidationError
 from pydantic.json_schema import GenerateJsonSchema
 
+from fmu.datamodels._schema_urls import FmuSchemaUrls
 from fmu.datamodels.types import VersionStr
 
 T = TypeVar("T", dict, list, object)
 
 
-class FmuSchemas:
-    """These URLs can be constructed programmatically from radixconfig.yaml if need be:
-
-        {cfg.components[].name}-{cfg.metadata.name}-{spec.environments[].name}
-
-    As they are unlikely to change they are hardcoded here.
-    """
-
-    DEV_URL: Final[str] = "https://main-fmu-schemas-dev.radix.equinor.com"
-    PROD_URL: Final[str] = "https://main-fmu-schemas-prod.radix.equinor.com"
-    PATH: Final[Path] = Path("schemas")
+FMU_SCHEMA_PATH: Final[Path] = Path("schemas")
 
 
 class GenerateJsonSchemaBase(GenerateJsonSchema):
@@ -114,11 +105,11 @@ class SchemaBase(ABC):
 
         schemas/0.1.0/schema.json
 
-    This path should _always_ have `FmuSchemas.PATH` as its first parent.
+    This path should _always_ have `FMU_SCHEMA_PATH` as its first parent.
     This determines the on-disk and URL location of this schema file. A
     trivial example is:
 
-        PATH: Path = FmuSchemas.PATH / VERSION / FILENAME
+        PATH: Path = FMU_SCHEMA_PATH / VERSION / FILENAME
 
     """
 
@@ -144,9 +135,9 @@ class SchemaBase(ABC):
 
     @classmethod
     def _validate_path(cls) -> None:
-        if not cls.PATH.parts[0].startswith(str(FmuSchemas.PATH)):
+        if not cls.PATH.parts[0].startswith(str(FMU_SCHEMA_PATH)):
             raise ValueError(
-                f"PATH must start with `FmuSchemas.PATH`: {FmuSchemas.PATH}. "
+                f"PATH must start with `FMU_SCHEMA_PATH`: {FMU_SCHEMA_PATH}. "
                 f"Got {cls.PATH}"
             )
 
@@ -178,12 +169,12 @@ class SchemaBase(ABC):
     @classmethod
     def dev_url(cls) -> str:
         """Returns the url to the schema on the Radix dev environment."""
-        return f"{FmuSchemas.DEV_URL}/{cls.PATH}"
+        return f"{FmuSchemaUrls.DEV_URL}/{cls.PATH}"
 
     @classmethod
     def prod_url(cls) -> str:
         """Returns the url to the schema on the Radix prod environment."""
-        return f"{FmuSchemas.PROD_URL}/{cls.PATH}"
+        return f"{FmuSchemaUrls.PROD_URL}/{cls.PATH}"
 
     @classmethod
     def url(cls) -> str:

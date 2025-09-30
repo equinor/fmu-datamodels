@@ -1,6 +1,5 @@
 # Ignore everything
 *
-
 # Except these
 !nginx.conf
 !schemas/**

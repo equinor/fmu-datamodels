@@ -20,7 +20,7 @@ from fmu.datamodels.types import VersionStr
 T = TypeVar("T", dict, list, object)
 
 
-FMU_SCHEMA_PATH: Final[Path] = Path("schemas")
+FMU_SCHEMAS_PATH: Final[Path] = Path("schemas")
 
 
 class GenerateJsonSchemaBase(GenerateJsonSchema):
@@ -105,11 +105,11 @@ class SchemaBase(ABC):
 
         schemas/0.1.0/schema.json
 
-    This path should _always_ have `FMU_SCHEMA_PATH` as its first parent.
+    This path should _always_ have `FMU_SCHEMAS_PATH` as its first parent.
     This determines the on-disk and URL location of this schema file. A
     trivial example is:
 
-        PATH: Path = FMU_SCHEMA_PATH / VERSION / FILENAME
+        PATH: Path = FMU_SCHEMAS_PATH / VERSION / FILENAME
 
     """
 
@@ -135,9 +135,9 @@ class SchemaBase(ABC):
 
     @classmethod
     def _validate_path(cls) -> None:
-        if not cls.PATH.parts[0].startswith(str(FMU_SCHEMA_PATH)):
+        if not cls.PATH.parts[0].startswith(str(FMU_SCHEMAS_PATH)):
             raise ValueError(
-                f"PATH must start with `FMU_SCHEMA_PATH`: {FMU_SCHEMA_PATH}. "
+                f"PATH must start with `FMU_SCHEMAS_PATH`: {FMU_SCHEMAS_PATH}. "
                 f"Got {cls.PATH}"
             )
 

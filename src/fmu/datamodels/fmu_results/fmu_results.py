@@ -13,7 +13,7 @@ from pydantic import (
 )
 
 from fmu.datamodels._schema_base import (
-    FMU_SCHEMA_PATH,
+    FMU_SCHEMAS_PATH,
     GenerateJsonSchemaBase,
     SchemaBase,
 )
@@ -136,7 +136,7 @@ class FmuResultsSchema(SchemaBase):
     """
 
     FILENAME: str = "fmu_results.json"
-    PATH: Path = FMU_SCHEMA_PATH / VERSION / FILENAME
+    PATH: Path = FMU_SCHEMAS_PATH / VERSION / FILENAME
 
     SOURCE: str = "fmu"
     CONTRACTUAL: Final[list[str]] = [

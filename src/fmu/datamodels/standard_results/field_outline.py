@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, Field, RootModel
 
-from fmu.datamodels._schema_base import FMU_SCHEMA_PATH, SchemaBase
+from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -62,7 +62,7 @@ class FieldOutlineSchema(SchemaBase):
     FILENAME: str = "field_outline.json"
     """The filename this schema is written to."""
 
-    PATH: Path = FMU_SCHEMA_PATH / "file_formats" / VERSION / FILENAME
+    PATH: Path = FMU_SCHEMAS_PATH / "file_formats" / VERSION / FILENAME
     """The local and URL path of this schema."""
 
     @classmethod

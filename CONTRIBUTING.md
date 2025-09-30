@@ -115,7 +115,7 @@ line, then more text if needed. Lines shouldn't be longer than 72
 characters. If the commit is related to a ticket, indicate that with
 `"See #3456", "Cf. #3344, "See ticket 3456", "Closes #3456"` or similar.
 
-Read `Chris Beams hints on commit messages <https://chris.beams.io/posts/git-commit/>`\_.
+Read [Chris Beams hints on commit messages](https://chris.beams.io/posts/git-commit/).
 
 Describing the motivation for a change, the nature of a bug for bug fixes or
 some details on what an enhancement does are also good to include in a commit message.

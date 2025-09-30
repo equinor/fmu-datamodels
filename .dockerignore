@@ -3,3 +3,6 @@
 # Except these
 !nginx.conf
 !schemas/**
+!src/fmu/datamodels/_schema_urls.py
+!tools/export-schema-urls.py
+!run_nginx.sh

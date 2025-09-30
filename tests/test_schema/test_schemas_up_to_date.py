@@ -7,7 +7,8 @@ import pytest
 from pytest import MonkeyPatch
 
 from fmu.datamodels import schemas
-from fmu.datamodels._schema_base import FmuSchemas, SchemaBase
+from fmu.datamodels._schema_base import SchemaBase
+from fmu.datamodels._schema_urls import FmuSchemaUrls
 
 
 def _contains_discriminator_mapping(schema: Any) -> bool:
@@ -54,14 +55,14 @@ def test_schema_url_changes_with_env_var(
 ) -> None:
     monkeypatch.setenv("DEV_SCHEMA", "")
     json = schema.dump()
-    assert schema.url().startswith(FmuSchemas.PROD_URL)
-    assert json["$id"].startswith(FmuSchemas.PROD_URL)
+    assert schema.url().startswith(FmuSchemaUrls.PROD_URL)
+    assert json["$id"].startswith(FmuSchemaUrls.PROD_URL)
     assert json["$schema"] == "https://json-schema.org/draft/2020-12/schema"
 
     monkeypatch.setenv("DEV_SCHEMA", "1")
     json = schema.dump()
-    assert schema.url().startswith(FmuSchemas.DEV_URL)
-    assert json["$id"].startswith(FmuSchemas.DEV_URL)
+    assert schema.url().startswith(FmuSchemaUrls.DEV_URL)
+    assert json["$id"].startswith(FmuSchemaUrls.DEV_URL)
     assert json["$schema"] == "https://json-schema.org/draft/2020-12/schema"
 
 
@@ -84,8 +85,8 @@ def test_schema_url_changes_with_komodo_bleeding_env_var(
     DEV_SCHEMA is set to 1 whenever the tests are run, so it is unset here."""
     monkeypatch.delenv("DEV_SCHEMA", raising=False)
     json = schema.dump()
-    assert schema.url().startswith(FmuSchemas.PROD_URL)
-    assert json["$id"].startswith(FmuSchemas.PROD_URL)
+    assert schema.url().startswith(FmuSchemaUrls.PROD_URL)
+    assert json["$id"].startswith(FmuSchemaUrls.PROD_URL)
     assert json["$schema"] == "https://json-schema.org/draft/2020-12/schema"
 
     # needed to prevent tests failing if inside an actual komodo environment
@@ -93,8 +94,8 @@ def test_schema_url_changes_with_komodo_bleeding_env_var(
 
     monkeypatch.setenv(env_var, env_var_value)
     json = schema.dump()
-    assert schema.url().startswith(FmuSchemas.DEV_URL)
-    assert json["$id"].startswith(FmuSchemas.DEV_URL)
+    assert schema.url().startswith(FmuSchemaUrls.DEV_URL)
+    assert json["$id"].startswith(FmuSchemaUrls.DEV_URL)
     assert json["$schema"] == "https://json-schema.org/draft/2020-12/schema"
 
 

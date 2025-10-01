@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import gc
 from pathlib import Path
 
 import pytest
 
+import fmu.datamodels as models
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 
 
@@ -97,3 +99,14 @@ def test_schemabase_validates_a_version_has_a_changelog_entry() -> None:
         VERSION_CHANGELOG: str = "### 0.9.0"
         FILENAME: str = "fmu_results.json"
         PATH: Path = FMU_SCHEMAS_PATH / "test"
+
+
+def test_schemabase_all_subclasses_in_exposed_schemas_list() -> None:
+    """Tests that all schemas are in the list of schemas to generate and expose."""
+    # Make sure test classes are removed as subclasses of SchemaBase
+    gc.collect()
+
+    schemas = SchemaBase.__subclasses__()
+    exposed_schemas = models.schemas
+    assert len(schemas) == len(exposed_schemas)
+    assert set(schemas) == set(exposed_schemas)

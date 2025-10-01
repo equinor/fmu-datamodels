@@ -6,6 +6,8 @@ from .fmu_results import FmuResults, FmuResultsSchema
 from .standard_results import (
     FieldOutlineResult,
     FieldOutlineSchema,
+    FluidContactOutlineResult,
+    FluidContactOutlineSchema,
     InplaceVolumesResult,
     InplaceVolumesSchema,
     StructureDepthFaultLinesResult,
@@ -24,6 +26,8 @@ __all__ = [
     "FmuResultsSchema",
     "FieldOutlineResult",
     "FieldOutlineSchema",
+    "FluidContactOutlineResult",
+    "FluidContactOutlineSchema",
     "InplaceVolumesResult",
     "InplaceVolumesSchema",
     "StructureDepthFaultLinesResult",
@@ -33,6 +37,7 @@ __all__ = [
 schemas: list[type[SchemaBase]] = [
     FmuResultsSchema,
     FieldOutlineSchema,
+    FluidContactOutlineSchema,
     InplaceVolumesSchema,
     StructureDepthFaultLinesSchema,
 ]

@@ -22,7 +22,6 @@ from pydantic import (
 )
 
 from fmu.datamodels.types import MD5HashStr
-from fmu.datamodels.version import __version__
 
 from . import enums
 
@@ -452,18 +451,23 @@ class Tracklog(RootModel):
         return iter(self.root)
 
     @classmethod
-    def initialize(cls) -> Tracklog:
+    def initialize(cls, fmu_dataio_version: str) -> Tracklog:
         """Initialize the tracklog object with a list containing one
         TracklogEvent of type 'created'"""
-        return cls(cls._generate_tracklog_events(enums.TrackLogEventType.created))
 
-    def extend(self, event: enums.TrackLogEventType) -> None:
+        return cls(
+            root=cls._generate_tracklog_events(
+                enums.TrackLogEventType.created, fmu_dataio_version
+            ),
+        )
+
+    def extend(self, event: enums.TrackLogEventType, fmu_dataio_version: str) -> None:
         """Extend the tracklog with a new tracklog record."""
-        self.root.extend(self._generate_tracklog_events(event))
+        self.root.extend(self._generate_tracklog_events(event, fmu_dataio_version))
 
     @staticmethod
     def _generate_tracklog_events(
-        event: enums.TrackLogEventType,
+        event: enums.TrackLogEventType, fmu_dataio_version: str
     ) -> list[TracklogEvent]:
         """Generate new tracklog events with the given event type"""
         komodo_release = os.environ.get(
@@ -472,6 +476,7 @@ class Tracklog(RootModel):
         komodo = (
             Version.model_construct(version=komodo_release) if komodo_release else None
         )
+        fmu_dataio = Version.model_construct(version=fmu_dataio_version)
         return [
             TracklogEvent.model_construct(
                 datetime=datetime.datetime.now(datetime.UTC),
@@ -479,7 +484,7 @@ class Tracklog(RootModel):
                 user=User.model_construct(id=getpass.getuser()),
                 sysinfo=(
                     SystemInformation.model_construct(
-                        fmu_dataio=Version.model_construct(version=__version__),
+                        fmu_dataio=fmu_dataio,
                         komodo=komodo,
                         operating_system=(
                             OperatingSystem.model_construct(

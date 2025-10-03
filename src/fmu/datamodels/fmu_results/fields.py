@@ -456,20 +456,22 @@ class Tracklog(RootModel):
         TracklogEvent of type 'created'"""
 
         return cls(
-            root=cls._generate_tracklog_events(
-                enums.TrackLogEventType.created, fmu_dataio_version
-            ),
+            root=[
+                cls._generate_tracklog_event(
+                    enums.TrackLogEventType.created, fmu_dataio_version
+                )
+            ]
         )
 
-    def extend(self, event: enums.TrackLogEventType, fmu_dataio_version: str) -> None:
-        """Extend the tracklog with a new tracklog record."""
-        self.root.extend(self._generate_tracklog_events(event, fmu_dataio_version))
+    def append(self, event: enums.TrackLogEventType, fmu_dataio_version: str) -> None:
+        """Append new tracklog record to the tracklog."""
+        self.root.append(self._generate_tracklog_event(event, fmu_dataio_version))
 
     @staticmethod
-    def _generate_tracklog_events(
+    def _generate_tracklog_event(
         event: enums.TrackLogEventType, fmu_dataio_version: str
-    ) -> list[TracklogEvent]:
-        """Generate new tracklog events with the given event type"""
+    ) -> TracklogEvent:
+        """Generate new tracklog event with the given event type"""
         komodo_release = os.environ.get(
             "KOMODO_RELEASE", os.environ.get("KOMODO_RELEASE_BACKUP", None)
         )
@@ -477,28 +479,26 @@ class Tracklog(RootModel):
             Version.model_construct(version=komodo_release) if komodo_release else None
         )
         fmu_dataio = Version.model_construct(version=fmu_dataio_version)
-        return [
-            TracklogEvent.model_construct(
-                datetime=datetime.datetime.now(datetime.UTC),
-                event=event,
-                user=User.model_construct(id=getpass.getuser()),
-                sysinfo=(
-                    SystemInformation.model_construct(
-                        fmu_dataio=fmu_dataio,
-                        komodo=komodo,
-                        operating_system=(
-                            OperatingSystem.model_construct(
-                                hostname=platform.node(),
-                                operating_system=platform.platform(),
-                                release=platform.release(),
-                                system=platform.system(),
-                                version=platform.version(),
-                            )
-                        ),
-                    )
-                ),
-            )
-        ]
+        return TracklogEvent.model_construct(
+            datetime=datetime.datetime.now(datetime.UTC),
+            event=event,
+            user=User.model_construct(id=getpass.getuser()),
+            sysinfo=(
+                SystemInformation.model_construct(
+                    fmu_dataio=fmu_dataio,
+                    komodo=komodo,
+                    operating_system=(
+                        OperatingSystem.model_construct(
+                            hostname=platform.node(),
+                            operating_system=platform.platform(),
+                            release=platform.release(),
+                            system=platform.system(),
+                            version=platform.version(),
+                        )
+                    ),
+                )
+            ),
+        )
 
 
 class TracklogEvent(BaseModel):

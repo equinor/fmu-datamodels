@@ -33,7 +33,9 @@ jobs:
       run: |
         branch_name="propose-schema-${{ inputs.release_tag }}"
         git switch -C $branch_name
-        git rebase staging
+        git branch -a
+        git tag
+        #git rebase staging
         if [ $? -eq 0 ]; then
           echo "Simulated push"
           # git push -u origin $branch_name

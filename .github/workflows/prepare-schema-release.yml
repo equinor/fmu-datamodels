@@ -76,6 +76,8 @@ jobs:
         https://api.github.com/repos/equinor/fmu-datamodels/pulls \
         -d "$data")
 
+        echo $response
+        
         pr_url=$(echo "$response" | jq -r '.html_url')
         echo "Pull Request created successfully."
         echo "See the PR in GitHub here $pr_url"

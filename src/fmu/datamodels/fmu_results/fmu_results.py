@@ -45,9 +45,13 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.15.0"
+    VERSION: VersionStr = "0.15.1"
 
     VERSION_CHANGELOG: str = """
+    #### 0.15.1
+
+    - 'data.fluid_contact.contact' is added to $contractual
+
     #### 0.15.0
 
     - 'ObjectMetadataClass.triangulated_surface' is removed,
@@ -145,6 +149,7 @@ class FmuResultsSchema(SchemaBase):
         "data.alias",
         "data.bbox",
         "data.content",
+        "data.fluid_contact.contact",
         "data.format",
         "data.geometry",
         "data.grid_model",

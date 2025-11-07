@@ -14,21 +14,27 @@ jobs:
   check_schema:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Checkout fmu-datamodels repo
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+        run: uv python install "3.11"
 
-      - name: Install dependencies
+      - name: Create project environment from uv.lock
         run: |
-          pip install pip -U
-          pip install -e .
+
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            uv sync --all-extras --upgrade
+          else
+            uv sync --all-extras --frozen
+          fi
 
       - name: Check schema
         run: |
-          ./tools/update-schemas.py --diff
+          uv run ./tools/update-schemas.py --diff
 
       - name: Ensure schema validates with AJV
         run: |

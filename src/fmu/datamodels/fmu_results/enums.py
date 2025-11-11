@@ -117,6 +117,17 @@ class Content(StrEnum):
 
     """
 
+    production_network = "production_network"
+    """Tabular data representing the production group structure.
+
+    Typically provided as a Pandas ``Dataframe``.
+
+    .. tip::
+
+       You should not export this manually. Use `SIM2SUMO
+       <https://fmu-sumo-sim2sumo.readthedocs.io/en/latest/>`_.
+    """
+
     pinchout = "pinchout"
     """Polygons designating a pinchout.
 
@@ -251,6 +262,18 @@ class Content(StrEnum):
     """Tabulated inplace volumes per grid, initial (static) conditions.
 
     Typically provided as a Pandas ``Dataframe``.
+    """
+
+    well_completions = "well_completions"
+    """Tabular data representing well completions.
+
+    Typically provided as a Pandas ``Dataframe``.
+
+    .. tip::
+
+       You should not export this manually. Use `SIM2SUMO
+       <https://fmu-sumo-sim2sumo.readthedocs.io/en/latest/>`_.
+
     """
 
     wellpicks = "wellpicks"

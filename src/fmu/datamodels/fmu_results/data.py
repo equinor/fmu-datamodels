@@ -485,6 +485,16 @@ class PinchoutData(Data):
     """The type of content these data represent."""
 
 
+class ProductionNetworkData(Data):
+    """
+    The ``data`` block contains information about the data contained in this object.
+    This class contains metadata for production network data.
+    """
+
+    content: Literal[enums.Content.production_network]
+    """The type of content these data represent."""
+
+
 class PropertyData(Data):
     """
     The ``data`` block contains information about the data contained in this object.
@@ -655,6 +665,16 @@ class WellPicksData(Data):
     """The type of content these data represent."""
 
 
+class WellCompletionsData(Data):
+    """
+    The ``data`` block contains information about the data contained in this object.
+    This class contains metadata for well completions.
+    """
+
+    content: Literal[enums.Content.well_completions]
+    """The type of content these data represent."""
+
+
 class AnyData(RootModel):
     """
     The ``data`` block contains information about the data contained in this object.
@@ -680,6 +700,7 @@ class AnyData(RootModel):
         | NamedAreaData
         | ParametersData
         | PinchoutData
+        | ProductionNetworkData
         | PropertyData
         | FaultPropertiesData
         | PVTData
@@ -695,6 +716,7 @@ class AnyData(RootModel):
         | TransmissibilitiesData
         | VelocityData
         | VolumesData
+        | WellCompletionsData
         | WellPicksData,
         Field(discriminator="content"),
     ]

@@ -45,9 +45,14 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.15.1"
+    VERSION: VersionStr = "0.16.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.16.0
+
+    - 'well_completions' is added as a new content type
+    - 'production_network' is added as a new content type
+
     #### 0.15.1
 
     - 'data.fluid_contact.contact' is added to $contractual

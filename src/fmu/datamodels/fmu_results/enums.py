@@ -338,7 +338,6 @@ class Layout(StrEnum):
     cornerpoint = "cornerpoint"
     table = "table"
     dictionary = "dictionary"
-    faultroom_triangulated = "faultroom_triangulated"
     triangulated = "triangulated"
 
 

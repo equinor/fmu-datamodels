@@ -45,9 +45,14 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.16.0"
+    VERSION: VersionStr = "0.16.1"
 
     VERSION_CHANGELOG: str = """
+    #### 0.16.1
+
+    - New ert simulation mode 'manual_enif_update'
+      added to ErtSimulationMode enum.
+
     #### 0.16.0
 
     - 'well_completions' is added as a new content type

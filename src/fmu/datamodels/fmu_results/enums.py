@@ -298,6 +298,7 @@ class ErtSimulationMode(str, Enum):
     ensemble_smoother = "ensemble_smoother"
     es_mda = "es_mda"
     evaluate_ensemble = "evaluate_ensemble"
+    manual_enif_update = "manual_enif_update"
     manual_update = "manual_update"
     test_run = "test_run"
     workflow = "workflow"

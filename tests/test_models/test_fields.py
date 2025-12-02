@@ -8,7 +8,7 @@ import pytest
 from pydantic import BaseModel, ValidationError
 
 from fmu.datamodels import FmuResults
-from fmu.datamodels.fmu_results import enums
+from fmu.datamodels.common.enums import Classification
 from fmu.datamodels.fmu_results.fields import Aggregation, Realization
 
 
@@ -176,7 +176,7 @@ def test_aggregation_and_realalization_field(fluid_contact_metadata: dict) -> No
         FmuResults.model_validate(fluid_contact_metadata)
 
 
-@pytest.mark.parametrize("classification", enums.Classification)
+@pytest.mark.parametrize("classification", Classification)
 def test_access_field(
     case_metadata: dict, seismic_metadata: dict, classification: dict
 ) -> None:

@@ -4,6 +4,30 @@ from uuid import UUID
 import pytest
 from pydantic import BaseModel
 
+from fmu.datamodels.common.access import (
+    Access,
+    Asset,
+    Ssdl,
+    SsdlAccess,
+)
+from fmu.datamodels.common.enums import Classification, TrackLogEventType
+from fmu.datamodels.common.masterdata import (
+    CoordinateSystem,
+    CountryItem,
+    DiscoveryItem,
+    FieldItem,
+    Masterdata,
+    Smda,
+    StratigraphicColumn,
+)
+from fmu.datamodels.common.tracklog import (
+    OperatingSystem,
+    SystemInformation,
+    Tracklog,
+    TracklogEvent,
+    User,
+    Version,
+)
 from fmu.datamodels.fmu_results import enums
 from fmu.datamodels.fmu_results.data import (
     AnyData,
@@ -19,29 +43,12 @@ from fmu.datamodels.fmu_results.data import (
 )
 from fmu.datamodels.fmu_results.fields import (
     FMU,
-    Access,
-    Asset,
     Case,
     Context,
-    CoordinateSystem,
-    CountryItem,
-    DiscoveryItem,
     Display,
-    FieldItem,
     File,
     FMUBase,
-    Masterdata,
     Model,
-    OperatingSystem,
-    Smda,
-    Ssdl,
-    SsdlAccess,
-    StratigraphicColumn,
-    SystemInformation,
-    Tracklog,
-    TracklogEvent,
-    User,
-    Version,
 )
 from fmu.datamodels.fmu_results.fmu_results import (
     CaseMetadata,
@@ -132,7 +139,7 @@ def _generate_metadata_base() -> dict:
         [
             TracklogEvent.model_construct(
                 datetime=datetime.datetime.now(datetime.UTC),
-                event=enums.TrackLogEventType.created,
+                event=TrackLogEventType.created,
                 user=User(id="user"),
                 sysinfo=SystemInformation.model_construct(
                     fmu_dataio=Version.model_construct(version="dummy_version"),
@@ -197,7 +204,7 @@ def _generate_object_metadata_base() -> dict:
     access = SsdlAccess.model_construct(
         asset=Asset(name="test"),
         ssdl=Ssdl.model_construct(
-            access_level=enums.Classification.internal, rep_include=False
+            access_level=Classification.internal, rep_include=False
         ),
     )
 
@@ -228,7 +235,7 @@ def case_metadata() -> dict:
     fmu_base = _generate_fmu_base()
 
     access = Access.model_construct(
-        asset=Asset(name="test"), classification=enums.Classification.internal
+        asset=Asset(name="test"), classification=Classification.internal
     )
 
     case_metadata_dict = {

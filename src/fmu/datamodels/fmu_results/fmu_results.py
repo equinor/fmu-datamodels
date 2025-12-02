@@ -17,22 +17,21 @@ from fmu.datamodels._schema_base import (
     GenerateJsonSchemaBase,
     SchemaBase,
 )
+from fmu.datamodels.common.access import Access, SsdlAccess
+from fmu.datamodels.common.masterdata import Masterdata
+from fmu.datamodels.common.tracklog import Tracklog
 from fmu.datamodels.types import VersionStr
 
 from .data import AnyData
 from .enums import FMUResultsMetadataClass, MetadataClass, ObjectMetadataClass
 from .fields import (
     FMU,
-    Access,
     Display,
     File,
     FMUBase,
     FMUEnsemble,
     FMUIteration,
     FMURealization,
-    Masterdata,
-    SsdlAccess,
-    Tracklog,
 )
 
 if TYPE_CHECKING:

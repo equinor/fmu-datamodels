@@ -23,7 +23,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Checkout fmu-datamodels repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Python
         run: uv python install ${{ matrix.python-version }}
@@ -50,7 +50,7 @@ jobs:
     name: Build Docker image
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Test Docker image can build
         run: docker build .

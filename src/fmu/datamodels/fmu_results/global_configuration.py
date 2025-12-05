@@ -18,7 +18,11 @@ from pydantic import (
     model_validator,
 )
 
-from . import data, enums, fields
+from fmu.datamodels.common.access import Asset
+from fmu.datamodels.common.enums import Classification
+from fmu.datamodels.common.masterdata import Masterdata
+
+from . import data, fields
 
 
 def validation_error_warning(err: ValidationError) -> None:
@@ -44,7 +48,7 @@ class Ssdl(BaseModel):
     Defines the configuration for the SSDL.
     """
 
-    access_level: enums.Classification | None = Field(default=None)
+    access_level: Classification | None = Field(default=None)
     rep_include: bool | None = Field(default=None)
 
 
@@ -53,9 +57,9 @@ class Access(BaseModel, use_enum_values=True):
     Manages access configurations, combining asset and SSDL information.
     """
 
-    asset: fields.Asset
+    asset: Asset
     ssdl: Ssdl | None = Field(default=None)
-    classification: enums.Classification | None = Field(default=None)
+    classification: Classification | None = Field(default=None)
 
     @model_validator(mode="after")
     def _validate_classification_ssdl_access_level(self) -> Access:
@@ -144,6 +148,6 @@ class GlobalConfiguration(BaseModel):
     """
 
     access: Access
-    masterdata: fields.Masterdata
+    masterdata: Masterdata
     model: fields.Model
     stratigraphy: Stratigraphy | None = Field(default=None)

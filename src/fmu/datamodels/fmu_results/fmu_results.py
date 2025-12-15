@@ -45,9 +45,14 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.16.1"
+    VERSION: VersionStr = "0.17.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.17.0
+
+    - Removed 'faultroom_triangulated' as a possible option in 'data.Layout',
+        'triangulated' should be used instead
+
     #### 0.16.1
 
     - New ert simulation mode 'manual_enif_update'

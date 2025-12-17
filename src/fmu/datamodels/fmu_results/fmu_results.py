@@ -51,7 +51,7 @@ class FmuResultsSchema(SchemaBase):
     #### 0.17.0
 
     - Removed 'faultroom_triangulated' as a possible option in 'data.Layout',
-        'triangulated' should be used instead
+      'triangulated' should be used instead
 
     #### 0.16.1
 

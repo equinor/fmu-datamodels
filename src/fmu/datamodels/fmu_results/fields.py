@@ -1,77 +1,26 @@
 from __future__ import annotations
 
-import datetime
-import getpass
-import os
-import platform
 from pathlib import Path
 from typing import (
     TYPE_CHECKING,
-    Any,
     Literal,
 )
 from uuid import UUID
 
 from pydantic import (
-    AwareDatetime,
     BaseModel,
     Field,
     GetJsonSchemaHandler,
-    RootModel,
     model_validator,
 )
 
+from fmu.datamodels.common.tracklog import User
 from fmu.datamodels.types import MD5HashStr
 
 from . import enums
 
 if TYPE_CHECKING:
     from pydantic_core import CoreSchema
-
-
-class Asset(BaseModel):
-    """The ``access.asset`` block contains information about the owner asset of
-    these data."""
-
-    name: str = Field(examples=["Drogon"])
-    """A string referring to a known asset name."""
-
-
-class Ssdl(BaseModel):
-    """
-    The ``access.ssdl`` block contains information related to SSDL.
-    Note that this is kept due to legacy.
-    """
-
-    access_level: enums.Classification
-    """The SSDL access level. See :class:`enums.Classification`."""
-
-    rep_include: bool
-    """Flag if this data is to be shown in REP or not."""
-
-
-class Access(BaseModel):
-    """
-    The ``access`` block contains information related to access control for
-    this data object.
-    """
-
-    asset: Asset
-    """A block containing information about the owner asset of these data.
-    See :class:`Asset`."""
-
-    classification: enums.Classification | None = Field(default=None)
-    """The access classification level. See :class:`enums.Classification`."""
-
-
-class SsdlAccess(Access):
-    """
-    The ``access`` block contains information related to access control for
-    this data object, with legacy SSDL settings.
-    """
-
-    ssdl: Ssdl
-    """A block containing information related to SSDL. See :class:`Ssdl`."""
 
 
 class File(BaseModel):
@@ -152,13 +101,6 @@ class Workflow(BaseModel):
 
     reference: str
     """A string referring to which workflow this data object was exported by."""
-
-
-class User(BaseModel):
-    """The ``user`` block holds information about the user."""
-
-    id: str = Field(examples=["peesv", "jriv"])
-    """A user identity reference."""
 
 
 class Case(BaseModel):
@@ -284,243 +226,6 @@ class Realization(BaseModel):
         Please note that users shall not set this flag in the metadata upon export;
         it is intended to be configured through interactions with the Sumo GUI.
     """
-
-
-class CountryItem(BaseModel):
-    """A single country in the ``smda.masterdata.country`` list of countries
-    known to SMDA."""
-
-    identifier: str = Field(examples=["Norway"])
-    """Identifier known to SMDA."""
-
-    uuid: UUID = Field(examples=["15ce3b84-766f-4c93-9050-b154861f9100"])
-    """Identifier known to SMDA."""
-
-
-class DiscoveryItem(BaseModel):
-    """A single discovery in the ``masterdata.smda.discovery`` list of discoveries
-    known to SMDA."""
-
-    short_identifier: str = Field(examples=["SomeDiscovery"])
-    """Identifier known to SMDA."""
-
-    uuid: UUID = Field(examples=["15ce3b84-766f-4c93-9050-b154861f9100"])
-    """Identifier known to SMDA."""
-
-
-class FieldItem(BaseModel):
-    """A single field in the ``masterdata.smda.field`` list of fields
-    known to SMDA."""
-
-    identifier: str = Field(examples=["OseFax"])
-    """Identifier known to SMDA."""
-
-    uuid: UUID = Field(examples=["15ce3b84-766f-4c93-9050-b154861f9100"])
-    """Identifier known to SMDA."""
-
-
-class CoordinateSystem(BaseModel):
-    """The ``masterdata.smda.coordinate_system`` block contains the coordinate
-    system known to SMDA."""
-
-    identifier: str = Field(examples=["ST_WGS84_UTM37N_P32637"])
-    """Identifier known to SMDA."""
-
-    uuid: UUID = Field(examples=["15ce3b84-766f-4c93-9050-b154861f9100"])
-    """Identifier known to SMDA."""
-
-
-class StratigraphicColumn(BaseModel):
-    """The ``masterdata.smda.stratigraphic_column`` block contains the
-    stratigraphic column known to SMDA."""
-
-    identifier: str = Field(examples=["DROGON_2020"])
-    """Identifier known to SMDA."""
-
-    uuid: UUID = Field(examples=["15ce3b84-766f-4c93-9050-b154861f9100"])
-    """Identifier known to SMDA."""
-
-
-class Smda(BaseModel):
-    """The ``masterdata.smda`` block contains SMDA-related attributes."""
-
-    coordinate_system: CoordinateSystem
-    """Reference to coordinate system known to SMDA.
-    See :class:`CoordinateSystem`."""
-
-    country: list[CountryItem]
-    """A list referring to countries known to SMDA. First item is primary.
-    See :class:`CountryItem`."""
-
-    discovery: list[DiscoveryItem]
-    """A list referring to discoveries known to SMDA. First item is primary.
-    See :class:`DiscoveryItem`."""
-
-    field: list[FieldItem]
-    """A list referring to fields known to SMDA. First item is primary.
-    See :class:`FieldItem`."""
-
-    stratigraphic_column: StratigraphicColumn
-    """Reference to stratigraphic column known to SMDA.
-    See :class:`StratigraphicColumn`."""
-
-
-class Masterdata(BaseModel):
-    """The ``masterdata`` block contains information related to masterdata.
-    Currently, SMDA holds the masterdata.
-    """
-
-    smda: Smda
-    """Block containing SMDA-related attributes. See :class:`Smda`."""
-
-
-class Version(BaseModel):
-    """
-    A generic block that contains a string representing the version of
-    something.
-    """
-
-    version: str
-    """A string representing the version."""
-
-
-class OperatingSystem(BaseModel):
-    """
-    The ``operating_system`` block contains information about the OS on which the
-    ensemble was run.
-    """
-
-    hostname: str = Field(examples=["st-123.equinor.com"])
-    """A string containing the network name of the machine."""
-
-    operating_system: str = Field(examples=["Darwin-18.7.0-x86_64-i386-64bit"])
-    """A string containing the name of the operating system implementation."""
-
-    release: str = Field(examples=["18.7.0"])
-    """A string containing the level of the operating system."""
-
-    system: str = Field(examples=["GNU/Linux"])
-    """A string containing the name of the operating system kernel."""
-
-    version: str = Field(examples=["#1 SMP Tue Aug 27 21:37:59 PDT 2019"])
-    """The specific release version of the system."""
-
-
-# TODO: Make `fmu_dataio` and `operating_system` non-optional
-#  when fmu-sumo-aggregation-service uses only fmu-dataio
-class SystemInformation(BaseModel):
-    """
-    The ``tracklog.sysinfo`` block contains information about the system upon which
-    these data were exported from.
-    """
-
-    fmu_dataio: Version | None = Field(
-        alias="fmu-dataio",
-        default=None,
-        examples=["1.2.3"],
-    )
-    """The version of fmu-dataio used to export the data. See :class:`Version`."""
-
-    komodo: Version | None = Field(
-        default=None,
-        examples=["2023.12.05-py38"],
-    )
-    """The version of Komodo in which the the ensemble was run from."""
-
-    operating_system: OperatingSystem | None = Field(default=None)
-    """The operating system from which the ensemble was started from.
-    See :class:`OperatingSystem`."""
-
-
-class Tracklog(RootModel):
-    """The ``tracklog`` block contains a record of events recorded on these data.
-    This data object describes the list of tracklog events, in addition to functionality
-    for constructing a tracklog and adding new records to it.
-    """
-
-    root: list[TracklogEvent]
-
-    def __getitem__(self, item: int) -> TracklogEvent:
-        return self.root[item]
-
-    def __iter__(
-        self,
-    ) -> Any:
-        # Using ´Any´ as return type here as mypy is having issues
-        # resolving the correct type
-        return iter(self.root)
-
-    @classmethod
-    def initialize(cls, fmu_dataio_version: str) -> Tracklog:
-        """Initialize the tracklog object with a list containing one
-        TracklogEvent of type 'created'"""
-
-        return cls(
-            root=[
-                cls._generate_tracklog_event(
-                    enums.TrackLogEventType.created, fmu_dataio_version
-                )
-            ]
-        )
-
-    def append(self, event: enums.TrackLogEventType, fmu_dataio_version: str) -> None:
-        """Append new tracklog record to the tracklog."""
-        self.root.append(self._generate_tracklog_event(event, fmu_dataio_version))
-
-    @staticmethod
-    def _generate_tracklog_event(
-        event: enums.TrackLogEventType, fmu_dataio_version: str
-    ) -> TracklogEvent:
-        """Generate new tracklog event with the given event type"""
-        komodo_release = os.environ.get(
-            "KOMODO_RELEASE", os.environ.get("KOMODO_RELEASE_BACKUP", None)
-        )
-        komodo = (
-            Version.model_construct(version=komodo_release) if komodo_release else None
-        )
-        fmu_dataio = Version.model_construct(version=fmu_dataio_version)
-        return TracklogEvent.model_construct(
-            datetime=datetime.datetime.now(datetime.UTC),
-            event=event,
-            user=User.model_construct(id=getpass.getuser()),
-            sysinfo=(
-                SystemInformation.model_construct(
-                    fmu_dataio=fmu_dataio,
-                    komodo=komodo,
-                    operating_system=(
-                        OperatingSystem.model_construct(
-                            hostname=platform.node(),
-                            operating_system=platform.platform(),
-                            release=platform.release(),
-                            system=platform.system(),
-                            version=platform.version(),
-                        )
-                    ),
-                )
-            ),
-        )
-
-
-class TracklogEvent(BaseModel):
-    """The ``tracklog`` block contains a record of events recorded on these data.
-    This data object describes a tracklog event.
-    """
-
-    datetime: AwareDatetime = Field(examples=["2020-10-28T14:28:024286Z"])
-    """A datetime representation recording when the event occurred."""
-
-    event: enums.TrackLogEventType
-    """The type of event being logged. See :class:`enums.TrackLogEventType`."""
-
-    user: User
-    """The user who caused the event to happen. See :class:`User`."""
-
-    # TODO: Make non-optional when fmu-sumo-aggregation-service uses only fmu-dataio
-    sysinfo: SystemInformation | None = Field(
-        default_factory=SystemInformation,
-    )
-    """Information about the system on which the event occurred.
-    See :class:`SystemInformation`."""
 
 
 class Display(BaseModel):

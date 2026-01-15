@@ -42,6 +42,8 @@ dev = [
     "coverage>=4.1",
     "hypothesis",
     "mypy",
+    "pyarrow",
+    "pyarrow-stubs",
     "pytest",
     "pytest-cov",
     "pytest-mock",

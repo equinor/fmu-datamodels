@@ -135,12 +135,13 @@ class DerrfDistribution(BaseDistribution):
 
 DistributionMetadata = Annotated[
     UniformDistribution
+    | LogUnifDistribution
     | LogNormalDistribution
     | NormalDistribution
-    | LogNormalDistribution
     | TruncatedNormalDistribution
     | RawDistribution
     | ConstDistribution
+    | DUnifDistribution
     | TriangularDistribution
     | ErrfDistribution
     | DerrfDistribution,

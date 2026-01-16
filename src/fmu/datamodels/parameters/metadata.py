@@ -1,4 +1,4 @@
-"""Schemas for Ert parameter distributions.
+"""Schemas for Ert parameter metadata.
 
 These schemas are used for Parquet column metadata in Ert parameter tables."""
 
@@ -8,8 +8,8 @@ from typing import Annotated, Literal, Self
 from pydantic import BaseModel, Field
 
 
-class BaseDistribution(BaseModel):
-    """Base class for all distribution metadata.
+class GenKwParameterMetadata(BaseModel):
+    """Base class for all parameter metadata.
 
     These models are attached as column metadata for the exported Ert parameters
     Parquet table."""
@@ -36,7 +36,7 @@ class BaseDistribution(BaseModel):
         return cls.model_validate(str_metadata)
 
 
-class UniformDistribution(BaseDistribution):
+class UniformParameter(GenKwParameterMetadata):
     """Metadata values for a uniform distribution."""
 
     distribution: Literal["uniform"] = "uniform"
@@ -44,7 +44,7 @@ class UniformDistribution(BaseDistribution):
     max: float
 
 
-class LogUnifDistribution(BaseDistribution):
+class LogUnifParameter(GenKwParameterMetadata):
     """Metadata values for a log uniform distribution."""
 
     distribution: Literal["logunif"] = "logunif"
@@ -52,7 +52,7 @@ class LogUnifDistribution(BaseDistribution):
     max: float
 
 
-class NormalDistribution(BaseDistribution):
+class NormalParameter(GenKwParameterMetadata):
     """Metadata values for a normal distribution."""
 
     distribution: Literal["normal"] = "normal"
@@ -60,7 +60,7 @@ class NormalDistribution(BaseDistribution):
     std: float
 
 
-class LogNormalDistribution(BaseDistribution):
+class LogNormalParameter(GenKwParameterMetadata):
     """Metadata values for a log normal distribution."""
 
     distribution: Literal["lognormal"] = "lognormal"
@@ -68,7 +68,7 @@ class LogNormalDistribution(BaseDistribution):
     std: float
 
 
-class TruncatedNormalDistribution(BaseDistribution):
+class TruncatedNormalParameter(GenKwParameterMetadata):
     """Metadata values for a truncated normal distribution."""
 
     distribution: Literal["truncated_normal"] = "truncated_normal"
@@ -78,7 +78,7 @@ class TruncatedNormalDistribution(BaseDistribution):
     std: float
 
 
-class RawDistribution(BaseDistribution):
+class RawParameter(GenKwParameterMetadata):
     """Metadata values for a raw distribution.
 
     This "distribution" is used for design matrix parameters.
@@ -87,14 +87,14 @@ class RawDistribution(BaseDistribution):
     distribution: Literal["raw"] = "raw"
 
 
-class ConstDistribution(BaseDistribution):
+class ConstParameter(GenKwParameterMetadata):
     """Metadata values for a const distribution."""
 
     distribution: Literal["const"] = "const"
     value: float
 
 
-class DUnifDistribution(BaseDistribution):
+class DUnifParameter(GenKwParameterMetadata):
     """Metadata values for a discrete uniform distribution."""
 
     distribution: Literal["dunif"] = "dunif"
@@ -103,7 +103,7 @@ class DUnifDistribution(BaseDistribution):
     steps: int
 
 
-class TriangularDistribution(BaseDistribution):
+class TriangularParameter(GenKwParameterMetadata):
     """Metadata values for a triangular distribution."""
 
     distribution: Literal["triangular"] = "triangular"
@@ -112,7 +112,7 @@ class TriangularDistribution(BaseDistribution):
     mode: float
 
 
-class ErrfDistribution(BaseDistribution):
+class ErrfParameter(GenKwParameterMetadata):
     """Metadata values for a Errf (error function) distribution."""
 
     distribution: Literal["errf"] = "errf"
@@ -122,7 +122,7 @@ class ErrfDistribution(BaseDistribution):
     width: float
 
 
-class DerrfDistribution(BaseDistribution):
+class DerrfParameter(GenKwParameterMetadata):
     """Metadata values for a Derrf (discrete error function) distribution."""
 
     distribution: Literal["derrf"] = "derrf"
@@ -133,17 +133,17 @@ class DerrfDistribution(BaseDistribution):
     steps: float
 
 
-DistributionMetadata = Annotated[
-    UniformDistribution
-    | LogUnifDistribution
-    | LogNormalDistribution
-    | NormalDistribution
-    | TruncatedNormalDistribution
-    | RawDistribution
-    | ConstDistribution
-    | DUnifDistribution
-    | TriangularDistribution
-    | ErrfDistribution
-    | DerrfDistribution,
+ParameterMetadata = Annotated[
+    UniformParameter
+    | LogUnifParameter
+    | LogNormalParameter
+    | NormalParameter
+    | TruncatedNormalParameter
+    | RawParameter
+    | ConstParameter
+    | DUnifParameter
+    | TriangularParameter
+    | ErrfParameter
+    | DerrfParameter,
     Field(discriminator="distribution"),
 ]

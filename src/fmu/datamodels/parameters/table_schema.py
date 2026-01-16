@@ -2,14 +2,14 @@ from typing import Literal
 
 from pydantic import BaseModel
 
-from .distributions import DistributionMetadata
+from .metadata import ParameterMetadata
 
 
 class ParameterColumn(BaseModel):
     """Metadata for a parameter column."""
 
     type: Literal["float64", "int64"]
-    metadata: DistributionMetadata
+    metadata: ParameterMetadata
 
 
 class ParameterTableSchema(BaseModel):

@@ -6,9 +6,11 @@ from .metadata import ParameterMetadata
 
 
 class ParameterColumn(BaseModel):
-    """Metadata for a parameter column."""
+    """Metadata for a parameter column.
 
-    type: Literal["float64", "int64"]
+    'string' is a valid dtype when it comes from the design matrix."""
+
+    type: Literal["float64", "int64", "string"]
     metadata: ParameterMetadata
 
 

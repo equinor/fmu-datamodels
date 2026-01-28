@@ -10,6 +10,7 @@ from pydantic import (
 )
 
 from fmu.datamodels.standard_results import (
+    ErtParametersSchema,
     FieldOutlineSchema,
     FluidContactOutlineSchema,
     InplaceVolumesSchema,
@@ -40,6 +41,24 @@ class StandardResult(BaseModel):
 
     file_schema: FileSchema | None = Field(default=None)
     """The schema identifying the format of the standard result."""
+
+
+class ErtParametersStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'parameters' standard result.
+    """
+
+    name: Literal[enums.StandardResultName.parameters]
+    """The identifying name for the 'parameters' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=ErtParametersSchema.VERSION,
+        url=AnyHttpUrl(ErtParametersSchema.url()),
+    )
+    """The schema identifying the format of the 'parameters' standard result."""
 
 
 class InplaceVolumesStandardResult(StandardResult):
@@ -186,7 +205,8 @@ class AnyStandardResult(RootModel):
     """
 
     root: Annotated[
-        FieldOutlineStandardResult
+        ErtParametersStandardResult
+        | FieldOutlineStandardResult
         | InplaceVolumesStandardResult
         | StructureDepthSurfaceStandardResult
         | StructureDepthFaultSurfaceStandardResult

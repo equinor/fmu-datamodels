@@ -1,15 +1,16 @@
 import pyarrow as pa
 import pytest
 
-from fmu.datamodels.parameters import (
+from fmu.datamodels.standard_results.ert_parameters import (
     ConstParameter,
     DerrfParameter,
     DUnifParameter,
     ErrfParameter,
+    ErtDistribution,
+    ErtParameterMetadata,
     LogNormalParameter,
     LogUnifParameter,
     NormalParameter,
-    ParameterMetadata,
     RawParameter,
     TriangularParameter,
     TruncatedNormalParameter,
@@ -22,7 +23,12 @@ def test_to_pa_metadata_serialization() -> None:
 
     Uses DUnif because it has both float and int."""
     dist = DUnifParameter(
-        min=0.0, max=1.0, steps=100, group="GLOBVAR", input_source="sampled"
+        distribution=ErtDistribution.dunif,
+        min=0.0,
+        max=1.0,
+        steps=100,
+        group="GLOBVAR",
+        input_source="sampled",
     )
     assert dist.to_pa_metadata() == {
         b"group": b'"GLOBVAR"',
@@ -47,27 +53,55 @@ def test_to_pa_metadata_serialization() -> None:
 @pytest.mark.parametrize(
     "parameter_class, value_dict",
     [
-        (UniformParameter, {"min": 0.0, "max": 1.0}),
-        (LogUnifParameter, {"min": 0.0, "max": 1.0}),
-        (NormalParameter, {"mean": 0.2, "std": 0.1}),
+        (UniformParameter, {"distribution": "uniform", "min": 0.0, "max": 1.0}),
+        (LogUnifParameter, {"distribution": "logunif", "min": 0.0, "max": 1.0}),
+        (NormalParameter, {"distribution": "normal", "mean": 0.2, "std": 0.1}),
         (
             TruncatedNormalParameter,
-            {"min": 0.0, "max": 1.0, "mean": 0.2, "std": 0.1},
+            {
+                "distribution": "truncated_normal",
+                "min": 0.0,
+                "max": 1.0,
+                "mean": 0.2,
+                "std": 0.1,
+            },
         ),
-        (LogNormalParameter, {"mean": 0.2, "std": 0.1}),
-        (RawParameter, {}),
-        (ConstParameter, {"value": 2.0}),
-        (TriangularParameter, {"min": 0.0, "max": 3.0, "mode": 2.0}),
-        (ErrfParameter, {"min": 0.0, "max": 3.0, "skewness": 2.0, "width": 10.0}),
+        (LogNormalParameter, {"distribution": "lognormal", "mean": 0.2, "std": 0.1}),
+        (RawParameter, {"distribution": "raw"}),
+        (ConstParameter, {"distribution": "const", "value": 2.0}),
+        (
+            TriangularParameter,
+            {"distribution": "triangular", "min": 0.0, "max": 3.0, "mode": 2.0},
+        ),
+        (
+            ErrfParameter,
+            {
+                "distribution": "errf",
+                "min": 0.0,
+                "max": 3.0,
+                "skewness": 2.0,
+                "width": 10.0,
+            },
+        ),
         (
             DerrfParameter,
-            {"min": 0.0, "max": 3.0, "skewness": 2.0, "width": 10.0, "steps": 1000.0},
+            {
+                "distribution": "derrf",
+                "min": 0.0,
+                "max": 3.0,
+                "skewness": 2.0,
+                "width": 10.0,
+                "steps": 1000.0,
+            },
         ),
-        (DUnifParameter, {"min": 0.0, "max": 1.0, "steps": 100}),
+        (
+            DUnifParameter,
+            {"distribution": "dunif", "min": 0.0, "max": 1.0, "steps": 100},
+        ),
     ],
 )
 def test_from_pa_metadata_roundtrip(
-    parameter_class: ParameterMetadata, value_dict: dict[str, int | float]
+    parameter_class: ErtParameterMetadata, value_dict: dict[str, int | float]
 ) -> None:
     """Roundtrip serialization-deserialization works for all parameters."""
     input_source = (

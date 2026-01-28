@@ -6,6 +6,7 @@ from enum import Enum, StrEnum
 class StandardResultName(StrEnum):
     """The standard result name of a given data object."""
 
+    parameters = "parameters"
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
     structure_depth_surface = "structure_depth_surface"

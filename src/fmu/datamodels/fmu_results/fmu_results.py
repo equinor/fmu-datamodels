@@ -44,9 +44,13 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.17.0"
+    VERSION: VersionStr = "0.18.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.18.0
+
+    - Added 'parameters' standard result for Ert parameters.
+
     #### 0.17.0
 
     - Removed 'faultroom_triangulated' as a possible option in 'data.Layout',

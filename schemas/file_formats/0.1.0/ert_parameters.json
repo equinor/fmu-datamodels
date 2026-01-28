@@ -1,0 +1,544 @@
+{
+  "$defs": {
+    "ConstParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a const distribution.",
+      "properties": {
+        "distribution": {
+          "const": "const",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "value"
+      ],
+      "title": "ConstParameter",
+      "type": "object"
+    },
+    "DUnifParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a discrete uniform distribution.",
+      "properties": {
+        "distribution": {
+          "const": "dunif",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "steps": {
+          "title": "Steps",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "min",
+        "max",
+        "steps"
+      ],
+      "title": "DUnifParameter",
+      "type": "object"
+    },
+    "DerrfParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a Derrf (discrete error function) distribution.",
+      "properties": {
+        "distribution": {
+          "const": "derrf",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "skewness": {
+          "title": "Skewness",
+          "type": "number"
+        },
+        "steps": {
+          "title": "Steps",
+          "type": "number"
+        },
+        "width": {
+          "title": "Width",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "min",
+        "max",
+        "skewness",
+        "width",
+        "steps"
+      ],
+      "title": "DerrfParameter",
+      "type": "object"
+    },
+    "ErrfParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a Errf (error function) distribution.",
+      "properties": {
+        "distribution": {
+          "const": "errf",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "skewness": {
+          "title": "Skewness",
+          "type": "number"
+        },
+        "width": {
+          "title": "Width",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "min",
+        "max",
+        "skewness",
+        "width"
+      ],
+      "title": "ErrfParameter",
+      "type": "object"
+    },
+    "ErtParameterColumn": {
+      "description": "Metadata for a parameter column.\n\n'string' is a valid dtype when it comes from the design matrix.",
+      "properties": {
+        "metadata": {
+          "discriminator": {
+            "propertyName": "distribution"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/UniformParameter"
+            },
+            {
+              "$ref": "#/$defs/LogUnifParameter"
+            },
+            {
+              "$ref": "#/$defs/LogNormalParameter"
+            },
+            {
+              "$ref": "#/$defs/NormalParameter"
+            },
+            {
+              "$ref": "#/$defs/TruncatedNormalParameter"
+            },
+            {
+              "$ref": "#/$defs/RawParameter"
+            },
+            {
+              "$ref": "#/$defs/ConstParameter"
+            },
+            {
+              "$ref": "#/$defs/DUnifParameter"
+            },
+            {
+              "$ref": "#/$defs/TriangularParameter"
+            },
+            {
+              "$ref": "#/$defs/ErrfParameter"
+            },
+            {
+              "$ref": "#/$defs/DerrfParameter"
+            }
+          ],
+          "title": "Metadata"
+        },
+        "type": {
+          "enum": [
+            "float64",
+            "int64",
+            "string"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "metadata"
+      ],
+      "title": "ErtParameterColumn",
+      "type": "object"
+    },
+    "LogNormalParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a log normal distribution.",
+      "properties": {
+        "distribution": {
+          "const": "lognormal",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "mean": {
+          "title": "Mean",
+          "type": "number"
+        },
+        "std": {
+          "title": "Std",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "mean",
+        "std"
+      ],
+      "title": "LogNormalParameter",
+      "type": "object"
+    },
+    "LogUnifParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a log uniform distribution.",
+      "properties": {
+        "distribution": {
+          "const": "logunif",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "min",
+        "max"
+      ],
+      "title": "LogUnifParameter",
+      "type": "object"
+    },
+    "NormalParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a normal distribution.",
+      "properties": {
+        "distribution": {
+          "const": "normal",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "mean": {
+          "title": "Mean",
+          "type": "number"
+        },
+        "std": {
+          "title": "Std",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "mean",
+        "std"
+      ],
+      "title": "NormalParameter",
+      "type": "object"
+    },
+    "RawParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a raw distribution.\n\nThis \"distribution\" is used for design matrix parameters.",
+      "properties": {
+        "distribution": {
+          "const": "raw",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution"
+      ],
+      "title": "RawParameter",
+      "type": "object"
+    },
+    "TriangularParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a triangular distribution.",
+      "properties": {
+        "distribution": {
+          "const": "triangular",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "mode": {
+          "title": "Mode",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "min",
+        "max",
+        "mode"
+      ],
+      "title": "TriangularParameter",
+      "type": "object"
+    },
+    "TruncatedNormalParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a truncated normal distribution.",
+      "properties": {
+        "distribution": {
+          "const": "truncated_normal",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "mean": {
+          "title": "Mean",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "std": {
+          "title": "Std",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "min",
+        "max",
+        "mean",
+        "std"
+      ],
+      "title": "TruncatedNormalParameter",
+      "type": "object"
+    },
+    "UniformParameter": {
+      "additionalProperties": false,
+      "description": "Metadata values for a uniform distribution.",
+      "properties": {
+        "distribution": {
+          "const": "uniform",
+          "title": "Distribution",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "input_source": {
+          "enum": [
+            "sampled",
+            "design_matrix"
+          ],
+          "title": "Input Source",
+          "type": "string"
+        },
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        }
+      },
+      "required": [
+        "group",
+        "input_source",
+        "distribution",
+        "min",
+        "max"
+      ],
+      "title": "UniformParameter",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_parameters.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": {
+    "$ref": "#/$defs/ErtParameterColumn"
+  },
+  "description": "Represents the Ert parameters exported as a Parquet file.\n\nEvery parameter column has associated column metadata.\n\nThe table always has a 'realization' column (int64) as the first column. That column\nis not represented in this schema, but is implied.",
+  "title": "ErtParametersResult",
+  "type": "object",
+  "version": "0.1.0"
+}

@@ -49,6 +49,7 @@ class FmuResultsSchema(SchemaBase):
     VERSION_CHANGELOG: str = """
     #### 0.18.0
 
+    - Added dedicated link to SMDA stratigraphic column
     - Added 'parameters' standard result for Ert parameters.
 
     #### 0.17.0

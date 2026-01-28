@@ -38,6 +38,7 @@ from fmu.datamodels.fmu_results.data import (
     FluidContact,
     Layer,
     Seismic,
+    SmdaEntity,
     Time,
     Timestamp,
 )
@@ -130,6 +131,10 @@ def _generate_metadata_base() -> dict:
             ],
             stratigraphic_column=StratigraphicColumn.model_construct(
                 identifier="DROGON_2020",
+                uuid=UUID("00000000-0000-0000-0000-000000000000"),
+            ),
+            smda_entity=SmdaEntity.model_construct(
+                identifier="Viking Gp. Top",
                 uuid=UUID("00000000-0000-0000-0000-000000000000"),
             ),
         )

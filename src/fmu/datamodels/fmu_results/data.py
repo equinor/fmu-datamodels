@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import warnings
 from typing import TYPE_CHECKING, Annotated, Any, Literal
+from uuid import UUID
 
 from pydantic import (
     AwareDatetime,
@@ -207,6 +208,18 @@ class BoundingBox3D(BoundingBox2D):
     maximum surface value and it will be absent if all values are undefined."""
 
 
+class SmdaEntity(BaseModel):
+    """The stratigraphic entity (horizon name, zone name etc) known to SMDA."""
+
+    identifier: str = Field(examples=["Viking Gp. Top"])
+    """Identifier (name) known to SMDA."""
+
+    uuid: UUID | None = Field(
+        default=None, examples=["15ce3b84-766f-4c93-9050-b154861f9100"]
+    )
+    """Identifier known to SMDA."""
+
+
 class Data(BaseModel):
     """
     The ``data`` block contains information about the data contained in this object.
@@ -245,6 +258,9 @@ class Data(BaseModel):
 
     stratigraphic: bool
     """True if this is defined in the stratigraphic column."""
+
+    smda_entity: SmdaEntity | None = Field(default=None)
+    """The stratigraphic entity (horizon name, zone name etc) known to SMDA"""
 
     description: list[str] | None = Field(default=None)
     """A list of strings, freetext description of this data, if applicable."""

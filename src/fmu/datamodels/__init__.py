@@ -4,6 +4,10 @@ from fmu.datamodels._schema_base import SchemaBase
 
 from .fmu_results import FmuResults, FmuResultsSchema
 from .standard_results import (
+    ErtDistribution,
+    ErtParameterMetadata,
+    ErtParametersResult,
+    ErtParametersSchema,
     FieldOutlineResult,
     FieldOutlineSchema,
     FluidContactOutlineResult,
@@ -22,6 +26,10 @@ except ImportError:
     __version__ = "0.0.0"
 
 __all__ = [
+    "ErtDistribution",
+    "ErtParameterMetadata",
+    "ErtParametersResult",
+    "ErtParametersSchema",
     "FmuResults",
     "FmuResultsSchema",
     "FieldOutlineResult",
@@ -36,6 +44,7 @@ __all__ = [
 
 schemas: list[type[SchemaBase]] = [
     FmuResultsSchema,
+    ErtParametersSchema,
     FieldOutlineSchema,
     FluidContactOutlineSchema,
     InplaceVolumesSchema,

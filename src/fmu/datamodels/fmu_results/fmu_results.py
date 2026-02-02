@@ -51,6 +51,8 @@ class FmuResultsSchema(SchemaBase):
 
     - Added dedicated link to SMDA stratigraphic column
     - Added 'parameters' standard result for Ert parameters.
+    - Added 'ert.ensemble'
+    - Made 'fmu.ensemble.id' optional
 
     #### 0.17.0
 

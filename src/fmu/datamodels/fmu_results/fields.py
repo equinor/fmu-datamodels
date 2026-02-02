@@ -135,11 +135,24 @@ class Ert(BaseModel):
 
     experiment: Experiment
     """Reference to the ert experiment.
-    See :class:`Experiment`."""
+
+    See :class:`Experiment`.
+    """
 
     simulation_mode: enums.ErtSimulationMode
     """Reference to the ert simulation mode.
-    See :class:`SimulationMode`."""
+
+    See :class:`SimulationMode`.
+    """
+
+    ensemble: Ensemble | None = None
+    """The ensemble from Ert's perspective.
+
+    The uuid changes for every ensemble whenever an Ert simulation is started, even if
+    on an existing case. This value cannot exist in the PRE_EXPERIMENT/case context.
+
+    See :class:`Ensemble`.
+    """
 
 
 class Experiment(BaseModel):
@@ -152,26 +165,47 @@ class Experiment(BaseModel):
 
 class Ensemble(BaseModel):
     """
-    The ``fmu.ensemble`` block contains information about the ensemble this data
-    object belongs to.
+    Ensemble information present as both ``fmu.ensemble`` and ``ert.ensemble``.
+
+    Although ensemble information may be present in both blocks, within the same
+    experiment they are inconsistent.
+
+    - In the FMU context, as ``fmu.ensemble``, this name is derived from the run path.
+      The ``name`` is derived from the run path, and the uuid is derived from the case
+      uuid and the ``name``.
+    - In the Ert context, as ``ert.ensemble``, this name is derived from Ert UI
+      configuration and is consistent with what's inside of the Ert storage. The
+      ensemble uuid may differ within the same case if there are multiple reruns, as
+      each run of an experiment generates a new ensemble uuid in the storage.
+
+    Note that this is true mostly for the ``ensemble`` context. It means that
+    ``fmu.ensemble`` != ``ert.ensemble``.
     """
 
-    id: int = Field(ge=0)
-    """The internal identification of this ensemble, represented by an integer."""
+    name: str = Field(examples=["iter-0", "pred", "default_0", "ensemble"])
+    """The name of the ensemble.
 
-    name: str = Field(examples=["iter-0"])
-    """The name of the ensemble. This is typically reflecting the folder name on
-    scratch. In ERT, custom names for ensembles are supported, e.g. "pred"."""
+    This is either the run path name or the Ert storage name, depending on the context.
+    """
 
     uuid: UUID = Field(examples=["15ce3b84-766f-4c93-9050-b154861f9100"])
-    """The unique identifier of this case. Currently made by fmu.dataio."""
+    """The unique identifier of this case.
+
+    This is either made by fmu.dataio as a uuid generated from the case uuid, and the
+    run path name, or is taken directly from the Ert storage, depending on the context.
+    """
 
     restart_from: UUID | None = Field(
         default=None,
         examples=["15ce3b84-766f-4c93-9050-b154861f9100"],
     )
-    """A uuid reference to another ensemble that this ensemble was restarted
-    from"""
+    """A uuid reference to another ensemble that this ensemble was restarted from."""
+
+    id: int | None = None
+    """The internal identification of this ensemble, represented by an integer.
+
+    Deprecated.
+    """
 
 
 class Model(BaseModel):

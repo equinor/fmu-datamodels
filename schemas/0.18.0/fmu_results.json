@@ -1048,16 +1048,26 @@
       "type": "string"
     },
     "Ensemble": {
-      "description": "The ``fmu.ensemble`` block contains information about the ensemble this data\nobject belongs to.",
+      "description": "Ensemble information present as both ``fmu.ensemble`` and ``ert.ensemble``.\n\nAlthough ensemble information may be present in both blocks, within the same\nexperiment they are inconsistent.\n\n- In the FMU context, as ``fmu.ensemble``, this name is derived from the run path.\n  The ``name`` is derived from the run path, and the uuid is derived from the case\n  uuid and the ``name``.\n- In the Ert context, as ``ert.ensemble``, this name is derived from Ert UI\n  configuration and is consistent with what's inside of the Ert storage. The\n  ensemble uuid may differ within the same case if there are multiple reruns, as\n  each run of an experiment generates a new ensemble uuid in the storage.\n\nNote that this is true mostly for the ``ensemble`` context. It means that\n``fmu.ensemble`` != ``ert.ensemble``.",
       "properties": {
         "id": {
-          "minimum": 0,
-          "title": "Id",
-          "type": "integer"
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Id"
         },
         "name": {
           "examples": [
-            "iter-0"
+            "iter-0",
+            "pred",
+            "default_0",
+            "ensemble"
           ],
           "title": "Name",
           "type": "string"
@@ -1088,7 +1098,6 @@
         }
       },
       "required": [
-        "id",
         "name",
         "uuid"
       ],
@@ -1177,6 +1186,17 @@
     "Ert": {
       "description": "The ``fmu.ert`` block contains information about the current ert run.",
       "properties": {
+        "ensemble": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ensemble"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "experiment": {
           "$ref": "#/$defs/Experiment"
         },

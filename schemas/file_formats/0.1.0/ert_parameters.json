@@ -233,6 +233,7 @@
           "enum": [
             "float64",
             "int64",
+            "int32",
             "string"
           ],
           "title": "Type",
@@ -537,7 +538,7 @@
   "additionalProperties": {
     "$ref": "#/$defs/ErtParameterColumn"
   },
-  "description": "Represents the Ert parameters exported as a Parquet file.\n\nEvery parameter column has associated column metadata.\n\nThe table always has a 'realization' column (int64) as the first column. That column\nis not represented in this schema, but is implied.",
+  "description": "Represents the Ert parameters exported as a Parquet file.\n\nEvery parameter column has associated column metadata.\n\nThe table always has a 'REAL' column (int64) as the first column. That column\nis not represented in this schema, but is implied.",
   "title": "ErtParametersResult",
   "type": "object",
   "version": "0.1.0"

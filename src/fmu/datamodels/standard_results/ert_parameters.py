@@ -188,7 +188,7 @@ class ErtParameterColumn(BaseModel):
 
     'string' is a valid dtype when it comes from the design matrix."""
 
-    type: Literal["float64", "int64", "string"]
+    type: Literal["float64", "int64", "int32", "string"]
     metadata: ErtParameterMetadata
 
 
@@ -198,12 +198,12 @@ class ErtParametersResult(RootModel[dict[str, ErtParameterColumn]]):
 
     Every parameter column has associated column metadata.
 
-    The table always has a 'realization' column (int64) as the first column. That column
+    The table always has a 'REAL' column (int64) as the first column. That column
     is not represented in this schema, but is implied.
     """
 
     def all_column_names(self) -> list[str]:
-        return ["realization", *self.root.keys()]
+        return ["REAL", *self.root.keys()]
 
 
 class ErtParametersSchema(SchemaBase):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum, IntEnum, StrEnum
+from enum import IntEnum, StrEnum
 
 
 class AxisOrientation(IntEnum):
@@ -267,7 +267,7 @@ class Content(StrEnum):
         )
 
 
-class ErtSimulationMode(str, Enum):
+class ErtSimulationMode(StrEnum):
     """The simulation mode ert was run in. These definitions come from
     `ert.mode_definitions`."""
 
@@ -320,7 +320,7 @@ class Layout(StrEnum):
     triangulated = "triangulated"
 
 
-class FMUContext(str, Enum):
+class FMUContext(StrEnum):
     """The context in which FMU was being run when data were generated."""
 
     case = "case"

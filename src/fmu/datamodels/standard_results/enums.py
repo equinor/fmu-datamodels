@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum, StrEnum
+from enum import StrEnum
 
 
 class StandardResultName(StrEnum):
@@ -21,14 +21,14 @@ class StandardResultName(StrEnum):
 class InplaceVolumes:
     """Enumerations relevant to inplace volumes tables."""
 
-    class Fluid(str, Enum):
+    class Fluid(StrEnum):
         """Fluid types used as values in the FLUID column."""
 
         oil = "oil"
         gas = "gas"
         water = "water"
 
-    class TableIndexColumns(str, Enum):
+    class TableIndexColumns(StrEnum):
         """The index columns for an inplace volumes table."""
 
         FLUID = "FLUID"
@@ -37,7 +37,7 @@ class InplaceVolumes:
         FACIES = "FACIES"
         LICENSE = "LICENSE"
 
-    class VolumetricColumns(str, Enum):
+    class VolumetricColumns(StrEnum):
         """The value columns for an inplace volumes table."""
 
         BULK = "BULK"
@@ -94,7 +94,7 @@ class InplaceVolumes:
 class FaultLines:
     """Enumerations relevant to fault lines tables."""
 
-    class TableIndexColumns(str, Enum):
+    class TableIndexColumns(StrEnum):
         """The index columns for a fault lines table."""
 
         POLY_ID = "POLY_ID"

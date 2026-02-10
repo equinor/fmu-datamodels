@@ -44,9 +44,13 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.18.0"
+    VERSION: VersionStr = "0.19.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.19.0
+
+    - Added 'codenames' to 'data.spec' for discrete grid properties.
+
     #### 0.18.0
 
     - Added dedicated link to SMDA stratigraphic column

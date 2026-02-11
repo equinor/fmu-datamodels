@@ -50,6 +50,14 @@ class FmuResultsSchema(SchemaBase):
     #### 0.19.0
 
     - Added 'codenames' to 'data.spec' for discrete grid properties.
+    - Added standard results for the following simulator tables:
+      - Lift curves
+      - Production network
+      - Pvt
+      - Relperm
+      - Rft
+      - Timeseries
+      - Well completions
 
     #### 0.18.0
 

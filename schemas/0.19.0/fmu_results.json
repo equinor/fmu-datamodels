@@ -248,6 +248,27 @@
         },
         {
           "$ref": "#/$defs/FluidContactOutlineStandardResult"
+        },
+        {
+          "$ref": "#/$defs/LiftCurvesStandardResult"
+        },
+        {
+          "$ref": "#/$defs/ProductionNetworkStandardResult"
+        },
+        {
+          "$ref": "#/$defs/PvtStandardResult"
+        },
+        {
+          "$ref": "#/$defs/RelpermStandardResult"
+        },
+        {
+          "$ref": "#/$defs/RftStandardResult"
+        },
+        {
+          "$ref": "#/$defs/SimulationTimeseriesStandardResult"
+        },
+        {
+          "$ref": "#/$defs/WellCompletionsStandardResult"
         }
       ],
       "title": "AnyStandardResult"
@@ -4812,6 +4833,32 @@
       "title": "LiftCurvesData",
       "type": "object"
     },
+    "LiftCurvesStandardResult": {
+      "description": "This class contains metadata for the 'lift_curves' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "lift_curves",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "LiftCurvesStandardResult",
+      "type": "object"
+    },
     "Masterdata": {
       "description": "The ``masterdata`` block contains information related to masterdata.\nCurrently, SMDA holds the masterdata.",
       "properties": {
@@ -6703,6 +6750,32 @@
       "title": "ProductionNetworkData",
       "type": "object"
     },
+    "ProductionNetworkStandardResult": {
+      "description": "This class contains metadata for the 'production_network' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "production_network",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ProductionNetworkStandardResult",
+      "type": "object"
+    },
     "Property": {
       "description": "A block describing property data. Shall be present if ``data.content`\n== ``property``.",
       "properties": {
@@ -7057,6 +7130,32 @@
         "is_prediction"
       ],
       "title": "PropertyData",
+      "type": "object"
+    },
+    "PvtStandardResult": {
+      "description": "This class contains metadata for the 'pvt' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "pvt",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "PvtStandardResult",
       "type": "object"
     },
     "RFTData": {
@@ -8097,6 +8196,58 @@
       "title": "RelpermData",
       "type": "object"
     },
+    "RelpermStandardResult": {
+      "description": "This class contains metadata for the 'relperm' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "relperm",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "RelpermStandardResult",
+      "type": "object"
+    },
+    "RftStandardResult": {
+      "description": "This class contains metadata for the 'rft' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "rft",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "RftStandardResult",
+      "type": "object"
+    },
     "Seismic": {
       "description": "A block describing seismic data. Shall be present if ``data.content``\n== ``seismic``.",
       "properties": {
@@ -8809,6 +8960,32 @@
         "is_prediction"
       ],
       "title": "SimulationTimeSeriesData",
+      "type": "object"
+    },
+    "SimulationTimeseriesStandardResult": {
+      "description": "This class contains metadata for the 'simulationtimeseries' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "simulationtimeseries",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SimulationTimeseriesStandardResult",
       "type": "object"
     },
     "Smda": {
@@ -11884,6 +12061,32 @@
         "is_prediction"
       ],
       "title": "WellCompletionsData",
+      "type": "object"
+    },
+    "WellCompletionsStandardResult": {
+      "description": "This class contains metadata for the 'well_completions' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "well_completions",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "WellCompletionsStandardResult",
       "type": "object"
     },
     "WellPicksData": {

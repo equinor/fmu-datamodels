@@ -1,3 +1,4 @@
+from .enums import StandardResultName
 from .ert_parameters import (
     ErtDistribution,
     ErtParameterMetadata,
@@ -25,4 +26,5 @@ __all__ = [
     "StructureDepthFaultLinesResult",
     "FluidContactOutlineSchema",
     "FluidContactOutlineResult",
+    "StandardResultName",
 ]

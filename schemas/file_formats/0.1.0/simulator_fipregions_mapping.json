@@ -1,0 +1,38 @@
+{
+  "$defs": {
+    "SimulatorFipregionsMappingResultRow": {
+      "description": "Represents the columns of a row in a simulator fipregions mapping export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "FIPNUM": {
+          "minimum": 0,
+          "title": "Fipnum",
+          "type": "integer"
+        },
+        "REGION": {
+          "title": "Region",
+          "type": "string"
+        },
+        "ZONE": {
+          "title": "Zone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "FIPNUM",
+        "ZONE",
+        "REGION"
+      ],
+      "title": "SimulatorFipregionsMappingResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_fipregions_mapping.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant simulator fipregions mapping parquet file, which is\nnaturally a list of rows.\n\nConsumers who retrieve this parquet file must read it into a json-dictionary\nequivalent format to validate it against the schema.",
+  "items": {
+    "$ref": "#/$defs/SimulatorFipregionsMappingResultRow"
+  },
+  "title": "SimulatorFipregionsMappingResult",
+  "type": "array",
+  "version": "0.1.0"
+}

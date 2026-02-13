@@ -60,6 +60,7 @@ class FmuResultsSchema(SchemaBase):
       - Rft
       - Timeseries
       - Well completions
+    - Added standard result 'simulator_fipregions_mapping'.
 
     #### 0.18.0
 

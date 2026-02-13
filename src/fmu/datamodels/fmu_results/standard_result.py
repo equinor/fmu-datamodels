@@ -277,6 +277,7 @@ class AnyStandardResult(RootModel):
         | RelpermStandardResult
         | RftStandardResult
         | SimulationTimeseriesStandardResult
+        | TransmissibilitiesStandardResult
         | WellCompletionsStandardResult,
         Field(discriminator="name"),
     ]

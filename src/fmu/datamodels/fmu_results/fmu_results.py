@@ -49,6 +49,7 @@ class FmuResultsSchema(SchemaBase):
     VERSION_CHANGELOG: str = """
     #### 0.19.0
 
+    - 'mappings' is added as a new content type
     - Added 'codenames' to 'data.spec' for discrete grid properties.
     - Added standard results for the following simulator tables:
       - Lift curves

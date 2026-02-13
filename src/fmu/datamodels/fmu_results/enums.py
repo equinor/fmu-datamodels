@@ -76,6 +76,17 @@ class Content(StrEnum):
 
     Typically provided as a Pandas ``Dataframe`` for export.
     """
+    mappings = "mappings"
+    """Tabular cross-references used to translate between different naming conventions
+    or identifiers.
+
+    Acts as a bridge to align data across different domains, such as:
+    * Official stratigraphy to model zonation.
+    * Static reservoir regions/zones to simulator-specific identifiers (e.g., FIPGRP).
+    * Unique Well Identifiers (UWI) to simulation well names.
+
+    Typically provided as a Pandas ``Dataframe`` for export.
+    """
 
     named_area = "named_area"
     """A named area within a field that is _not_ a region.

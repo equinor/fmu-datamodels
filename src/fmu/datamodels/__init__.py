@@ -14,6 +14,8 @@ from .standard_results import (
     FluidContactOutlineSchema,
     InplaceVolumesResult,
     InplaceVolumesSchema,
+    SimulatorFipregionsMappingResult,
+    SimulatorFipregionsMappingSchema,
     StructureDepthFaultLinesResult,
     StructureDepthFaultLinesSchema,
 )
@@ -38,6 +40,8 @@ __all__ = [
     "FluidContactOutlineSchema",
     "InplaceVolumesResult",
     "InplaceVolumesSchema",
+    "SimulatorFipregionsMappingResult",
+    "SimulatorFipregionsMappingSchema",
     "StructureDepthFaultLinesResult",
     "StructureDepthFaultLinesSchema",
 ]
@@ -48,5 +52,6 @@ schemas: list[type[SchemaBase]] = [
     FieldOutlineSchema,
     FluidContactOutlineSchema,
     InplaceVolumesSchema,
+    SimulatorFipregionsMappingSchema,
     StructureDepthFaultLinesSchema,
 ]

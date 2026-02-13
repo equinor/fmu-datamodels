@@ -16,6 +16,7 @@ class StandardResultName(StrEnum):
     parameters = "parameters"
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
+    simulator_fipregions_mapping = "simulator_fipregions_mapping"
     structure_depth_surface = "structure_depth_surface"
     structure_time_surface = "structure_time_surface"
     grid_extracted_depth_surface = "grid_extracted_depth_surface"
@@ -122,6 +123,22 @@ class FaultLines:
     def index_columns() -> list[str]:
         """Returns a list of the index columns."""
         return [k.value for k in FaultLines.TableIndexColumns]
+
+
+class SimulatorFipregionsMapping:
+    """Enumerations relevant to simulator fipregions mapping tables."""
+
+    class TableIndexColumns(StrEnum):
+        """The index columns for a simulator fipregions mapping table."""
+
+        FIPNUM = "FIPNUM"
+        ZONE = "ZONE"
+        REGION = "REGION"
+
+    @staticmethod
+    def index_columns() -> list[str]:
+        """Returns a list of the index columns."""
+        return [k.value for k in SimulatorFipregionsMapping.TableIndexColumns]
 
 
 class SimulatorTables:

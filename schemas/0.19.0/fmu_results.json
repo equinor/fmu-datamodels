@@ -268,6 +268,9 @@
           "$ref": "#/$defs/SimulationTimeseriesStandardResult"
         },
         {
+          "$ref": "#/$defs/TransmissibilitiesStandardResult"
+        },
+        {
           "$ref": "#/$defs/WellCompletionsStandardResult"
         }
       ],
@@ -11067,6 +11070,32 @@
         "is_prediction"
       ],
       "title": "TransmissibilitiesData",
+      "type": "object"
+    },
+    "TransmissibilitiesStandardResult": {
+      "description": "This class contains metadata for the 'transmissibilities' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "transmissibilities",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "TransmissibilitiesStandardResult",
       "type": "object"
     },
     "TriangulatedSurfaceSpecification": {

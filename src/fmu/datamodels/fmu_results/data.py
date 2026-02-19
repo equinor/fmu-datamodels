@@ -471,6 +471,16 @@ class LiftCurvesData(Data):
     """The type of content these data represent."""
 
 
+class MappingData(Data):
+    """
+    The ``data`` block contains information about the data contained in this object.
+    This class contains metadata for mapping.
+    """
+
+    content: Literal[enums.Content.mapping]
+    """The type of content these data represent."""
+
+
 class NamedAreaData(Data):
     """
     The ``data`` block contains information about the data contained in this object.
@@ -713,6 +723,7 @@ class AnyData(RootModel):
         | FluidContactData
         | KPProductData
         | LiftCurvesData
+        | MappingData
         | NamedAreaData
         | ParametersData
         | PinchoutData

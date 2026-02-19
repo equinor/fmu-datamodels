@@ -1,6 +1,13 @@
 from __future__ import annotations
 
-from enum import Enum, StrEnum
+from enum import StrEnum
+
+
+class IndexColumnsStrEnum(StrEnum):
+    @classmethod
+    def index_columns(cls) -> list[str]:
+        """Returns all values as the index columns."""
+        return [m.value for m in cls]
 
 
 class StandardResultName(StrEnum):
@@ -9,26 +16,38 @@ class StandardResultName(StrEnum):
     parameters = "parameters"
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
+    simulator_fipregions_mapping = "simulator_fipregions_mapping"
     structure_depth_surface = "structure_depth_surface"
     structure_time_surface = "structure_time_surface"
+    grid_extracted_depth_surface = "grid_extracted_depth_surface"
     structure_depth_isochore = "structure_depth_isochore"
     structure_depth_fault_lines = "structure_depth_fault_lines"
     structure_depth_fault_surface = "structure_depth_fault_surface"
     fluid_contact_surface = "fluid_contact_surface"
     fluid_contact_outline = "fluid_contact_outline"
 
+    # Sim 2 Sumo
+    lift_curves = "lift_curves"
+    production_network = "production_network"
+    pvt = "pvt"
+    relperm = "relperm"
+    rft = "rft"
+    simulationtimeseries = "simulationtimeseries"
+    transmissibilities = "transmissibilities"
+    well_completions = "well_completions"
+
 
 class InplaceVolumes:
     """Enumerations relevant to inplace volumes tables."""
 
-    class Fluid(str, Enum):
+    class Fluid(StrEnum):
         """Fluid types used as values in the FLUID column."""
 
         oil = "oil"
         gas = "gas"
         water = "water"
 
-    class TableIndexColumns(str, Enum):
+    class TableIndexColumns(StrEnum):
         """The index columns for an inplace volumes table."""
 
         FLUID = "FLUID"
@@ -37,7 +56,7 @@ class InplaceVolumes:
         FACIES = "FACIES"
         LICENSE = "LICENSE"
 
-    class VolumetricColumns(str, Enum):
+    class VolumetricColumns(StrEnum):
         """The value columns for an inplace volumes table."""
 
         BULK = "BULK"
@@ -94,7 +113,7 @@ class InplaceVolumes:
 class FaultLines:
     """Enumerations relevant to fault lines tables."""
 
-    class TableIndexColumns(str, Enum):
+    class TableIndexColumns(StrEnum):
         """The index columns for a fault lines table."""
 
         POLY_ID = "POLY_ID"
@@ -104,3 +123,65 @@ class FaultLines:
     def index_columns() -> list[str]:
         """Returns a list of the index columns."""
         return [k.value for k in FaultLines.TableIndexColumns]
+
+
+class SimulatorFipregionsMapping:
+    """Enumerations relevant to simulator fipregions mapping tables."""
+
+    class TableIndexColumns(StrEnum):
+        """The index columns for a simulator fipregions mapping table."""
+
+        FIPNUM = "FIPNUM"
+        ZONE = "ZONE"
+        REGION = "REGION"
+
+    @staticmethod
+    def index_columns() -> list[str]:
+        """Returns a list of the index columns."""
+        return [k.value for k in SimulatorFipregionsMapping.TableIndexColumns]
+
+
+class SimulatorTables:
+    """Enumerations relevant to tables extracted from a flow simulator."""
+
+    class ProductionNetworkColumns(IndexColumnsStrEnum):
+        """The index columns for a lift curves table."""
+
+        DATE = "DATE"
+        CHILD = "CHILD"
+        PARENT = "PARENT"
+        KEYWORD = "KEYWORD"
+
+    class PvtColumns(IndexColumnsStrEnum):
+        """The index columns for a pvt table."""
+
+        PVTNUM = "PVTNUM"
+        KEYWORD = "KEYWORD"
+
+    class TransmissibilitiesColumns(IndexColumnsStrEnum):
+        """The index columns for a pvt table."""
+
+        DIR = "DIR"
+
+    class RelpermColumns(IndexColumnsStrEnum):
+        """The index columns for a relperm table."""
+
+        SATNUM = "SATNUM"
+
+    class RftColumns(IndexColumnsStrEnum):
+        """The index columns for an rft table."""
+
+        WELL = "WELL"
+        DATE = "DATE"
+
+    class SimulationTimeseriesColumns(IndexColumnsStrEnum):
+        """The index columns for a simulation timeseries table."""
+
+        DATE = "DATE"
+
+    class WellCompletionsColumns(IndexColumnsStrEnum):
+        """The index columns for a well completions table."""
+
+        WELL = "WELL"
+        DATE = "DATE"
+        ZONE = "ZONE"

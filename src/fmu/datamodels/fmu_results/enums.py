@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from enum import Enum, IntEnum, StrEnum
+from enum import IntEnum, StrEnum
 
 
 class AxisOrientation(IntEnum):
@@ -73,6 +73,17 @@ class Content(StrEnum):
 
     lift_curves = "lift_curves"
     """Table representing the relationship between production rates and pressures.
+
+    Typically provided as a Pandas ``Dataframe`` for export.
+    """
+    mapping = "mapping"
+    """Tabular cross-references used to translate between different naming conventions
+    or identifiers.
+
+    Acts as a bridge to align data across different domains, such as:
+    * Official stratigraphy to model zonation.
+    * Static reservoir regions/zones to simulator-specific identifiers (e.g., FIPGRP).
+    * Unique Well Identifiers (UWI) to simulation well names.
 
     Typically provided as a Pandas ``Dataframe`` for export.
     """
@@ -267,7 +278,7 @@ class Content(StrEnum):
         )
 
 
-class ErtSimulationMode(str, Enum):
+class ErtSimulationMode(StrEnum):
     """The simulation mode ert was run in. These definitions come from
     `ert.mode_definitions`."""
 
@@ -320,7 +331,7 @@ class Layout(StrEnum):
     triangulated = "triangulated"
 
 
-class FMUContext(str, Enum):
+class FMUContext(StrEnum):
     """The context in which FMU was being run when data were generated."""
 
     case = "case"

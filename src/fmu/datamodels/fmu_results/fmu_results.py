@@ -44,9 +44,24 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.18.0"
+    VERSION: VersionStr = "0.19.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.19.0
+
+    - Added new standard result for`GridExtractedDepthSurfaceStandardResult`
+    - Added 'mapping' as a new content type
+    - Added 'codenames' to 'data.spec' for discrete grid properties.
+    - Added standard results for the following simulator tables:
+      - Lift curves
+      - Production network
+      - Pvt
+      - Relperm
+      - Rft
+      - Timeseries
+      - Well completions
+    - Added standard result 'simulator_fipregions_mapping'.
+
     #### 0.18.0
 
     - Added dedicated link to SMDA stratigraphic column

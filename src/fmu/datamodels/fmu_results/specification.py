@@ -128,6 +128,11 @@ class ZoneDefinition(BaseModel):
 class CPGridPropertySpecification(RowColumnLayer):
     """Specifies relevant values describing a corner point grid property object."""
 
+    codenames: dict[int, str] | None = Field(
+        default=None, examples=[{0: "shale", 1: "sand"}]
+    )
+    """Mapping from discrete property values to corresponding names."""
+
 
 # TODO: Base on TableSpecification when we only support table export format for polygons
 class PolygonsSpecification(BaseModel):

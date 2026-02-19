@@ -148,7 +148,7 @@
           "$ref": "#/$defs/LiftCurvesData"
         },
         {
-          "$ref": "#/$defs/MappingsData"
+          "$ref": "#/$defs/MappingData"
         },
         {
           "$ref": "#/$defs/NamedAreaData"
@@ -4894,8 +4894,8 @@
       "title": "LiftCurvesStandardResult",
       "type": "object"
     },
-    "MappingsData": {
-      "description": "The ``data`` block contains information about the data contained in this object.\nThis class contains metadata for mappings.",
+    "MappingData": {
+      "description": "The ``data`` block contains information about the data contained in this object.\nThis class contains metadata for mapping.",
       "properties": {
         "alias": {
           "anyOf": [
@@ -4939,7 +4939,7 @@
           "title": "Bbox"
         },
         "content": {
-          "const": "mappings",
+          "const": "mapping",
           "title": "Content",
           "type": "string"
         },
@@ -5202,7 +5202,7 @@
         "is_observation",
         "is_prediction"
       ],
-      "title": "MappingsData",
+      "title": "MappingData",
       "type": "object"
     },
     "Masterdata": {

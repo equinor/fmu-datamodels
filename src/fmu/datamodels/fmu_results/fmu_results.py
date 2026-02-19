@@ -50,7 +50,7 @@ class FmuResultsSchema(SchemaBase):
     #### 0.19.0
 
     - Added new standard result for`GridExtractedDepthSurfaceStandardResult`
-    - 'mappings' is added as a new content type
+    - Added 'mapping' as a new content type
     - Added 'codenames' to 'data.spec' for discrete grid properties.
     - Added standard results for the following simulator tables:
       - Lift curves

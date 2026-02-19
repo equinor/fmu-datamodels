@@ -76,7 +76,7 @@ class Content(StrEnum):
 
     Typically provided as a Pandas ``Dataframe`` for export.
     """
-    mappings = "mappings"
+    mapping = "mapping"
     """Tabular cross-references used to translate between different naming conventions
     or identifiers.
 

@@ -241,6 +241,9 @@
           "$ref": "#/$defs/StructureTimeSurfaceStandardResult"
         },
         {
+          "$ref": "#/$defs/GridExtractedDepthSurfaceStandardResult"
+        },
+        {
           "$ref": "#/$defs/StructureDepthIsochoreStandardResult"
         },
         {
@@ -4075,6 +4078,32 @@
         "relative_path"
       ],
       "title": "Geometry",
+      "type": "object"
+    },
+    "GridExtractedDepthSurfaceStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represent.\nThis class contains metadata for the \"grid_extracted_depth_surface' standard result.",
+      "properties": {
+        "file_schema": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileSchema"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "const": "grid_extracted_depth_surface",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "GridExtractedDepthSurfaceStandardResult",
       "type": "object"
     },
     "GridModel": {

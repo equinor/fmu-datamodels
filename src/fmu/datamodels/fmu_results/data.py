@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import warnings
 from typing import TYPE_CHECKING, Annotated, Any, Literal
 from uuid import UUID
@@ -16,6 +17,11 @@ from pydantic import (
 )
 
 from . import enums
+from .enums import (
+    PropertyAttribute,
+    PropertyAttributeContinuous,
+    PropertyAttributeDiscrete,
+)
 from .specification import AnySpecification
 from .standard_result import AnyStandardResult
 
@@ -87,11 +93,42 @@ class Property(BaseModel):
     """A block describing property data. Shall be present if ``data.content`
     == ``property``."""
 
-    attribute: str | None = Field(default=None, examples=["porosity"])
+    attribute: PropertyAttributeContinuous | PropertyAttributeDiscrete | str | None = (
+        Field(default=None, examples=["porosity"])
+    )
     """A known attribute."""
 
     is_discrete: bool | None = Field(default=None)
     """If True, this is a discrete property."""
+
+    @field_validator("attribute", mode="before")
+    @classmethod
+    def try_parse_property_attribute(
+        cls, v: PropertyAttribute | str | None
+    ) -> PropertyAttribute | str | None:
+        with contextlib.suppress(ValueError):
+            if isinstance(v, str):
+                return PropertyAttribute.from_string(v)
+        return v
+
+    @model_validator(mode="after")
+    def validate_is_discrete(v: Property) -> Property:
+        if (
+            isinstance(v.attribute, PropertyAttribute)
+            and v.attribute.is_discrete != v.is_discrete
+        ):
+            if v.is_discrete is not None:
+                attr_type = "discrete" if v.attribute.is_discrete else "continuous"
+
+                warnings.warn(
+                    f"The property attribute '{v.attribute}' is a known {attr_type} "
+                    "attribute. The 'is_discrete' field will be updated for this "
+                    "attribute. Either remove the 'is_discrete' field or update the "
+                    "value to silence this warning.",
+                )
+            v.is_discrete = v.attribute.is_discrete
+
+        return v
 
 
 class FluidContact(BaseModel):

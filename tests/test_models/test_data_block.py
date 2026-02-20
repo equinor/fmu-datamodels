@@ -146,6 +146,67 @@ def test_content_field_region(field_region_metadata: dict) -> None:
         FmuResults.model_validate(field_region_metadata)
 
 
+def test_content_property_known_attribute_sets_is_discrete(
+    property_metadata: dict,
+) -> None:
+    """Test is_discrete field is set for known attribute"""
+
+    # test continous attribute
+    _metadata = deepcopy(property_metadata)
+    _metadata["data"]["property"]["attribute"] = "water_saturation"
+    del _metadata["data"]["property"]["is_discrete"]
+
+    model_metadata = FmuResults.model_validate(_metadata).model_dump()
+    assert model_metadata["data"]["property"]["attribute"] == "water_saturation"
+    assert model_metadata["data"]["property"]["is_discrete"] is False
+
+    # test discrete attribute
+    _metadata = deepcopy(property_metadata)
+    _metadata["data"]["property"]["attribute"] = "regions"
+    del _metadata["data"]["property"]["is_discrete"]
+
+    model_metadata = FmuResults.model_validate(_metadata).model_dump()
+    assert model_metadata["data"]["property"]["attribute"] == "regions"
+    assert model_metadata["data"]["property"]["is_discrete"] is True
+
+
+def test_content_property_known_attribute_updates_is_discrete(
+    property_metadata: dict,
+) -> None:
+    """
+    Test is_discrete field is updated with a warning for a known attribute if an
+    incorrect is_discrete value is set.
+    """
+
+    _metadata = deepcopy(property_metadata)
+    _metadata["data"]["property"]["attribute"] = "porosity"
+    _metadata["data"]["property"]["is_discrete"] = True  # incorrect value for porosity
+
+    with pytest.warns(UserWarning, match="'is_discrete' field will be updated"):
+        model_metadata = FmuResults.model_validate(_metadata).model_dump()
+        assert model_metadata["data"]["property"]["is_discrete"] is False
+
+    _metadata = deepcopy(property_metadata)
+    _metadata["data"]["property"]["attribute"] = "facies"
+    _metadata["data"]["property"]["is_discrete"] = False  # incorrect value for facies
+
+    with pytest.warns(UserWarning, match="'is_discrete' field will be updated"):
+        model_metadata = FmuResults.model_validate(_metadata).model_dump()
+        assert model_metadata["data"]["property"]["is_discrete"] is True
+
+
+def test_content_property_unknown_attribute(property_metadata: dict) -> None:
+    """Test is_discrete field is not set for unknown attribute"""
+
+    _metadata = deepcopy(property_metadata)
+    _metadata["data"]["property"]["attribute"] = "unknown"
+    del _metadata["data"]["property"]["is_discrete"]
+
+    model_metadata = FmuResults.model_validate(_metadata).model_dump()
+    assert model_metadata["data"]["property"]["attribute"] == "unknown"
+    assert model_metadata["data"]["property"]["is_discrete"] is None
+
+
 def test_content_seismic(seismic_metadata: dict) -> None:
     """Test content-specific rule: seismic.
 

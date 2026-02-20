@@ -391,3 +391,72 @@ class FileFormat(StrEnum):
     segy = "segy"
     openvds = "openvds"
     tsurf = "tsurf"
+
+
+class PropertyAttribute(StrEnum):
+    """Base class for property attributes."""
+
+    @property
+    def is_discrete(self) -> bool:
+        """Flag if attribute is discrete."""
+        return isinstance(self, PropertyAttributeDiscrete)
+
+    @classmethod
+    def from_string(
+        cls, value: str
+    ) -> PropertyAttributeDiscrete | PropertyAttributeContinuous:
+        """Try to parse a string as either a discrete or continuous attribute."""
+        try:
+            return PropertyAttributeDiscrete(value)
+        except ValueError as exc:
+            try:
+                return PropertyAttributeContinuous(value)
+            except ValueError:
+                raise ValueError(f"Unknown property attribute: {value}") from exc
+
+
+class PropertyAttributeDiscrete(PropertyAttribute):
+    """Known discrete property attributes."""
+
+    zones = "zones"
+    """Classification of geological zonations within the reservoir."""
+
+    regions = "regions"
+    """Classification of distinct geographic regions in the field."""
+
+    facies = "facies"
+    """Classification of rock types influencing reservoir properties."""
+
+    fluid_indicator = "fluid_indicator"
+    """Presence indicator for specific fluids (e.g., oil/gas/water) in the reservoir."""
+
+
+class PropertyAttributeContinuous(PropertyAttribute):
+    """Known continuous property attributes."""
+
+    porosity = "porosity"
+    """The fraction of the rock volume that is pore space."""
+
+    permeability = "permeability"
+    """Measure of how easily fluids flow."""
+
+    permeability_vertical = "permeability_vertical"
+    """Measure of how easily fluids flow in the vertical direction."""
+
+    saturation_water = "saturation_water"
+    """The fraction of the pore space occupied by water."""
+
+    saturation_oil = "saturation_oil"
+    """The fraction of the pore space occupied by oil."""
+
+    saturation_gas = "saturation_gas"
+    """The fraction of the pore space occupied by gas."""
+
+    volume_shale = "volume_shale"
+    """The fraction of the rock volume that is shale."""
+
+    bulk_volume_oil = "bulk_volume_oil"
+    """The bulk volume of oil in the rock."""
+
+    bulk_volume_gas = "bulk_volume_gas"
+    """The bulk volume of gas in the rock."""

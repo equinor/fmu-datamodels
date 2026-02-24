@@ -63,6 +63,7 @@ from fmu.datamodels.fmu_results.global_configuration import (
 )
 from fmu.datamodels.fmu_results.specification import (
     PolygonsSpecification,
+    Statistics,
     SurfaceSpecification,
     TableSpecification,
 )
@@ -295,6 +296,7 @@ def fluid_contact_metadata() -> dict:
                 xori=0.1,
                 yflip=enums.AxisOrientation.normal,
                 yori=0.1,
+                value_statistics=Statistics(min=-1.0, max=1.0, mean=0.0, std=0.5),
             ),
             "time": None,
             "undef_is_zero": None,
@@ -458,6 +460,7 @@ def seismic_metadata() -> dict:
                 xori=456063.6875,
                 yori=5926551.0,
                 yflip=enums.AxisOrientation.normal,
+                value_statistics=Statistics(min=-1.0, max=1.0, mean=0.0, std=0.5),
             ),
             "time": Time(
                 t0=Timestamp(label="base", value=datetime.datetime.now(datetime.UTC)),

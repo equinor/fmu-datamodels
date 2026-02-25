@@ -5208,28 +5208,6 @@
       "title": "MappingData",
       "type": "object"
     },
-    "SimulatorFipregionsMappingStandardResult": {
-      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'simulator_fipregions_mapping'\nstandard result.",
-      "properties": {
-        "file_schema": {
-          "$ref": "#/$defs/FileSchema",
-          "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_fipregions_mapping.json",
-            "version": "0.1.0"
-          }
-        },
-        "name": {
-          "const": "simulator_fipregions_mapping",
-          "title": "Name",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "title": "SimulatorFipregionsMappingStandardResult",
-      "type": "object"
-    },
     "Masterdata": {
       "description": "The ``masterdata`` block contains information related to masterdata.\nCurrently, SMDA holds the masterdata.",
       "properties": {
@@ -7153,6 +7131,12 @@
         "attribute": {
           "anyOf": [
             {
+              "$ref": "#/$defs/PropertyAttributeContinuous"
+            },
+            {
+              "$ref": "#/$defs/PropertyAttributeDiscrete"
+            },
+            {
               "type": "string"
             },
             {
@@ -7180,6 +7164,33 @@
       },
       "title": "Property",
       "type": "object"
+    },
+    "PropertyAttributeContinuous": {
+      "description": "Known continuous property attributes.",
+      "enum": [
+        "porosity",
+        "permeability",
+        "permeability_vertical",
+        "saturation_water",
+        "saturation_oil",
+        "saturation_gas",
+        "volume_shale",
+        "bulk_volume_oil",
+        "bulk_volume_gas"
+      ],
+      "title": "PropertyAttributeContinuous",
+      "type": "string"
+    },
+    "PropertyAttributeDiscrete": {
+      "description": "Known discrete property attributes.",
+      "enum": [
+        "zones",
+        "regions",
+        "facies",
+        "fluid_indicator"
+      ],
+      "title": "PropertyAttributeDiscrete",
+      "type": "string"
     },
     "PropertyData": {
       "description": "The ``data`` block contains information about the data contained in this object.\nThis class contains metadata for property data.",
@@ -9357,6 +9368,28 @@
         "name"
       ],
       "title": "SimulationTimeseriesStandardResult",
+      "type": "object"
+    },
+    "SimulatorFipregionsMappingStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'simulator_fipregions_mapping'\nstandard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_fipregions_mapping.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "simulator_fipregions_mapping",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SimulatorFipregionsMappingStandardResult",
       "type": "object"
     },
     "Smda": {

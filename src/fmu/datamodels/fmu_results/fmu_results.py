@@ -49,6 +49,7 @@ class FmuResultsSchema(SchemaBase):
     VERSION_CHANGELOG: str = """
     #### 0.19.0
 
+    - Added list of known property attributes
     - Added new standard result for`GridExtractedDepthSurfaceStandardResult`
     - Added 'mapping' as a new content type
     - Added 'codenames' to 'data.spec' for discrete grid properties.

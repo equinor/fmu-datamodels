@@ -417,12 +417,16 @@
           "exclusiveMinimum": 0,
           "title": "Nrow",
           "type": "integer"
+        },
+        "value_statistics": {
+          "$ref": "#/$defs/Statistics"
         }
       },
       "required": [
         "nrow",
         "ncol",
-        "nlay"
+        "nlay",
+        "value_statistics"
       ],
       "title": "CPGridPropertySpecification",
       "type": "object"
@@ -693,6 +697,9 @@
           "title": "Undef",
           "type": "number"
         },
+        "value_statistics": {
+          "$ref": "#/$defs/Statistics"
+        },
         "xinc": {
           "exclusiveMinimum": 0,
           "title": "Xinc",
@@ -737,6 +744,7 @@
         "xori",
         "yflip",
         "yori",
+        "value_statistics",
         "nlay",
         "zinc",
         "zori",
@@ -5208,28 +5216,6 @@
       "title": "MappingData",
       "type": "object"
     },
-    "SimulatorFipregionsMappingStandardResult": {
-      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'simulator_fipregions_mapping'\nstandard result.",
-      "properties": {
-        "file_schema": {
-          "$ref": "#/$defs/FileSchema",
-          "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_fipregions_mapping.json",
-            "version": "0.1.0"
-          }
-        },
-        "name": {
-          "const": "simulator_fipregions_mapping",
-          "title": "Name",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "title": "SimulatorFipregionsMappingStandardResult",
-      "type": "object"
-    },
     "Masterdata": {
       "description": "The ``masterdata`` block contains information related to masterdata.\nCurrently, SMDA holds the masterdata.",
       "properties": {
@@ -9359,6 +9345,28 @@
       "title": "SimulationTimeseriesStandardResult",
       "type": "object"
     },
+    "SimulatorFipregionsMappingStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'simulator_fipregions_mapping'\nstandard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_fipregions_mapping.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "simulator_fipregions_mapping",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SimulatorFipregionsMappingStandardResult",
+      "type": "object"
+    },
     "Smda": {
       "description": "The ``masterdata.smda`` block contains SMDA-related attributes.",
       "properties": {
@@ -9477,6 +9485,34 @@
         "ssdl"
       ],
       "title": "SsdlAccess",
+      "type": "object"
+    },
+    "Statistics": {
+      "properties": {
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "mean": {
+          "title": "Mean",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "std": {
+          "title": "Std",
+          "type": "number"
+        }
+      },
+      "required": [
+        "min",
+        "max",
+        "mean",
+        "std"
+      ],
+      "title": "Statistics",
       "type": "object"
     },
     "StratigraphicColumn": {
@@ -9963,6 +9999,9 @@
           "title": "Undef",
           "type": "number"
         },
+        "value_statistics": {
+          "$ref": "#/$defs/Statistics"
+        },
         "xinc": {
           "exclusiveMinimum": 0,
           "title": "Xinc",
@@ -9994,7 +10033,8 @@
         "yinc",
         "xori",
         "yflip",
-        "yori"
+        "yori",
+        "value_statistics"
       ],
       "title": "SurfaceSpecification",
       "type": "object"

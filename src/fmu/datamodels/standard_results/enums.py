@@ -20,6 +20,7 @@ class StandardResultName(StrEnum):
     structure_depth_surface = "structure_depth_surface"
     structure_time_surface = "structure_time_surface"
     grid_extracted_depth_surface = "grid_extracted_depth_surface"
+    grid_model_static = "grid_model_static"
     structure_depth_isochore = "structure_depth_isochore"
     structure_depth_fault_lines = "structure_depth_fault_lines"
     structure_depth_fault_surface = "structure_depth_fault_surface"

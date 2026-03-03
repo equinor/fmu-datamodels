@@ -44,10 +44,14 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.19.0"
+    VERSION: VersionStr = "0.20.0"
 
     VERSION_CHANGELOG: str = """
-    #### 0.19.0
+    #### 0.20.0
+
+    - Added new standard result for`grid_model_static`
+
+     #### 0.19.0
 
     - Added new standard result for`GridExtractedDepthSurfaceStandardResult`
     - Added 'mapping' as a new content type

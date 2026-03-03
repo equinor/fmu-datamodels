@@ -147,6 +147,17 @@ class GridExtractedDepthSurfaceStandardResult(StandardResult):
     """The identifying name for the 'grid_extracted_depth_surface' standard result."""
 
 
+class GridModelStaticStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represent.
+    This class contains metadata for the "grid_model_static' standard result.
+    """
+
+    name: Literal[StandardResultName.grid_model_static]
+    """The identifying name for the 'grid_model_static' standard result."""
+
+
 class StructureDepthIsochoreStandardResult(StandardResult):
     """
     The ``standard_result`` field contains information about which standard results this
@@ -303,6 +314,7 @@ class AnyStandardResult(RootModel):
         | StructureDepthFaultSurfaceStandardResult
         | StructureTimeSurfaceStandardResult
         | GridExtractedDepthSurfaceStandardResult
+        | GridModelStaticStandardResult
         | StructureDepthIsochoreStandardResult
         | StructureDepthFaultLinesStandardResult
         | FluidContactSurfaceStandardResult

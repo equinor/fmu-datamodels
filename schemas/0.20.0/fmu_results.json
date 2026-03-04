@@ -7160,6 +7160,9 @@
         "attribute": {
           "anyOf": [
             {
+              "$ref": "#/$defs/PropertyAttribute"
+            },
+            {
               "type": "string"
             },
             {
@@ -7187,6 +7190,27 @@
       },
       "title": "Property",
       "type": "object"
+    },
+    "PropertyAttribute": {
+      "description": "Known property attributes.",
+      "enum": [
+        "zonation",
+        "regions",
+        "facies",
+        "net_to_gross",
+        "fluid_indicator",
+        "porosity",
+        "permeability",
+        "permeability_vertical",
+        "saturation_water",
+        "saturation_oil",
+        "saturation_gas",
+        "volume_shale",
+        "bulk_volume_oil",
+        "bulk_volume_gas"
+      ],
+      "title": "PropertyAttribute",
+      "type": "string"
     },
     "PropertyData": {
       "description": "The ``data`` block contains information about the data contained in this object.\nThis class contains metadata for property data.",

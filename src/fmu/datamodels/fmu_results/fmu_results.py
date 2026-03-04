@@ -50,8 +50,9 @@ class FmuResultsSchema(SchemaBase):
     #### 0.20.0
 
     - Added new standard result for`grid_model_static`
+    - Added list of known property attributes
 
-     #### 0.19.0
+    #### 0.19.0
 
     - Added new standard result for`GridExtractedDepthSurfaceStandardResult`
     - Added 'mapping' as a new content type

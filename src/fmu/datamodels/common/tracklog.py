@@ -66,41 +66,62 @@ class Tracklog(RootModel):
             ]
         )
 
-    def append(self, event: enums.TrackLogEventType, fmu_dataio_version: str) -> None:
+    def append(
+        self,
+        event: enums.TrackLogEventType,
+        fmu_dataio_version: str,
+        source_name: str | None = None,
+        source_version: str | None = None,
+    ) -> None:
         """Append new tracklog record to the tracklog."""
-        self.root.append(self._generate_tracklog_event(event, fmu_dataio_version))
+        self.root.append(
+            self._generate_tracklog_event(
+                event, fmu_dataio_version, source_name, source_version
+            )
+        )
 
     @staticmethod
     def _generate_tracklog_event(
-        event: enums.TrackLogEventType, fmu_dataio_version: str
+        event: enums.TrackLogEventType,
+        version: str,
+        source_name: str | None = None,
+        source_version: str | None = None,
     ) -> TracklogEvent:
         """Generate new tracklog event with the given event type"""
+        source: TracklogSource | None = None
+
+        if source_name is not None and source_version is not None:
+            source = TracklogSource(
+                name=source_name, version=Version(version=source_version)
+            )
+        elif source_name is not None or source_version is not None:
+            raise ValueError(
+                "Both the source name and source version must be provided together."
+            )
+
         komodo_release = os.environ.get(
             "KOMODO_RELEASE", os.environ.get("KOMODO_RELEASE_BACKUP", None)
         )
-        komodo = (
-            Version.model_construct(version=komodo_release) if komodo_release else None
+        komodo = Version(version=komodo_release) if komodo_release else None
+
+        sysinfo = SystemInformation.model_construct(
+            fmu_dataio=Version(version=version),
+            source=source,
+            komodo=komodo,
+            operating_system=OperatingSystem(
+                hostname=platform.node(),
+                operating_system=platform.platform(),
+                release=platform.release(),
+                system=platform.system(),
+                version=platform.version(),
+            ),
         )
-        fmu_dataio = Version.model_construct(version=fmu_dataio_version)
+
         return TracklogEvent.model_construct(
             datetime=datetime.datetime.now(datetime.UTC),
             event=event,
-            user=User.model_construct(id=getpass.getuser()),
-            sysinfo=(
-                SystemInformation.model_construct(
-                    fmu_dataio=fmu_dataio,
-                    komodo=komodo,
-                    operating_system=(
-                        OperatingSystem.model_construct(
-                            hostname=platform.node(),
-                            operating_system=platform.platform(),
-                            release=platform.release(),
-                            system=platform.system(),
-                            version=platform.version(),
-                        )
-                    ),
-                )
-            ),
+            user=User(id=getpass.getuser()),
+            sysinfo=sysinfo,
         )
 
 
@@ -126,6 +147,18 @@ class OperatingSystem(BaseModel):
     """The specific release version of the system."""
 
 
+class TracklogSource(BaseModel):
+    """The package or service causing an event that's added to the tracklog.
+
+    This is only relevant for a non-fmu-dataio source."""
+
+    name: str
+    """The name of the source package or service."""
+
+    version: Version
+    """The version of the source package or service."""
+
+
 # TODO: Make `fmu_dataio` and `operating_system` non-optional
 #  when fmu-sumo-aggregation-service uses only fmu-dataio
 class SystemInformation(BaseModel):
@@ -140,6 +173,11 @@ class SystemInformation(BaseModel):
         examples=["1.2.3"],
     )
     """The version of fmu-dataio used to export the data. See :class:`Version`."""
+
+    source: TracklogSource | None = None
+    """The package or service that is the source of the tracklog entry.
+
+    This field should not be used when fmu-dataio is the source itself."""
 
     komodo: Version | None = Field(
         default=None,

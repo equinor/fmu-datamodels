@@ -10093,6 +10093,17 @@
             }
           ],
           "default": null
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TracklogSource"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "title": "SystemInformation",
@@ -11180,6 +11191,24 @@
         "user"
       ],
       "title": "TracklogEvent",
+      "type": "object"
+    },
+    "TracklogSource": {
+      "description": "The package or service causing an event that's added to the tracklog.\n\nThis is only relevant for a non-fmu-dataio source.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/$defs/Version"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "TracklogSource",
       "type": "object"
     },
     "TransmissibilitiesData": {

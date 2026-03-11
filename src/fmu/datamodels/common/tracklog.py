@@ -54,14 +54,20 @@ class Tracklog(RootModel):
         return iter(self.root)
 
     @classmethod
-    def initialize(cls, fmu_dataio_version: str) -> Tracklog:
+    def initialize(
+        cls,
+        fmu_dataio_version: str,
+        tracklog_source: TracklogSource | None = None,
+    ) -> Tracklog:
         """Initialize the tracklog object with a list containing one
         TracklogEvent of type 'created'"""
 
         return cls(
             root=[
                 cls._generate_tracklog_event(
-                    enums.TrackLogEventType.created, fmu_dataio_version
+                    enums.TrackLogEventType.created,
+                    fmu_dataio_version,
+                    tracklog_source,
                 )
             ]
         )
@@ -70,35 +76,20 @@ class Tracklog(RootModel):
         self,
         event: enums.TrackLogEventType,
         fmu_dataio_version: str,
-        source_name: str | None = None,
-        source_version: str | None = None,
+        tracklog_source: TracklogSource | None = None,
     ) -> None:
         """Append new tracklog record to the tracklog."""
         self.root.append(
-            self._generate_tracklog_event(
-                event, fmu_dataio_version, source_name, source_version
-            )
+            self._generate_tracklog_event(event, fmu_dataio_version, tracklog_source)
         )
 
     @staticmethod
     def _generate_tracklog_event(
         event: enums.TrackLogEventType,
         version: str,
-        source_name: str | None = None,
-        source_version: str | None = None,
+        tracklog_source: TracklogSource | None = None,
     ) -> TracklogEvent:
         """Generate new tracklog event with the given event type"""
-        source: TracklogSource | None = None
-
-        if source_name is not None and source_version is not None:
-            source = TracklogSource(
-                name=source_name, version=Version(version=source_version)
-            )
-        elif source_name is not None or source_version is not None:
-            raise ValueError(
-                "Both the source name and source version must be provided together."
-            )
-
         komodo_release = os.environ.get(
             "KOMODO_RELEASE", os.environ.get("KOMODO_RELEASE_BACKUP", None)
         )
@@ -106,7 +97,7 @@ class Tracklog(RootModel):
 
         sysinfo = SystemInformation.model_construct(
             fmu_dataio=Version(version=version),
-            source=source,
+            source=tracklog_source,
             komodo=komodo,
             operating_system=OperatingSystem(
                 hostname=platform.node(),

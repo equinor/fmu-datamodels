@@ -13,6 +13,7 @@ from .tracklog import (
     SystemInformation,
     Tracklog,
     TracklogEvent,
+    TracklogSource,
     User,
     Version,
 )
@@ -33,6 +34,7 @@ __all__ = [
     "OperatingSystem",
     "SystemInformation",
     "TracklogEvent",
+    "TracklogSource",
     "User",
     "Version",
 ]

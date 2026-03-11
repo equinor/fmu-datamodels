@@ -2,6 +2,26 @@
 
 from fmu.datamodels._schema_base import SchemaBase
 
+from .common import (
+    Access,
+    Asset,
+    CoordinateSystem,
+    CountryItem,
+    DiscoveryItem,
+    FieldItem,
+    Masterdata,
+    OperatingSystem,
+    Smda,
+    Ssdl,
+    SsdlAccess,
+    StratigraphicColumn,
+    SystemInformation,
+    Tracklog,
+    TracklogEvent,
+    TracklogSource,
+    User,
+    Version,
+)
 from .fmu_results import FmuResults, FmuResultsSchema
 from .standard_results import (
     ErtDistribution,
@@ -28,6 +48,24 @@ except ImportError:
     __version__ = "0.0.0"
 
 __all__ = [
+    "Access",
+    "SsdlAccess",
+    "Asset",
+    "Ssdl",
+    "Masterdata",
+    "Smda",
+    "StratigraphicColumn",
+    "CoordinateSystem",
+    "CountryItem",
+    "FieldItem",
+    "DiscoveryItem",
+    "Tracklog",
+    "OperatingSystem",
+    "SystemInformation",
+    "TracklogEvent",
+    "TracklogSource",
+    "User",
+    "Version",
     "ErtDistribution",
     "ErtParameterMetadata",
     "ErtParametersResult",

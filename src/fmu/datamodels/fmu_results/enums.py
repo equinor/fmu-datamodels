@@ -391,3 +391,49 @@ class FileFormat(StrEnum):
     segy = "segy"
     openvds = "openvds"
     tsurf = "tsurf"
+
+
+class PropertyAttribute(StrEnum):
+    """Known property attributes."""
+
+    zonation = "zonation"
+    """Classification of geological zonations within the reservoir."""
+
+    regions = "regions"
+    """Classification of distinct geographic regions in the field."""
+
+    facies = "facies"
+    """Classification of rock types influencing reservoir properties."""
+
+    net_to_gross = "net_to_gross"
+    """Classification of net-to-gross ratio within the reservoir."""
+
+    fluid_indicator = "fluid_indicator"
+    """Presence indicator for specific fluids (e.g., oil/gas/water) in the reservoir."""
+
+    porosity = "porosity"
+    """The fraction of the rock volume that is pore space."""
+
+    permeability = "permeability"
+    """Measure of how easily fluids flow."""
+
+    permeability_vertical = "permeability_vertical"
+    """Measure of how easily fluids flow in the vertical direction."""
+
+    saturation_water = "saturation_water"
+    """The fraction of the pore space occupied by water."""
+
+    saturation_oil = "saturation_oil"
+    """The fraction of the pore space occupied by oil."""
+
+    saturation_gas = "saturation_gas"
+    """The fraction of the pore space occupied by gas."""
+
+    volume_shale = "volume_shale"
+    """The fraction of the rock volume that is shale."""
+
+    bulk_volume_oil = "bulk_volume_oil"
+    """The bulk volume of oil in the rock."""
+
+    bulk_volume_gas = "bulk_volume_gas"
+    """The bulk volume of gas in the rock."""

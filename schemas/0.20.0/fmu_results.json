@@ -11201,7 +11201,8 @@
           "type": "string"
         },
         "version": {
-          "$ref": "#/$defs/Version"
+          "title": "Version",
+          "type": "string"
         }
       },
       "required": [

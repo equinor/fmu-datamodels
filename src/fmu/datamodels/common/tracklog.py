@@ -146,7 +146,7 @@ class TracklogSource(BaseModel):
     name: str
     """The name of the source package or service."""
 
-    version: Version
+    version: str
     """The version of the source package or service."""
 
 

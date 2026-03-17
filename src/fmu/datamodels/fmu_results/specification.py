@@ -22,6 +22,20 @@ class RowColumnLayer(RowColumn):
     """The number of layers."""
 
 
+class Statistics(BaseModel):
+    min: float = Field(allow_inf_nan=False)
+    """Minimum value"""
+
+    max: float = Field(allow_inf_nan=False)
+    """Maximum value"""
+
+    mean: float = Field(allow_inf_nan=False)
+    """Mean value"""
+
+    std: float = Field(ge=0, allow_inf_nan=False)
+    """Standard deviation"""
+
+
 class SurfaceSpecification(RowColumn):
     """Specifies relevant values describing a regular surface object."""
 
@@ -45,6 +59,9 @@ class SurfaceSpecification(RowColumn):
 
     yori: float = Field(allow_inf_nan=False)
     """Origin along the y-axis."""
+
+    value_statistics: Statistics | None = Field(default=None)
+    """Statistics for the surface values."""
 
 
 # TODO: Base on TableSpecification when we only support table export format for points
@@ -132,6 +149,9 @@ class CPGridPropertySpecification(RowColumnLayer):
         default=None, examples=[{0: "shale", 1: "sand"}]
     )
     """Mapping from discrete property values to corresponding names."""
+
+    value_statistics: Statistics | None = Field(default=None)
+    """Statistics for the grid property values."""
 
 
 # TODO: Base on TableSpecification when we only support table export format for polygons

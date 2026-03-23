@@ -23,16 +23,16 @@ class RowColumnLayer(RowColumn):
 
 
 class Statistics(BaseModel):
-    min: float
+    min: float = Field(allow_inf_nan=False)
     """Minimum value"""
 
-    max: float
+    max: float = Field(allow_inf_nan=False)
     """Maximum value"""
 
-    mean: float
+    mean: float = Field(allow_inf_nan=False)
     """Mean value"""
 
-    std: float = Field(ge=0)
+    std: float = Field(ge=0, allow_inf_nan=False)
     """Standard deviation"""
 
 

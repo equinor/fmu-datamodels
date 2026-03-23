@@ -9444,6 +9444,7 @@
           "items": {
             "$ref": "#/$defs/CountryItem"
           },
+          "minItems": 1,
           "title": "Country",
           "type": "array"
         },
@@ -9451,6 +9452,7 @@
           "items": {
             "$ref": "#/$defs/DiscoveryItem"
           },
+          "minItems": 1,
           "title": "Discovery",
           "type": "array"
         },
@@ -9458,6 +9460,7 @@
           "items": {
             "$ref": "#/$defs/FieldItem"
           },
+          "minItems": 1,
           "title": "Field",
           "type": "array"
         },

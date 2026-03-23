@@ -52,6 +52,7 @@ class FmuResultsSchema(SchemaBase):
     - Added new standard result for`grid_model_static`
     - Added list of known property attributes
     - Added 'source' field in tracklog events
+    - Added optional 'value_statistics' to 'data.spec' for grid properties and surfaces.
 
     #### 0.19.0
 

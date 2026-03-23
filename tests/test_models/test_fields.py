@@ -110,6 +110,18 @@ def test_masterdata_smda_field(
             with pytest.raises(ValidationError):
                 FmuResults.model_validate(_example)
 
+        # assert validation error if empty list
+        for block in ["country", "discovery", "field"]:
+            _example = deepcopy(metadata)
+            assert isinstance(_example["masterdata"]["smda"][block], list)
+
+            _example["masterdata"]["smda"][block] = []
+
+            with pytest.raises(
+                ValidationError, match="List should have at least 1 item"
+            ):
+                FmuResults.model_validate(_example)
+
 
 def test_file_field(fluid_contact_metadata: dict) -> None:
     """Test variations on the file block."""

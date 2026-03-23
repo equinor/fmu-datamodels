@@ -24,15 +24,15 @@ class Smda(BaseModel):
     """Reference to coordinate system known to SMDA.
     See :class:`CoordinateSystem`."""
 
-    country: list[CountryItem]
+    country: list[CountryItem] = Field(min_length=1)
     """A list referring to countries known to SMDA. First item is primary.
     See :class:`CountryItem`."""
 
-    discovery: list[DiscoveryItem]
+    discovery: list[DiscoveryItem] = Field(min_length=1)
     """A list referring to discoveries known to SMDA. First item is primary.
     See :class:`DiscoveryItem`."""
 
-    field: list[FieldItem]
+    field: list[FieldItem] = Field(min_length=1)
     """A list referring to fields known to SMDA. First item is primary.
     See :class:`FieldItem`."""
 

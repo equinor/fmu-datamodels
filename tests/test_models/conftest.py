@@ -63,6 +63,7 @@ from fmu.datamodels.fmu_results.global_configuration import (
 )
 from fmu.datamodels.fmu_results.specification import (
     PolygonsSpecification,
+    Statistics,
     SurfaceSpecification,
     TableSpecification,
 )
@@ -295,6 +296,7 @@ def fluid_contact_metadata() -> dict:
                 xori=0.1,
                 yflip=enums.AxisOrientation.normal,
                 yori=0.1,
+                value_statistics=Statistics(min=-1.0, max=1.0, mean=0.0, std=0.5),
             ),
             "time": None,
             "undef_is_zero": None,
@@ -458,6 +460,7 @@ def seismic_metadata() -> dict:
                 xori=456063.6875,
                 yori=5926551.0,
                 yflip=enums.AxisOrientation.normal,
+                value_statistics=Statistics(min=-1.0, max=1.0, mean=0.0, std=0.5),
             ),
             "time": Time(
                 t0=Timestamp(label="base", value=datetime.datetime.now(datetime.UTC)),
@@ -524,6 +527,38 @@ def volumes_metadata() -> dict:
     )
 
     object_metadata_dict["class"] = enums.ObjectMetadataClass.table
+    object_metadata_dict["data"] = data
+
+    return ObjectMetadata.model_validate(object_metadata_dict).model_dump(
+        mode="json", exclude_none=True, by_alias=True
+    )
+
+
+@pytest.fixture(scope="function")
+def property_metadata() -> dict:
+    """Generate valid property metadata"""
+
+    object_metadata_dict = _generate_object_metadata_base()
+
+    data = AnyData.model_validate(
+        {
+            "content": enums.Content.property,
+            "property": {"attribute": "porosity", "is_discrete": False},
+            "name": "phit",
+            "stratigraphic": False,
+            "format": enums.FileFormat.roff,
+            "is_observation": False,
+            "is_prediction": True,
+            "layout": enums.Layout.cornerpoint,
+            "offset": 0.0,
+            "undef_is_zero": False,
+            "unit": "m",
+            "vertical_domain": "depth",
+            "domain_reference": "msl",
+        }
+    )
+
+    object_metadata_dict["class"] = enums.ObjectMetadataClass.cpgrid_property
     object_metadata_dict["data"] = data
 
     return ObjectMetadata.model_validate(object_metadata_dict).model_dump(

@@ -44,9 +44,16 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.19.0"
+    VERSION: VersionStr = "0.20.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.20.0
+
+    - Added new standard result for`grid_model_static`
+    - Added list of known property attributes
+    - Added 'source' field in tracklog events
+    - Added optional 'value_statistics' to 'data.spec' for grid properties and surfaces.
+
     #### 0.19.0
 
     - Added new standard result for`GridExtractedDepthSurfaceStandardResult`

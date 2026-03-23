@@ -420,6 +420,17 @@
           "exclusiveMinimum": 0,
           "title": "Nrow",
           "type": "integer"
+        },
+        "value_statistics": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Statistics"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -695,6 +706,17 @@
         "undef": {
           "title": "Undef",
           "type": "number"
+        },
+        "value_statistics": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Statistics"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "xinc": {
           "exclusiveMinimum": 0,
@@ -9535,6 +9557,35 @@
       "title": "SsdlAccess",
       "type": "object"
     },
+    "Statistics": {
+      "properties": {
+        "max": {
+          "title": "Max",
+          "type": "number"
+        },
+        "mean": {
+          "title": "Mean",
+          "type": "number"
+        },
+        "min": {
+          "title": "Min",
+          "type": "number"
+        },
+        "std": {
+          "minimum": 0,
+          "title": "Std",
+          "type": "number"
+        }
+      },
+      "required": [
+        "min",
+        "max",
+        "mean",
+        "std"
+      ],
+      "title": "Statistics",
+      "type": "object"
+    },
     "StratigraphicColumn": {
       "description": "The ``masterdata.smda.stratigraphic_column`` block contains the\nstratigraphic column known to SMDA.",
       "properties": {
@@ -10018,6 +10069,17 @@
         "undef": {
           "title": "Undef",
           "type": "number"
+        },
+        "value_statistics": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Statistics"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "xinc": {
           "exclusiveMinimum": 0,

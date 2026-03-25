@@ -57,6 +57,7 @@ class FmuResultsSchema(SchemaBase):
     - Added list of known property attributes
     - Added 'source' field in tracklog events
     - Added optional 'value_statistics' to 'data.spec' for grid properties and surfaces.
+    - Removed unused 'stratigraphic_alias' from global configuration stratigraphy
 
     #### 0.19.0
 

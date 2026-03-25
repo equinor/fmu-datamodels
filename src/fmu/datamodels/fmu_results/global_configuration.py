@@ -90,12 +90,11 @@ class StratigraphyElement(BaseModel):
     name: str
     stratigraphic: bool = Field(default=False)
     alias: list[str] | None = Field(default_factory=list)
-    stratigraphic_alias: list[str] | None = Field(default=None)
     offset: float = Field(default=0.0, allow_inf_nan=False)
     top: data.Layer | None = Field(default=None)
     base: data.Layer | None = Field(default=None)
 
-    @field_validator("alias", "stratigraphic_alias", mode="before")
+    @field_validator("alias", mode="before")
     @classmethod
     def _prune_nones_and_adjust_input(cls, values: Any) -> Any:
         # For backwards compatibility, remove after a deprecation period

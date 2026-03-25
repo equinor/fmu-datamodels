@@ -13,25 +13,40 @@ from fmu.datamodels.fmu_results import global_configuration
         strategies.none(),
         strategies.lists(strategies.one_of(strategies.text(), strategies.none())),
     ),
+)
+def test_drop_none(name: Any, stratigraphic: Any, alias: Any) -> None:
+    cnf = global_configuration.StratigraphyElement(
+        name=name,
+        stratigraphic=stratigraphic,
+        alias=alias,
+    )
+    if cnf.alias is not None:
+        assert all(v is not None for v in cnf.alias)
+
+
+@given(
+    name=strategies.text(min_size=1),
+    stratigraphic=strategies.booleans(),
+    alias=strategies.one_of(
+        strategies.none(),
+        strategies.lists(strategies.one_of(strategies.text(), strategies.none())),
+    ),
     stratigraphic_alias=strategies.one_of(
         strategies.none(),
         strategies.lists(strategies.one_of(strategies.text(), strategies.none())),
     ),
 )
-def test_drop_none(
+def test_stratigraphic_alias_provided_but_does_not_fail(
     name: Any, stratigraphic: Any, alias: Any, stratigraphic_alias: Any
 ) -> None:
-    cnf = global_configuration.StratigraphyElement(
-        name=name,
-        stratigraphic=stratigraphic,
-        alias=alias,
-        stratigraphic_alias=stratigraphic_alias,
+    global_configuration.StratigraphyElement.model_validate(
+        {
+            "name": name,
+            "stratigraphic": stratigraphic,
+            "alias": alias,
+            "stratigraphic_alias": stratigraphic_alias,
+        }
     )
-    if cnf.alias is not None:
-        assert all(v is not None for v in cnf.alias)
-
-    if cnf.stratigraphic_alias is not None:
-        assert all(v is not None for v in cnf.stratigraphic_alias)
 
 
 def test_access_classification_logic() -> None:

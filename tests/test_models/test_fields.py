@@ -111,7 +111,7 @@ def test_masterdata_smda_field(
                 FmuResults.model_validate(_example)
 
         # assert validation error if empty list
-        for block in ["country", "discovery", "field"]:
+        for block in ["country", "field"]:
             _example = deepcopy(metadata)
             assert isinstance(_example["masterdata"]["smda"][block], list)
 

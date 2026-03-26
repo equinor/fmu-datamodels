@@ -28,7 +28,7 @@ class Smda(BaseModel):
     """A list referring to countries known to SMDA. First item is primary.
     See :class:`CountryItem`."""
 
-    discovery: list[DiscoveryItem] = Field(min_length=1)
+    discovery: list[DiscoveryItem]
     """A list referring to discoveries known to SMDA. First item is primary.
     See :class:`DiscoveryItem`."""
 

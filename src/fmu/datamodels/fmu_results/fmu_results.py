@@ -51,7 +51,6 @@ class FmuResultsSchema(SchemaBase):
 
     - Added constraint to disallow empty list for these fields in `masterdata.smda`:
         - field
-        - discovery
         - country
     - Added new standard result for`grid_model_static`
     - Added list of known property attributes

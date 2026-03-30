@@ -9452,7 +9452,6 @@
           "items": {
             "$ref": "#/$defs/DiscoveryItem"
           },
-          "minItems": 1,
           "title": "Discovery",
           "type": "array"
         },

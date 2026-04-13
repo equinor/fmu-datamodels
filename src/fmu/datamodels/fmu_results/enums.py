@@ -94,6 +94,18 @@ class Content(StrEnum):
     Typically provided as an ``xtgeo.Polygons`` for export.
     """
 
+    observations = "observations"
+    """ERT observations generated for the ensemble.
+
+    Typically provided as a Pandas ``Dataframe`` for export.
+
+    .. tip::
+
+       You should not export this manually. This is done automatically by
+       the `CREATE_CASE_METADATA` ERT workflow.
+
+    """
+
     parameters = "parameters"
     """The ERT parameters generated for the realization.
 
@@ -101,8 +113,8 @@ class Content(StrEnum):
 
     .. tip::
 
-       You should not export this manually. This is done automatically by `SUMO_UPLOADER
-       <https://fmu-sumo-uploader.readthedocs.io/en/latest/>`_ when uploading files.
+       You should not export this manually. This is done automatically by
+       the `CREATE_CASE_METADATA` ERT workflow.
 
     """
 

@@ -527,6 +527,16 @@ class NamedAreaData(Data):
     """The type of content these data represent."""
 
 
+class ObservationsData(Data):
+    """
+    The ``data`` block contains information about the data contained in this object.
+    This class contains metadata for observations.
+    """
+
+    content: Literal[enums.Content.observations]
+    """The type of content these data represent."""
+
+
 class ParametersData(Data):
     """
     The ``data`` block contains information about the data contained in this object.
@@ -761,6 +771,7 @@ class AnyData(RootModel):
         | LiftCurvesData
         | MappingData
         | NamedAreaData
+        | ObservationsData
         | ParametersData
         | PinchoutData
         | ProductionNetworkData

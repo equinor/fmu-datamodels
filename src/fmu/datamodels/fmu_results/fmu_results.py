@@ -44,9 +44,13 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.20.0"
+    VERSION: VersionStr = "0.21.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.21.0
+
+    - Added `observations` as new content type
+
     #### 0.20.0
 
     - Added constraint to disallow empty list for these fields in `masterdata.smda`:

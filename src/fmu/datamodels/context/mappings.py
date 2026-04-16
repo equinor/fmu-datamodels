@@ -16,6 +16,7 @@ class MappingType(StrEnum):
     """
 
     stratigraphy = "stratigraphy"
+    wellbore = "wellbore"
 
 
 class RelationType(StrEnum):
@@ -39,6 +40,8 @@ class DataSystem(StrEnum):
     rms = "rms"
     smda = "smda"
     fmu = "fmu"
+    simulator = "simulator"
+    pdm = "pdm"
 
 
 class BaseMapping(BaseModel):
@@ -112,8 +115,18 @@ class StratigraphyIdentifierMapping(IdentifierMapping):
     mapping_type: Literal[MappingType.stratigraphy] = MappingType.stratigraphy
 
 
+class WellboreIdentifierMapping(IdentifierMapping):
+    """Represents a wellbore mapping.
+
+    This is a mapping from wellbore identifiers to official identifiers in SMDA/PDM.
+    """
+
+    mapping_type: Literal[MappingType.wellbore] = MappingType.wellbore
+
+
 AnyIdentifierMapping = Annotated[
-    StratigraphyIdentifierMapping, Field(discriminator="mapping_type")
+    StratigraphyIdentifierMapping | WellboreIdentifierMapping,
+    Field(discriminator="mapping_type"),
 ]
 
 
@@ -178,3 +191,23 @@ class StratigraphyMappings(RootModel[list[StratigraphyIdentifierMapping]]):
             and m.target_system == DataSystem.smda
         ]
         return mappings[0].target_id if mappings else None
+
+
+class WellboreMappings(RootModel[list[WellboreIdentifierMapping]]):
+    """Collection of all wellbore mappings."""
+
+    root: list[WellboreIdentifierMapping]
+
+    def __getitem__(self: Self, index: int) -> WellboreIdentifierMapping:
+        """Retrieves a wellbore mapping from the list using the specified index."""
+        return self.root[index]
+
+    def __iter__(  # type: ignore[override]
+        self: Self,
+    ) -> Iterator[WellboreIdentifierMapping]:
+        """Returns an iterator for the wellbore mappings."""
+        return iter(self.root)
+
+    def __len__(self: Self) -> int:
+        """Returns the number of wellbore mappings."""
+        return len(self.root)

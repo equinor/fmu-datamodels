@@ -1,7 +1,7 @@
 """Tests for validators in the mapping models."""
 
 import pytest
-from pydantic import TypeAdapter
+from pydantic import TypeAdapter, ValidationError
 
 from fmu.datamodels.context.mappings import (
     AnyIdentifierMapping,
@@ -208,3 +208,18 @@ def test_any_identifier_mapping_uses_mapping_type_discriminator(
     )
 
     assert isinstance(parsed, expected_type)
+
+
+def test_any_identifier_mapping_rejects_unknown_mapping_type() -> None:
+    """Ensure invalid discriminator values fail validation."""
+    payload = {
+        "source_system": DataSystem.rms,
+        "target_system": DataSystem.smda,
+        "mapping_type": "unknown",
+        "relation_type": RelationType.primary,
+        "source_id": "TopVolantis",
+        "target_id": "VOLANTIS GP. Top",
+    }
+
+    with pytest.raises(ValidationError, match="mapping_type"):
+        TypeAdapter(AnyIdentifierMapping).validate_python(payload)

@@ -13,34 +13,13 @@ from pydantic import (
     BaseModel,
     Field,
     RootModel,
-    ValidationError,
     field_validator,
     model_validator,
 )
 
-from fmu.datamodels.common.access import Asset
-from fmu.datamodels.common.enums import Classification
-from fmu.datamodels.common.masterdata import Masterdata
+from fmu.datamodels.common import Asset, Classification, Masterdata
 
 from . import data, fields
-
-
-def validation_error_warning(err: ValidationError) -> None:
-    """
-    Emits a warning when a ValidationError is encountered in global configuration.
-    """
-
-    warnings.warn(
-        f"""The global configuration has one or more errors that makes it
-impossible to create valid metadata. The data will still be exported but no
-metadata will be made. You are strongly encouraged to correct your
-configuration. Invalid configuration may be disallowed in future versions.
-
-Detailed information:
-{str(err)}
-""",
-        stacklevel=2,
-    )
 
 
 class Ssdl(BaseModel):

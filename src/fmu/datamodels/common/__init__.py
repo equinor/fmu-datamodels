@@ -1,4 +1,5 @@
 from .access import Access, Asset, Ssdl, SsdlAccess
+from .enums import Classification
 from .masterdata import (
     CoordinateSystem,
     CountryItem,
@@ -20,19 +21,20 @@ from .tracklog import (
 
 __all__ = [
     "Access",
-    "SsdlAccess",
     "Asset",
-    "Ssdl",
-    "Masterdata",
-    "Smda",
-    "StratigraphicColumn",
+    "Classification",
     "CoordinateSystem",
     "CountryItem",
-    "FieldItem",
     "DiscoveryItem",
-    "Tracklog",
+    "FieldItem",
+    "Masterdata",
     "OperatingSystem",
+    "Smda",
+    "Ssdl",
+    "SsdlAccess",
+    "StratigraphicColumn",
     "SystemInformation",
+    "Tracklog",
     "TracklogEvent",
     "TracklogSource",
     "User",

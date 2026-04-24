@@ -52,16 +52,69 @@ def test_identifier_mapping_ids_not_empty_strings() -> None:
         )
 
 
-def test_identifiers_equivalent_if_relation_equivalent() -> None:
-    """Validation fails if the relation type is equivalent but identifiers are not."""
-    with pytest.raises(ValueError, match="Equivalent mapping requires"):
+def test_identifier_mapping_allows_unmappable_without_target() -> None:
+    """An unmappable relation can omit target identifier fields."""
+    mapping = IdentifierMapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.smda,
+        mapping_type=MappingType.stratigraphy,
+        relation_type=RelationType.unmappable,
+        source_id="NoMatch",
+    )
+
+    assert mapping.target_id is None
+    assert mapping.target_uuid is None
+
+
+def test_identifier_mapping_allows_explicit_none_target_for_unmappable() -> None:
+    """An unmappable relation also accepts an explicit null target identifier."""
+    mapping = IdentifierMapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.smda,
+        mapping_type=MappingType.stratigraphy,
+        relation_type=RelationType.unmappable,
+        source_id="NoMatch",
+        target_id=None,
+    )
+
+    assert mapping.target_id is None
+
+
+def test_identifier_mapping_rejects_blank_target_id() -> None:
+    """Target identifiers cannot be blank when provided."""
+    with pytest.raises(ValueError, match="An identifier cannot be an empty string"):
         IdentifierMapping(
             source_system=DataSystem.rms,
-            target_system=DataSystem.fmu,
+            target_system=DataSystem.smda,
             mapping_type=MappingType.stratigraphy,
-            relation_type=RelationType.equivalent,
-            source_id="bar",
-            target_id="foo",
+            relation_type=RelationType.primary,
+            source_id="TopVolantis",
+            target_id="   ",
+        )
+
+
+def test_identifier_mapping_requires_target_id_for_mappable_relations() -> None:
+    """Mappings still require target identifiers unless marked unmappable."""
+    with pytest.raises(ValueError, match="target_id is required"):
+        IdentifierMapping(
+            source_system=DataSystem.rms,
+            target_system=DataSystem.smda,
+            mapping_type=MappingType.stratigraphy,
+            relation_type=RelationType.primary,
+            source_id="TopVolantis",
+        )
+
+
+def test_identifier_mapping_rejects_target_for_unmappable_relation() -> None:
+    """Unmappable relations must not carry target identifier fields."""
+    with pytest.raises(ValueError, match="Unmappable mapping cannot define"):
+        IdentifierMapping(
+            source_system=DataSystem.rms,
+            target_system=DataSystem.smda,
+            mapping_type=MappingType.stratigraphy,
+            relation_type=RelationType.unmappable,
+            source_id="NoMatch",
+            target_id="VOLANTIS GP. Top",
         )
 
 

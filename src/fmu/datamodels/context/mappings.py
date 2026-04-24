@@ -28,10 +28,12 @@ class RelationType(StrEnum):
     alias = "alias"
     """Alias of a primary unofficial identifier."""
 
-    equivalent = "equivalent"
-    """A name used in the source system that is the same as the official name.
+    unmappable = "unmappable"
+    """A source identifier that has been reviewed and cannot be mapped.
 
-    For example, if an RMS stratigraphic name is the same as the SMDA name."""
+    This relation records the intended source and target systems, but there is no
+    corresponding identifier in the target system.
+    """
 
 
 class DataSystem(StrEnum):
@@ -81,26 +83,38 @@ class IdentifierMapping(BaseMapping):
 
     source_id: str
     source_uuid: UUID | None = None
-    target_id: str
+    target_id: str | None = None
     target_uuid: UUID | None = None
 
-    @field_validator("source_id", "target_id")
-    def validate_ids_not_empty(cls: Self, v: str) -> str:
-        """Ensure IDs are not empty strings."""
+    @field_validator("source_id")
+    def validate_source_id_not_empty(cls: Self, v: str) -> str:
+        """Ensure source IDs are not empty strings."""
         if not v or not v.strip():
             raise ValueError("An identifier cannot be an empty string")
         return v.strip()
 
+    @field_validator("target_id")
+    def validate_target_id_not_empty(cls: Self, v: str | None) -> str | None:
+        """Ensure target IDs are not empty strings when provided."""
+        if v is None:
+            return v
+        if not v.strip():
+            raise ValueError("An identifier cannot be an empty string")
+        return v.strip()
+
     @model_validator(mode="after")
-    def validate_equivalent_relation(self) -> Self:
-        """Ensure relation_type=equivalent is only used when source and target match."""
-        if (
-            self.relation_type == RelationType.equivalent
-            and self.source_id != self.target_id
-        ):
+    def validate_relation_target_constraints(self) -> Self:
+        """Ensure relation-specific target identifier constraints are respected."""
+        if self.relation_type == RelationType.unmappable:
+            if self.target_id is not None or self.target_uuid is not None:
+                raise ValueError(
+                    "Unmappable mapping cannot define target_id or target_uuid"
+                )
+            return self
+
+        if self.target_id is None:
             raise ValueError(
-                "Equivalent mapping requires matching source_id/target_id; "
-                f"got source_id='{self.source_id}', target_id='{self.target_id}'"
+                "target_id is required unless relation_type is 'unmappable'"
             )
         return self
 

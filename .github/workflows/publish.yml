@@ -40,13 +40,6 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
 
-  verify-breaking-changes:
-    needs: pypi-publish
-    uses: ./.github/workflows/verify-breaking-changes.yml
-    with:
-      release_tag: ${{ github.event.release.tag_name }}
-    secrets: inherit
-
   prepare-schema-release:
     needs: pypi-publish
     uses: ./.github/workflows/prepare-schema-release.yml

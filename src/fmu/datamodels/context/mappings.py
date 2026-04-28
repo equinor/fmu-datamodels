@@ -23,16 +23,16 @@ class RelationType(StrEnum):
     """The kind of relation this mapping represents."""
 
     primary = "primary"
-    """The primary unofficial identifier."""
+    """The main source identifier to use for this mapping."""
 
     alias = "alias"
-    """Alias of a primary unofficial identifier."""
+    """Alias of a primary identifier."""
 
     unmappable = "unmappable"
     """A source identifier that has been reviewed and cannot be mapped.
 
-    This relation records the intended source and target systems, but there is no
-    corresponding identifier in the target system.
+    This means the identifier has been checked, but no matching identifier exists
+    in the target system.
     """
 
 

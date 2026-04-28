@@ -1,0 +1,108 @@
+name: Verify breaking changes
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  wait-for-pypi:
+    name: Wait for published package on PyPI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait up to 5 minutes for package on PyPI
+        env:
+          PACKAGE_VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          python -m venv .pypi-check
+          . .pypi-check/bin/activate
+          python -m pip install --upgrade pip
+
+          deadline=$((SECONDS + 300))
+          mkdir -p pypi-dist
+
+          while true; do
+            rm -rf pypi-dist/*
+
+            if python -m pip download --no-deps --dest pypi-dist "fmu-datamodels==$PACKAGE_VERSION"; then
+              echo "fmu-datamodels==$PACKAGE_VERSION is available on PyPI."
+              break
+            fi
+
+            if [ "$SECONDS" -ge "$deadline" ]; then
+              echo "Timed out after 300 seconds waiting for fmu-datamodels==$PACKAGE_VERSION on PyPI." >&2
+              exit 1
+            fi
+
+            echo "Package not visible on PyPI yet. Retrying..."
+            sleep 5
+          done
+
+  verify-downstream:
+    name: Verify ${{ matrix.repository }} on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    needs: wait-for-pypi
+    strategy:
+      fail-fast: false
+      matrix:
+        repository:
+          - equinor/fmu-dataio
+          - equinor/fmu-settings
+          - equinor/grid3d-maps
+          - equinor/fmu-settings-cli
+          - equinor/fmu-settings-api
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        include:
+          - repository: equinor/fmu-dataio
+            test-command: uv run pytest -n auto -v --cov --cov-report term-missing
+            system-dependencies: sudo apt-get update && sudo apt-get install -y libegl1
+          - repository: equinor/fmu-settings
+            test-command: uv run pytest -n auto tests --cov=src/ --cov-report term-missing
+          - repository: equinor/grid3d-maps
+            test-setup-command: export MPLBACKEND=Agg
+            test-command: uv run pytest -n auto --disable-warnings
+            system-dependencies: sudo apt-get update && sudo apt-get install -y libegl1
+          - repository: equinor/fmu-settings-cli
+            test-setup-command: export TERMINAL_WIDTH=3000 COLUMNS=3000 _TYPER_FORCE_DISABLE_TERMINAL=1
+            test-command: uv run pytest -n auto tests --cov=src/ --cov-report term-missing
+          - repository: equinor/fmu-settings-api
+            test-command: uv run pytest -n auto tests --cov=src/ --cov-report term-missing
+
+    steps:
+      - name: Check out downstream repository
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ matrix.repository }}
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install uv and Python ${{ matrix.python-version }}
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install system dependencies
+        if: ${{ matrix.system-dependencies }}
+        run: |
+          ${{ matrix.system-dependencies }}
+
+      - name: Install downstream repository dependencies
+        run: |
+          uv sync --all-extras --frozen
+
+      - name: Install released fmu-datamodels from PyPI
+        env:
+          PACKAGE_VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          uv pip install --upgrade --reinstall-package fmu-datamodels "fmu-datamodels==$PACKAGE_VERSION"
+
+      - name: Run downstream test setup
+        if: ${{ matrix.test-setup-command }}
+        run: |
+          ${{ matrix.test-setup-command }}
+
+      - name: Run downstream test suite
+        run: |
+          ${{ matrix.test-command }}

@@ -56,10 +56,10 @@ class BaseMapping(BaseModel):
 
     @model_validator(mode="after")
     def validate_relation_system_constraints(self) -> "BaseMapping":
-        """Validate which relation types are allowed for same vs cross-system rows.
+        """Validate which relation types are allowed for same vs cross-system mappings.
 
-        Same-system rows can only be ``primary`` or ``alias``.
-        Cross-system rows can only be ``primary`` or ``unmappable``.
+        Same-system mappings can only be ``primary`` or ``alias``.
+        Cross-system mappings can only be ``primary`` or ``unmappable``.
         """
 
         if self.source_system == self.target_system:
@@ -109,11 +109,11 @@ class IdentifierMapping(BaseMapping):
         """Validate how ``source_id`` and ``target_id`` are allowed to relate.
 
         This means:
-        - ``unmappable`` rows must leave the target empty
-        - all other rows must provide a target
-        - same-system ``primary`` rows must use the same ``source_id`` and
+        - ``unmappable`` mappings must leave the target empty
+        - all other mappings must provide a target
+        - same-system ``primary`` mappings must use the same ``source_id`` and
           ``target_id``
-        - same-system ``alias`` rows must point to a different same-system
+        - same-system ``alias`` mappings must point to a different same-system
           ``target_id``
         """
         if self.relation_type == RelationType.unmappable:
@@ -178,52 +178,53 @@ AnyIdentifierMapping = Annotated[
 def _validate_identifier_mappings_collection(
     mappings: Sequence[IdentifierMapping],
 ) -> None:
-    """Validate how mapping rows are allowed to fit together.
+    """Validate how mappings are allowed to fit together.
 
     The collection must satisfy three invariants:
 
     - A same-system ``source_id`` can appear only once per mapping type.
-      Example valid rows::
+      Example valid mappings::
 
           rms -> rms, primary, source_id="TopVolantis", target_id="TopVolantis"
           rms -> rms, alias, source_id="TOP_VOLANTIS", target_id="TopVolantis"
 
-      Example invalid rows::
+      Example invalid mappings::
 
           rms -> rms, primary, source_id="TopVolantis", target_id="TopVolantis"
           rms -> rms, alias, source_id="TopVolantis", target_id="TopVolon"
 
-      The second row is invalid because ``TopVolantis`` is reused as a same-system
-      ``source_id``.
+      The second mapping is invalid because ``TopVolantis`` is reused as a
+      same-system ``source_id``.
 
-    - Same-system alias rows must point to an existing same-system primary row.
-      Example valid rows::
+    - Same-system alias mappings must point to an existing same-system primary
+      mapping.
+      Example valid mappings::
 
           rms -> rms, primary, source_id="TopVolantis", target_id="TopVolantis"
           rms -> rms, alias, source_id="TOP_VOLANTIS", target_id="TopVolantis"
 
-      Example invalid row::
+      Example invalid mapping::
 
           rms -> rms, alias, source_id="TOP_VOLANTIS", target_id="TopVolantis"
 
-      The alias is invalid on its own because there is no same-system primary row
-      for ``TopVolantis``.
+      The alias is invalid on its own because there is no same-system primary
+      mapping for ``TopVolantis``.
 
-    - Cross-system rows must originate from a same-system primary row and can
-      appear only once per target system.
-      Example valid rows::
+    - Cross-system mappings must originate from a same-system primary mapping and
+      can appear only once per target system.
+      Example valid mappings::
 
           rms -> rms, primary, source_id="TopVolantis", target_id="TopVolantis"
           rms -> smda, primary, source_id="TopVolantis", target_id="VOLANTIS GP. Top"
 
-      Example invalid rows::
+      Example invalid mappings::
 
           rms -> rms, alias, source_id="TOP_VOLANTIS", target_id="TopVolantis"
           rms -> smda, primary, source_id="TOP_VOLANTIS", target_id="VOLANTIS GP. Top"
 
-      The cross-system row is invalid because it starts from an alias instead of a
-      same-system primary. It is also invalid to add two ``rms -> smda`` rows for
-      the same ``source_id``.
+      The cross-system mapping is invalid because it starts from an alias instead
+      of a same-system primary. It is also invalid to add two ``rms -> smda``
+      mappings for the same ``source_id``.
     """
     same_system_source_keys: set[tuple[DataSystem, MappingType, str]] = set()
     same_system_primary_source_keys: set[tuple[DataSystem, MappingType, str]] = set()
@@ -240,8 +241,8 @@ def _validate_identifier_mappings_collection(
             mapping.source_id,
         )
 
-        # Same-system rows tell us which source_id is the main one and which
-        # source_ids are aliases of that main one.
+        # Same-system mappings tell us which source_id is the primary and which
+        # source_ids are aliases of that primary.
         if mapping.source_system == mapping.target_system:
             if source_key in same_system_source_keys:
                 raise ValueError("Same-system mappings cannot reuse the same source_id")
@@ -283,7 +284,7 @@ def _validate_identifier_mappings_collection(
                 "same-system primary source_id"
             )
 
-    # Cross-system rows are only allowed when they start from a same-system
+    # Cross-system mappings are only allowed when they start from a same-system
     # primary source_id.
     for mapping in cross_system_mappings:
         primary_source_key = (

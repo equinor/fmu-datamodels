@@ -112,6 +112,9 @@ def test_identifier_mapping_ids_not_empty_strings() -> None:
 def test_identifier_mapping_strips_surrounding_whitespace_from_ids() -> None:
     """Source and target identifiers are stripped when they contain padding."""
     mapping = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.smda,
+        relation_type=RelationType.primary,
         source_id="  TopVolantis  ",
         target_id="  VOLANTIS GP. Top  ",
     )
@@ -123,7 +126,9 @@ def test_identifier_mapping_strips_surrounding_whitespace_from_ids() -> None:
 def test_identifier_mapping_allows_same_system_primary_mapping_to_itself() -> None:
     """Same-system primary mappings must map an identifier to itself."""
     mapping = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
         source_id="TopVolantis",
         target_id="TopVolantis",
     )
@@ -141,7 +146,9 @@ def test_identifier_mapping_rejects_same_system_primary_to_other_identifier() ->
         ),
     ):
         create_stratigraphy_mapping(
+            source_system=DataSystem.rms,
             target_system=DataSystem.rms,
+            relation_type=RelationType.primary,
             source_id="TopVolantis",
             target_id="TopVolon",
         )
@@ -150,6 +157,7 @@ def test_identifier_mapping_rejects_same_system_primary_to_other_identifier() ->
 def test_identifier_mapping_allows_same_system_alias() -> None:
     """Same-system aliases can point to a primary identifier."""
     mapping = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
         relation_type=RelationType.alias,
         source_id="TOP_VOLANTIS",
@@ -170,6 +178,7 @@ def test_identifier_mapping_rejects_same_system_alias_mapping_to_itself() -> Non
         ),
     ):
         create_stratigraphy_mapping(
+            source_system=DataSystem.rms,
             target_system=DataSystem.rms,
             relation_type=RelationType.alias,
             source_id="TopVolantis",
@@ -199,6 +208,7 @@ def test_identifier_mapping_rejects_cross_system_alias() -> None:
         match="Cross-system mapping cannot use relation_type 'alias'",
     ):
         create_stratigraphy_mapping(
+            source_system=DataSystem.rms,
             target_system=DataSystem.smda,
             relation_type=RelationType.alias,
             source_id="TOP_VOLANTIS",
@@ -237,7 +247,13 @@ def test_identifier_mapping_allows_explicit_none_target_for_unmappable() -> None
 def test_identifier_mapping_rejects_blank_target_id() -> None:
     """Target identifiers cannot be blank when provided."""
     with pytest.raises(ValueError, match="An identifier cannot be an empty string"):
-        create_stratigraphy_mapping(target_id="   ")
+        create_stratigraphy_mapping(
+            source_system=DataSystem.rms,
+            target_system=DataSystem.smda,
+            relation_type=RelationType.primary,
+            source_id="TopVolantis",
+            target_id="   ",
+        )
 
 
 @pytest.mark.parametrize(
@@ -300,21 +316,55 @@ def test_stratigraphy_mappings_allow_empty_collection() -> None:
     assert len(mappings) == 0
 
 
-def test_stratigraphy_mappings_allow_valid_collection_and_dunder_methods() -> None:
-    """Stratigraphy collections allow valid rows and support dunder methods."""
+def test_stratigraphy_mappings_allow_valid_collection() -> None:
+    """Stratigraphy collections allow valid mappings."""
     primary = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
         source_id="TopVolantis",
         target_id="TopVolantis",
     )
     alias = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
         relation_type=RelationType.alias,
         source_id="TOP_VOLANTIS",
         target_id="TopVolantis",
     )
     mapped = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.smda,
+        relation_type=RelationType.primary,
+        source_id="TopVolantis",
+        target_id="VOLANTIS GP. Top",
+    )
+    mappings = StratigraphyMappings(root=[primary, alias, mapped])
+    expected = [primary, alias, mapped]
+
+    assert mappings.root == expected
+
+
+def test_stratigraphy_mappings_support_dunder_methods() -> None:
+    """Stratigraphy collections support the expected dunder methods."""
+    primary = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
+        source_id="TopVolantis",
+        target_id="TopVolantis",
+    )
+    alias = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.rms,
+        relation_type=RelationType.alias,
+        source_id="TOP_VOLANTIS",
+        target_id="TopVolantis",
+    )
+    mapped = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.smda,
+        relation_type=RelationType.primary,
         source_id="TopVolantis",
         target_id="VOLANTIS GP. Top",
     )
@@ -329,6 +379,7 @@ def test_stratigraphy_mappings_allow_valid_collection_and_dunder_methods() -> No
 def test_stratigraphy_mappings_reject_alias_without_primary() -> None:
     """Same-system aliases must point to an existing same-system primary."""
     alias = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
         relation_type=RelationType.alias,
         source_id="TOP_VOLANTIS",
@@ -345,21 +396,26 @@ def test_stratigraphy_mappings_reject_alias_without_primary() -> None:
         StratigraphyMappings(root=[alias])
 
 
-def test_stratigraphy_mappings_reject_cross_system_rows_for_alias_sources() -> None:
+def test_stratigraphy_mappings_reject_cross_system_mappings_for_alias_sources() -> None:
     """Cross-system mappings must use same-system primary source identifiers."""
     primary = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
         source_id="TopVolantis",
         target_id="TopVolantis",
     )
     alias = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
         relation_type=RelationType.alias,
         source_id="TOP_VOLANTIS",
         target_id="TopVolantis",
     )
     mapped_alias = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.smda,
+        relation_type=RelationType.primary,
         source_id="TOP_VOLANTIS",
         target_id="VOLANTIS GP. Top",
     )
@@ -377,16 +433,21 @@ def test_stratigraphy_mappings_reject_cross_system_rows_for_alias_sources() -> N
 def test_stratigraphy_mappings_reject_multiple_cross_system_outcomes() -> None:
     """A same-system primary identifier can only have one outcome per target system."""
     primary = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
         source_id="TopVolantis",
         target_id="TopVolantis",
     )
     mapped = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.smda,
+        relation_type=RelationType.primary,
         source_id="TopVolantis",
         target_id="VOLANTIS GP. Top",
     )
     unmappable = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.smda,
         relation_type=RelationType.unmappable,
         source_id="TopVolantis",
@@ -401,18 +462,23 @@ def test_stratigraphy_mappings_reject_multiple_cross_system_outcomes() -> None:
 
 
 def test_stratigraphy_mappings_reject_reused_same_system_source_identifier() -> None:
-    """A source identifier cannot be both a primary and an alias in the same graph."""
+    """A source_id cannot be both a primary and an alias in the same collection."""
     primary = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
         source_id="TopVolantis",
         target_id="TopVolantis",
     )
     other_primary = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
         source_id="TopVolon",
         target_id="TopVolon",
     )
     conflicting_alias = create_stratigraphy_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
         relation_type=RelationType.alias,
         source_id="TopVolantis",
@@ -438,7 +504,13 @@ def test_wellbore_mapping_supports_expected_target_systems(
     target_system: DataSystem, target_id: str
 ) -> None:
     """Ensure wellbore mappings can target the supported systems."""
-    mapping = create_wellbore_mapping(target_system=target_system, target_id=target_id)
+    mapping = create_wellbore_mapping(
+        source_system=DataSystem.rms,
+        target_system=target_system,
+        relation_type=RelationType.primary,
+        source_id="30_9-B-21_C",
+        target_id=target_id,
+    )
 
     assert mapping.target_system == target_system
     assert mapping.target_id == target_id
@@ -452,20 +524,55 @@ def test_wellbore_mappings_allow_empty_collection() -> None:
     assert len(mappings) == 0
 
 
-def test_wellbore_mappings_allow_valid_collection_and_dunder_methods() -> None:
-    """Wellbore collections allow valid rows and support dunder methods."""
+def test_wellbore_mappings_allow_valid_collection() -> None:
+    """Wellbore collections allow valid mappings."""
     primary = create_wellbore_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
         source_id="30_9-B-21_C",
         target_id="30_9-B-21_C",
     )
     simulator_target = create_wellbore_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.simulator,
+        relation_type=RelationType.primary,
         source_id="30_9-B-21_C",
         target_id="B21C",
     )
     pdm_target = create_wellbore_mapping(
+        source_system=DataSystem.rms,
         target_system=DataSystem.pdm,
+        relation_type=RelationType.primary,
+        source_id="30_9-B-21_C",
+        target_id="30/9-B-21 C",
+    )
+    mappings = WellboreMappings(root=[primary, simulator_target, pdm_target])
+    expected = [primary, simulator_target, pdm_target]
+
+    assert mappings.root == expected
+
+
+def test_wellbore_mappings_support_dunder_methods() -> None:
+    """Wellbore collections support the expected dunder methods."""
+    primary = create_wellbore_mapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.rms,
+        relation_type=RelationType.primary,
+        source_id="30_9-B-21_C",
+        target_id="30_9-B-21_C",
+    )
+    simulator_target = create_wellbore_mapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.simulator,
+        relation_type=RelationType.primary,
+        source_id="30_9-B-21_C",
+        target_id="B21C",
+    )
+    pdm_target = create_wellbore_mapping(
+        source_system=DataSystem.rms,
+        target_system=DataSystem.pdm,
+        relation_type=RelationType.primary,
         source_id="30_9-B-21_C",
         target_id="30/9-B-21 C",
     )

@@ -50,25 +50,20 @@ jobs:
         repository:
           - equinor/fmu-dataio
           - equinor/fmu-settings
-          - equinor/grid3d-maps
           - equinor/fmu-settings-cli
           - equinor/fmu-settings-api
         python-version: ["3.11", "3.12", "3.13", "3.14"]
         include:
           - repository: equinor/fmu-dataio
-            test-command: uv run pytest -n auto -v --cov --cov-report term-missing
+            test-command: uv run --no-sync pytest -n auto -v --cov --cov-report term-missing
             system-dependencies: sudo apt-get update && sudo apt-get install -y libegl1
           - repository: equinor/fmu-settings
-            test-command: uv run pytest -n auto tests --cov=src/ --cov-report term-missing
-          - repository: equinor/grid3d-maps
-            test-setup-command: export MPLBACKEND=Agg
-            test-command: uv run pytest -n auto --disable-warnings
-            system-dependencies: sudo apt-get update && sudo apt-get install -y libegl1
+            test-command: uv run --no-sync pytest -n auto tests --cov=src/ --cov-report term-missing
           - repository: equinor/fmu-settings-cli
             test-setup-command: export TERMINAL_WIDTH=3000 COLUMNS=3000 _TYPER_FORCE_DISABLE_TERMINAL=1
-            test-command: uv run pytest -n auto tests --cov=src/ --cov-report term-missing
+            test-command: uv run --no-sync pytest -n auto tests --cov=src/ --cov-report term-missing
           - repository: equinor/fmu-settings-api
-            test-command: uv run pytest -n auto tests --cov=src/ --cov-report term-missing
+            test-command: uv run --no-sync pytest -n auto tests --cov=src/ --cov-report term-missing
 
     steps:
       - name: Check out downstream repository
@@ -98,11 +93,7 @@ jobs:
         run: |
           uv pip install --upgrade --reinstall-package fmu-datamodels "fmu-datamodels==$PACKAGE_VERSION"
 
-      - name: Run downstream test setup
-        if: ${{ matrix.test-setup-command }}
-        run: |
-          ${{ matrix.test-setup-command }}
-
       - name: Run downstream test suite
         run: |
+          ${{ matrix.test-setup-command }}
           ${{ matrix.test-command }}

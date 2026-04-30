@@ -101,7 +101,7 @@ def test_identifier_mapping_ids_not_empty_strings() -> None:
     with pytest.raises(ValueError, match="An identifier cannot be an empty string"):
         IdentifierMapping(
             source_system=DataSystem.rms,
-            target_system=DataSystem.fmu,
+            target_system=DataSystem.smda,
             mapping_type=MappingType.stratigraphy,
             relation_type=RelationType.primary,
             source_id="",

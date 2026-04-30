@@ -41,7 +41,6 @@ class DataSystem(StrEnum):
 
     rms = "rms"
     smda = "smda"
-    fmu = "fmu"
     simulator = "simulator"
     pdm = "pdm"
 

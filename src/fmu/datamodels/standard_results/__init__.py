@@ -1,4 +1,12 @@
 from .enums import StandardResultName
+from .ert_observations_rft import (
+    ErtObservationsRftResult,
+    ErtObservationsRftSchema,
+)
+from .ert_observations_summary import (
+    ErtObservationsSummaryResult,
+    ErtObservationsSummarySchema,
+)
 from .ert_parameters import (
     ErtDistribution,
     ErtParameterMetadata,
@@ -19,6 +27,10 @@ from .structure_depth_fault_lines import (
 
 __all__ = [
     "ErtDistribution",
+    "ErtObservationsRftResult",
+    "ErtObservationsRftSchema",
+    "ErtObservationsSummaryResult",
+    "ErtObservationsSummarySchema",
     "ErtParameterMetadata",
     "ErtParametersResult",
     "ErtParametersSchema",

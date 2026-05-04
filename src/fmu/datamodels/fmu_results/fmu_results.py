@@ -50,6 +50,8 @@ class FmuResultsSchema(SchemaBase):
     #### 0.21.0
 
     - Added `observations` as new content type
+    - Added 'observations_rft' standard result for Ert rft observations.
+    - Added 'observations_summary' standard result for Ert summary observations.
 
     #### 0.20.0
 

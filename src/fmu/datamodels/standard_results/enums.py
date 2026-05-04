@@ -14,6 +14,8 @@ class StandardResultName(StrEnum):
     """The standard result name of a given data object."""
 
     parameters = "parameters"
+    observations_summary = "observations_summary"
+    observations_rft = "observations_rft"
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
     simulator_fipregions_mapping = "simulator_fipregions_mapping"
@@ -124,6 +126,25 @@ class FaultLines:
     def index_columns() -> list[str]:
         """Returns a list of the index columns."""
         return [k.value for k in FaultLines.TableIndexColumns]
+
+
+class ErtObservations:
+    """Enumerations relevant to observations tables extracted from Ert storage."""
+
+    class RftColumns(IndexColumnsStrEnum):
+        """The index columns for a rft observations table."""
+
+        response_key = "response_key"
+        property = "property"
+        well = "well"
+        date = "date"
+        zone = "zone"
+
+    class SummaryColumns(IndexColumnsStrEnum):
+        """The index columns for a summary observations table."""
+
+        response_key = "response_key"
+        time = "time"
 
 
 class SimulatorFipregionsMapping:

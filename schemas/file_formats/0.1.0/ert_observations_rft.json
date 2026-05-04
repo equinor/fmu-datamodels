@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "ErtObservationsRftResultRow": {
+      "description": "Represents the columns of a row in a Ert rft observation export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "east": {
+          "title": "East",
+          "type": "number"
+        },
+        "md": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Md"
+        },
+        "north": {
+          "title": "North",
+          "type": "number"
+        },
+        "observation_error": {
+          "title": "Observation Error",
+          "type": "number"
+        },
+        "observation_value": {
+          "title": "Observation Value",
+          "type": "number"
+        },
+        "property": {
+          "title": "Property",
+          "type": "string"
+        },
+        "response_key": {
+          "title": "Response Key",
+          "type": "string"
+        },
+        "tvd": {
+          "title": "Tvd",
+          "type": "number"
+        },
+        "well": {
+          "title": "Well",
+          "type": "string"
+        },
+        "zone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Zone"
+        }
+      },
+      "required": [
+        "response_key",
+        "property",
+        "well",
+        "date",
+        "observation_value",
+        "observation_error",
+        "east",
+        "north",
+        "tvd"
+      ],
+      "title": "ErtObservationsRftResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_observations_rft.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant Ert rft observations parquet file, which is\nnaturally a list of rows.\n\nConsumers who retrieve this parquet file must read it into a json-dictionary\nequivalent format to validate it against the schema.",
+  "items": {
+    "$ref": "#/$defs/ErtObservationsRftResultRow"
+  },
+  "title": "ErtObservationsRftResult",
+  "type": "array",
+  "version": "0.1.0"
+}

@@ -226,6 +226,12 @@
       },
       "oneOf": [
         {
+          "$ref": "#/$defs/ErtObservationsRftStandardResult"
+        },
+        {
+          "$ref": "#/$defs/ErtObservationsSummaryStandardResult"
+        },
+        {
           "$ref": "#/$defs/ErtParametersStandardResult"
         },
         {
@@ -1291,6 +1297,50 @@
         "simulation_mode"
       ],
       "title": "Ert",
+      "type": "object"
+    },
+    "ErtObservationsRftStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'observations_rft' standard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_observations_rft.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "observations_rft",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ErtObservationsRftStandardResult",
+      "type": "object"
+    },
+    "ErtObservationsSummaryStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'observations_summary' standard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_observations_summary.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "observations_summary",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ErtObservationsSummaryStandardResult",
       "type": "object"
     },
     "ErtParametersStandardResult": {

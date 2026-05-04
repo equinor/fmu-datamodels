@@ -18,6 +18,12 @@ from fmu.datamodels.standard_results import (
     StandardResultName,
     StructureDepthFaultLinesSchema,
 )
+from fmu.datamodels.standard_results.ert_observations_rft import (
+    ErtObservationsRftSchema,
+)
+from fmu.datamodels.standard_results.ert_observations_summary import (
+    ErtObservationsSummarySchema,
+)
 from fmu.datamodels.types import VersionStr
 
 
@@ -42,6 +48,45 @@ class StandardResult(BaseModel):
 
     file_schema: FileSchema | None = Field(default=None)
     """The schema identifying the format of the standard result."""
+
+
+class ErtObservationsRftStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'observations_rft' standard result.
+    """
+
+    name: Literal[StandardResultName.observations_rft]
+    """The identifying name for the 'observations_rft' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=ErtObservationsRftSchema.VERSION,
+        url=AnyHttpUrl(ErtObservationsRftSchema.url()),
+    )
+    """The schema identifying the format of the 'observations_rft' standard result."""
+
+
+class ErtObservationsSummaryStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'observations_summary' standard result.
+    """
+
+    name: Literal[StandardResultName.observations_summary]
+    """The identifying name for the 'observations_summary' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=ErtObservationsSummarySchema.VERSION,
+        url=AnyHttpUrl(ErtObservationsSummarySchema.url()),
+    )
+    """
+    The schema identifying the format of the 'observations_summary' standard
+    result.
+    """
 
 
 class ErtParametersStandardResult(StandardResult):
@@ -306,7 +351,9 @@ class AnyStandardResult(RootModel):
     """
 
     root: Annotated[
-        ErtParametersStandardResult
+        ErtObservationsRftStandardResult
+        | ErtObservationsSummaryStandardResult
+        | ErtParametersStandardResult
         | FieldOutlineStandardResult
         | InplaceVolumesStandardResult
         | SimulatorFipregionsMappingStandardResult

@@ -25,6 +25,10 @@ from .common import (
 from .fmu_results import FmuResults, FmuResultsSchema
 from .standard_results import (
     ErtDistribution,
+    ErtObservationsRftResult,
+    ErtObservationsRftSchema,
+    ErtObservationsSummaryResult,
+    ErtObservationsSummarySchema,
     ErtParameterMetadata,
     ErtParametersResult,
     ErtParametersSchema,
@@ -67,6 +71,10 @@ __all__ = [
     "User",
     "Version",
     "ErtDistribution",
+    "ErtObservationsRftResult",
+    "ErtObservationsRftSchema",
+    "ErtObservationsSummaryResult",
+    "ErtObservationsSummarySchema",
     "ErtParameterMetadata",
     "ErtParametersResult",
     "ErtParametersSchema",
@@ -86,6 +94,8 @@ __all__ = [
 
 schemas: list[type[SchemaBase]] = [
     FmuResultsSchema,
+    ErtObservationsRftSchema,
+    ErtObservationsSummarySchema,
     ErtParametersSchema,
     FieldOutlineSchema,
     FluidContactOutlineSchema,

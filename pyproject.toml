@@ -123,3 +123,13 @@ strict_equality = true
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
+
+[tool.uv]
+exclude-newer = "1 week"
+# Exclude specific package(s) we maintain for quick iteration
+
+[tool.uv.exclude-newer-package]
+# Exempt only xtgeo itself from the cooldown.
+# Its transitive deps (for example resfo, roffio, segyio, xtgeoviz) stay on cooldown
+# unless xtgeo starts requiring newer releases of them.
+"xtgeo" = false

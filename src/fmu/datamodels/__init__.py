@@ -25,6 +25,8 @@ from .common import (
 from .fmu_results import FmuResults, FmuResultsSchema
 from .standard_results import (
     ErtDistribution,
+    ErtObservationsBreakthroughResult,
+    ErtObservationsBreakthroughSchema,
     ErtObservationsRftResult,
     ErtObservationsRftSchema,
     ErtObservationsSummaryResult,
@@ -88,6 +90,8 @@ __all__ = [
     "InplaceVolumesSchema",
     "SimulatorFipregionsMappingResult",
     "SimulatorFipregionsMappingSchema",
+    "ErtObservationsBreakthroughResult",
+    "ErtObservationsBreakthroughSchema",
     "StructureDepthFaultLinesResult",
     "StructureDepthFaultLinesSchema",
 ]
@@ -101,5 +105,6 @@ schemas: list[type[SchemaBase]] = [
     FluidContactOutlineSchema,
     InplaceVolumesSchema,
     SimulatorFipregionsMappingSchema,
+    ErtObservationsBreakthroughSchema,
     StructureDepthFaultLinesSchema,
 ]

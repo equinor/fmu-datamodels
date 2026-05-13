@@ -44,9 +44,14 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.21.0"
+    VERSION: VersionStr = "0.22.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.22.0
+    
+    - Added 'observations_breakthrough' standard result for Ert breakthrough 
+    observations.
+
     #### 0.21.0
 
     - Added `observations` as new content type

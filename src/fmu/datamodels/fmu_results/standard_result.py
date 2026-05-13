@@ -18,6 +18,9 @@ from fmu.datamodels.standard_results import (
     StandardResultName,
     StructureDepthFaultLinesSchema,
 )
+from fmu.datamodels.standard_results.ert_observations_breakthrough import (
+    ErtObservationsBreakthroughSchema,
+)
 from fmu.datamodels.standard_results.ert_observations_rft import (
     ErtObservationsRftSchema,
 )
@@ -85,6 +88,27 @@ class ErtObservationsSummaryStandardResult(StandardResult):
     )
     """
     The schema identifying the format of the 'observations_summary' standard
+    result.
+    """
+
+
+class ErtObservationsBreakthroughStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'observations_breakthrough' standard result.
+    """
+
+    name: Literal[StandardResultName.observations_breakthrough]
+    """The identifying name for the 'observations_breakthrough' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=ErtObservationsBreakthroughSchema.VERSION,
+        url=AnyHttpUrl(ErtObservationsBreakthroughSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'observations_breakthrough' standard
     result.
     """
 
@@ -353,6 +377,7 @@ class AnyStandardResult(RootModel):
     root: Annotated[
         ErtObservationsRftStandardResult
         | ErtObservationsSummaryStandardResult
+        | ErtObservationsBreakthroughStandardResult
         | ErtParametersStandardResult
         | FieldOutlineStandardResult
         | InplaceVolumesStandardResult

@@ -16,6 +16,7 @@ class StandardResultName(StrEnum):
     parameters = "parameters"
     observations_summary = "observations_summary"
     observations_rft = "observations_rft"
+    observations_breakthrough = "observations_breakthrough"
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
     simulator_fipregions_mapping = "simulator_fipregions_mapping"
@@ -142,6 +143,12 @@ class ErtObservations:
 
     class SummaryColumns(IndexColumnsStrEnum):
         """The index columns for a summary observations table."""
+
+        response_key = "response_key"
+        time = "time"
+
+    class BreakthroughColumns(IndexColumnsStrEnum):
+        """The index columns for a breakthrough observations table."""
 
         response_key = "response_key"
         time = "time"

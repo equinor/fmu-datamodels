@@ -1,4 +1,8 @@
 from .enums import StandardResultName
+from .ert_observations_breakthrough import (
+    ErtObservationsBreakthroughResult,
+    ErtObservationsBreakthroughSchema,
+)
 from .ert_observations_rft import (
     ErtObservationsRftResult,
     ErtObservationsRftSchema,
@@ -31,6 +35,8 @@ __all__ = [
     "ErtObservationsRftSchema",
     "ErtObservationsSummaryResult",
     "ErtObservationsSummarySchema",
+    "ErtObservationsBreakthroughResult",
+    "ErtObservationsBreakthroughSchema",
     "ErtParameterMetadata",
     "ErtParametersResult",
     "ErtParametersSchema",

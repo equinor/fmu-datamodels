@@ -173,6 +173,19 @@ class SimulatorFipregionsMapping:
 class SimulatorTables:
     """Enumerations relevant to tables extracted from a flow simulator."""
 
+    class LiftCurvesColumns(IndexColumnsStrEnum):
+        """The index columns for a lift curves table."""
+
+        TABLE_NUMBER = "TABLE_NUMBER"
+        VFP_TYPE = "VFP_TYPE"
+        RATE_TYPE = "RATE_TYPE"
+        WFR_TYPE = "WFR_TYPE"
+        GFR_TYPE = "GFR_TYPE"
+        ALQ_TYPE = "ALQ_TYPE"
+        PRESSURE_TYPE = "PRESSURE_TYPE"
+        TAB_TYPE = "TAB_TYPE"
+        UNIT_TYPE = "UNIT_TYPE"
+
     class ProductionNetworkColumns(IndexColumnsStrEnum):
         """The index columns for a production network table."""
 

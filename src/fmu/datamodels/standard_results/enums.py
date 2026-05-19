@@ -174,7 +174,7 @@ class SimulatorTables:
     """Enumerations relevant to tables extracted from a flow simulator."""
 
     class ProductionNetworkColumns(IndexColumnsStrEnum):
-        """The index columns for a lift curves table."""
+        """The index columns for a production network table."""
 
         DATE = "DATE"
         CHILD = "CHILD"
@@ -188,7 +188,7 @@ class SimulatorTables:
         KEYWORD = "KEYWORD"
 
     class TransmissibilitiesColumns(IndexColumnsStrEnum):
-        """The index columns for a pvt table."""
+        """The index columns for a transmissibilities table."""
 
         DIR = "DIR"
 

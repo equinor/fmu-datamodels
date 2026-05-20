@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, RootModel
+from pydantic import BaseModel, Field, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 from fmu.datamodels.types import VersionStr
@@ -31,11 +31,11 @@ class ErtObservationsBreakthroughResultRow(BaseModel):
     threshold: float
     """The threshold value this row represents. Required."""
 
-    east: float
-    """The east coordinate this row represents. Required."""
+    east: float | None = Field(default=None)
+    """The east coordinate this row represents. Optional."""
 
-    north: float
-    """The north coordinate this row represents. Required."""
+    north: float | None = Field(default=None)
+    """The north coordinate this row represents. Optional."""
 
 
 class ErtObservationsBreakthroughResult(RootModel):

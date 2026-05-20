@@ -4,12 +4,28 @@
       "description": "Represents the columns of a row in a Ert breakthrough observation export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
       "properties": {
         "east": {
-          "title": "East",
-          "type": "number"
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "East"
         },
         "north": {
-          "title": "North",
-          "type": "number"
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "North"
         },
         "observation_error": {
           "title": "Observation Error",
@@ -38,9 +54,7 @@
         "time",
         "observation_value",
         "observation_error",
-        "threshold",
-        "east",
-        "north"
+        "threshold"
       ],
       "title": "ErtObservationsBreakthroughResultRow",
       "type": "object"

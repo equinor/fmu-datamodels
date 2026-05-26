@@ -207,6 +207,9 @@ class Ensemble(BaseModel):
     Deprecated.
     """
 
+    description: list[str] | None = Field(default=None)
+    """A free-text description of this ensemble."""
+
 
 class Model(BaseModel):
     """The ``fmu.model`` block contains information about the model used.

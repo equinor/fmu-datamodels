@@ -55,6 +55,8 @@ jobs:
       run: |
 
         body=$(cat <<EOF
+        ⚠️ This PR should only be merged as part of the release manager duty.
+
         Release a new schema to staging with the changes from release tag ${{ inputs.release_tag }}.
 
         ⚠️ Merging this PR will automatically deploy the changes to the schema applications staging environment in Radix.

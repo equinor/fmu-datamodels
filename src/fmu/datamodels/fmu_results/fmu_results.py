@@ -52,6 +52,8 @@ class FmuResultsSchema(SchemaBase):
     - Added 'observations_breakthrough' standard result for Ert breakthrough 
     observations.
     - Added index columns for lift curves table. 
+    - Added `fmu.ensemble.description` an optional field for free-text
+      description of ensemble.
 
     #### 0.21.0
 

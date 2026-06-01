@@ -24,6 +24,7 @@ class StandardResultName(StrEnum):
     structure_time_surface = "structure_time_surface"
     grid_extracted_depth_surface = "grid_extracted_depth_surface"
     grid_model_static = "grid_model_static"
+    stratigraphy_mapping = "stratigraphy_mapping"
     structure_depth_isochore = "structure_depth_isochore"
     structure_depth_fault_lines = "structure_depth_fault_lines"
     structure_depth_fault_surface = "structure_depth_fault_surface"

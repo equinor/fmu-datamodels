@@ -16,6 +16,7 @@ from fmu.datamodels.standard_results import (
     InplaceVolumesSchema,
     SimulatorFipregionsMappingSchema,
     StandardResultName,
+    StratigraphyMappingSchema,
     StructureDepthFaultLinesSchema,
 )
 from fmu.datamodels.standard_results.ert_observations_breakthrough import (
@@ -167,6 +168,27 @@ class SimulatorFipregionsMappingStandardResult(StandardResult):
     )
     """
     The schema identifying the format of the 'simulator_fipregions_mapping'
+    standard result.
+    """
+
+
+class StratigraphyMappingStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'stratigraphy_mapping' standard result.
+    """
+
+    name: Literal[StandardResultName.stratigraphy_mapping]
+    """The identifying name for the 'stratigraphy_mapping' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=StratigraphyMappingSchema.VERSION,
+        url=AnyHttpUrl(StratigraphyMappingSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'stratigraphy_mapping'
     standard result.
     """
 
@@ -382,6 +404,7 @@ class AnyStandardResult(RootModel):
         | FieldOutlineStandardResult
         | InplaceVolumesStandardResult
         | SimulatorFipregionsMappingStandardResult
+        | StratigraphyMappingStandardResult
         | StructureDepthSurfaceStandardResult
         | StructureDepthFaultSurfaceStandardResult
         | StructureTimeSurfaceStandardResult

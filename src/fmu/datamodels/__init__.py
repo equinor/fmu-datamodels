@@ -42,6 +42,8 @@ from .standard_results import (
     InplaceVolumesSchema,
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
+    StratigraphyMappingResult,
+    StratigraphyMappingSchema,
     StructureDepthFaultLinesResult,
     StructureDepthFaultLinesSchema,
 )
@@ -92,6 +94,8 @@ __all__ = [
     "SimulatorFipregionsMappingSchema",
     "ErtObservationsBreakthroughResult",
     "ErtObservationsBreakthroughSchema",
+    "StratigraphyMappingResult",
+    "StratigraphyMappingSchema",
     "StructureDepthFaultLinesResult",
     "StructureDepthFaultLinesSchema",
 ]
@@ -106,5 +110,6 @@ schemas: list[type[SchemaBase]] = [
     InplaceVolumesSchema,
     SimulatorFipregionsMappingSchema,
     ErtObservationsBreakthroughSchema,
+    StratigraphyMappingSchema,
     StructureDepthFaultLinesSchema,
 ]

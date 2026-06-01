@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "DataSystem": {
+      "description": "The system or application data is being mapping to or from.",
+      "enum": [
+        "rms",
+        "smda",
+        "simulator",
+        "pdm"
+      ],
+      "title": "DataSystem",
+      "type": "string"
+    },
+    "RelationType": {
+      "description": "The kind of relation this mapping represents.",
+      "enum": [
+        "primary",
+        "alias"
+      ],
+      "title": "RelationType",
+      "type": "string"
+    },
+    "StratigraphyMappingResultRow": {
+      "description": "Represents the columns of a row in a stratigraphy mapping export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "mapping_type": {
+          "const": "stratigraphy",
+          "default": "stratigraphy",
+          "title": "Mapping Type",
+          "type": "string"
+        },
+        "relation_type": {
+          "$ref": "#/$defs/RelationType"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_system": {
+          "$ref": "#/$defs/DataSystem"
+        },
+        "source_uuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Uuid"
+        },
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "target_system": {
+          "$ref": "#/$defs/DataSystem"
+        },
+        "target_uuid": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Uuid"
+        }
+      },
+      "required": [
+        "source_system",
+        "target_system",
+        "relation_type",
+        "source_id",
+        "target_id"
+      ],
+      "title": "StratigraphyMappingResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/stratigraphy_mapping.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant stratigraphy mapping parquet file, which is\nnaturally a list of rows.\n\nConsumers who retrieve this parquet file must read it into a json-dictionary\nequivalent format to validate it against the schema.",
+  "items": {
+    "$ref": "#/$defs/StratigraphyMappingResultRow"
+  },
+  "title": "StratigraphyMappingResult",
+  "type": "array",
+  "version": "0.1.0"
+}

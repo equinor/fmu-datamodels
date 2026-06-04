@@ -8,13 +8,6 @@ on:
         type: string
         required: true
 
-  workflow_call:
-    inputs:
-      release_tag:
-        description: "The release version of fmu-datamodels to release a new schema for."
-        type: string
-        required: true
-
 permissions:
   contents: write
   pull-requests: write

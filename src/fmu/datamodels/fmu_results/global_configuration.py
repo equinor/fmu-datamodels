@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import warnings
 from typing import Any
+from uuid import UUID
 
 from pydantic import (
     BaseModel,
@@ -72,6 +73,7 @@ class StratigraphyElement(BaseModel):
     offset: float = Field(default=0.0, allow_inf_nan=False)
     top: data.Layer | None = Field(default=None)
     base: data.Layer | None = Field(default=None)
+    uuid: UUID | None = Field(default=None)
 
     @field_validator("alias", mode="before")
     @classmethod

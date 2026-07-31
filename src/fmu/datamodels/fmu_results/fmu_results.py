@@ -44,9 +44,13 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.23.0"
+    VERSION: VersionStr = "0.23.1"
 
     VERSION_CHANGELOG: str = """
+    #### 0.23.1
+
+    - Added `fmu.ensemble.description` to `$contractual`.
+
     #### 0.23.0
     
     - Added 'stratigraphy_mapping' standard result.
@@ -237,6 +241,7 @@ class FmuResultsSchema(SchemaBase):
         "fmu.case",
         "fmu.context.stage",
         "fmu.entity.uuid",
+        "fmu.ensemble.description",
         "fmu.ensemble.name",
         "fmu.ensemble.uuid",
         "fmu.ert.experiment.id",

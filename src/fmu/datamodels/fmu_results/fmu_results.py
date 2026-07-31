@@ -239,6 +239,7 @@ class FmuResultsSchema(SchemaBase):
         "fmu.entity.uuid",
         "fmu.ensemble.name",
         "fmu.ensemble.uuid",
+        "fmu.ensemble.description",
         "fmu.ert.experiment.id",
         "fmu.iteration.name",
         "fmu.iteration.uuid",

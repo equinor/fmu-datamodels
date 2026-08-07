@@ -606,7 +606,7 @@
           "$ref": "#/$defs/Tracklog"
         },
         "version": {
-          "default": "0.23.1",
+          "default": "0.24.0",
           "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)",
           "title": "Version",
           "type": "string"
@@ -1259,7 +1259,7 @@
           "$ref": "#/$defs/Tracklog"
         },
         "version": {
-          "default": "0.23.1",
+          "default": "0.24.0",
           "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)",
           "title": "Version",
           "type": "string"
@@ -4341,7 +4341,7 @@
           "$ref": "#/$defs/Tracklog"
         },
         "version": {
-          "default": "0.23.1",
+          "default": "0.24.0",
           "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)",
           "title": "Version",
           "type": "string"
@@ -5771,7 +5771,7 @@
           "$ref": "#/$defs/Tracklog"
         },
         "version": {
-          "default": "0.23.1",
+          "default": "0.24.0",
           "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)",
           "title": "Version",
           "type": "string"
@@ -8390,7 +8390,7 @@
           "$ref": "#/$defs/Tracklog"
         },
         "version": {
-          "default": "0.23.1",
+          "default": "0.24.0",
           "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)",
           "title": "Version",
           "type": "string"
@@ -13415,7 +13415,7 @@
       "type": "object"
     }
   },
-  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/0.23.1/fmu_results.json",
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/0.24.0/fmu_results.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "discriminator": {
     "propertyName": "class"

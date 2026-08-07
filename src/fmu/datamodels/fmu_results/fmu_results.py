@@ -44,10 +44,10 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.23.1"
+    VERSION: VersionStr = "0.24.0"
 
     VERSION_CHANGELOG: str = """
-    #### 0.23.1
+    #### 0.24.0
 
     - Added `fmu.ensemble.description` to `$contractual`.
 

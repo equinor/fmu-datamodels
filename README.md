@@ -22,7 +22,7 @@ Within Equinor, the schemas are available on a Radix-hosted endpoint.
 - Radix Staging: ![Radix
   Staging](https://api.radix.equinor.com/api/v1/applications/fmu-schemas/environments/staging/buildstatus)
 - Radix Prod: ![Radix
-  Prod](https://api.radix.equinor.com/api/v1/applications/fmu-schemas/environments/prod/buildstatus)
+  Prod](https://api.radix.equinor.com/api/v1/applications/fmu-schemas/environments/prod/buildstatus?pipeline=promote)
 
 ## Documentation
 

@@ -6,6 +6,9 @@ from hypothesis import given, strategies
 from fmu.datamodels.fmu_results import global_configuration
 
 
+@pytest.mark.filterwarnings(
+    "ignore:The global config contains an empty list element:FutureWarning"
+)
 @given(
     name=strategies.text(min_size=1),
     stratigraphic=strategies.booleans(),
@@ -24,6 +27,9 @@ def test_drop_none(name: Any, stratigraphic: Any, alias: Any) -> None:
         assert all(v is not None for v in cnf.alias)
 
 
+@pytest.mark.filterwarnings(
+    "ignore:The global config contains an empty list element:FutureWarning"
+)
 @given(
     name=strategies.text(min_size=1),
     stratigraphic=strategies.booleans(),

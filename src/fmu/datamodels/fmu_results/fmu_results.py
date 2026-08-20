@@ -44,25 +44,12 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.26.0"
+    VERSION: VersionStr = "0.25.0"
 
     VERSION_CHANGELOG: str = """
-    #### 0.26.0
-
-    - Added 'pvt' standard result schema.
-    - Added 'relperm' standard result schema.
-    - Added 'observations_seismic' standard result for Ert seismic observations.
-    - Added separate 'model_stratigraphy_horizons' and 'model_stratigraphy_zones'
-    standard results.
-    - Added attribute docstrings to all pydantic file schemas.
-    - Added 'simulator_zone_layer_mapping' standard result.
-    - Added new content 'stratigraphy'
-
     #### 0.25.0
 
     - Bumped `ert_parameters.json` to version 0.2.0.
-    - Added `data.spec.value_statistics` to `$contractual`.
-    - Added 'wellbore_mapping' standard result.
 
     #### 0.24.0
 

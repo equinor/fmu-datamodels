@@ -27,6 +27,7 @@ class ErtDistribution(StrEnum):
     triangular = "triangular"
     errf = "errf"
     derrf = "derrf"
+    pert = "pert"
 
 
 class GenKwParameterMetadata(BaseModel):
@@ -51,6 +52,7 @@ class GenKwParameterMetadata(BaseModel):
         ErtDistribution.triangular,
         ErtDistribution.errf,
         ErtDistribution.derrf,
+        ErtDistribution.pert,
     ]
 
     def to_pa_metadata(self) -> dict[bytes, bytes]:
@@ -167,6 +169,16 @@ class DerrfParameter(GenKwParameterMetadata):
     steps: float
 
 
+class PertParameter(GenKwParameterMetadata):
+    """Metadata values for a pert distribution."""
+
+    distribution: Literal[ErtDistribution.pert]
+    min: float
+    max: float
+    mode: float
+    scale: float
+
+
 ErtParameterMetadata = Annotated[
     UniformParameter
     | LogUnifParameter
@@ -178,7 +190,8 @@ ErtParameterMetadata = Annotated[
     | DUnifParameter
     | TriangularParameter
     | ErrfParameter
-    | DerrfParameter,
+    | DerrfParameter
+    | PertParameter,
     Field(discriminator="distribution"),
 ]
 
@@ -212,10 +225,14 @@ class ErtParametersSchema(SchemaBase):
     location corresponds directly with the values and their validation constraints,
     documented above."""
 
-    VERSION: VersionStr = "0.1.0"
+    VERSION: VersionStr = "0.2.0"
     """The version of this schema."""
 
     VERSION_CHANGELOG: str = """
+    #### 0.2.0
+
+    - Added new distribution option `pert`.
+
     #### 0.1.0
 
     This is the initial schema version.

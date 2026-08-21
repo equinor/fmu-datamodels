@@ -47,7 +47,7 @@ If you are proposing a feature:
 
 Ready to contribute? Here's how to set up `fmu-datamodels` for local development.
 
-1. Fork the `fmu-datamodels` repo on Github equinor to your personal user
+1. Fork the `fmu-datamodels` repo on GitHub equinor to your personal user
 2. Clone your fork locally:
 
 ```bash
@@ -97,7 +97,7 @@ Now you can make your changes locally.
     $ git push origin name-of-your-bugfix-or-feature
 ```
 
-7. Submit a pull request through the Github website.
+7. Submit a pull request through the GitHub website.
 
 ### Writing commit messages
 
@@ -113,7 +113,7 @@ The first line of the commit message starts with a capitalized acronym
 (options listed below) indicating what type of commit this is. Then a blank
 line, then more text if needed. Lines shouldn't be longer than 72
 characters. If the commit is related to a ticket, indicate that with
-`"See #3456", "Cf. #3344, "See ticket 3456", "Closes #3456"` or similar.
+`"See #3456", "Cf. #3344", "See ticket 3456", "Closes #3456"` or similar.
 
 Read [Chris Beams hints on commit messages](https://chris.beams.io/posts/git-commit/).
 
@@ -175,6 +175,6 @@ Before you submit a pull request, ensure that you have added:
 - Comments on this PR where appropriate to help reviewers
 - Documentation about your new feature
 
-When merging your PR make sure all commits passes tests or make
+When merging your PR, make sure all commits pass the tests or make
 a squash merge. Make sure you have the latest main rebased/merged so that your
 branch is up to date.

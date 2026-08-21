@@ -232,6 +232,7 @@ class FmuResultsSchema(SchemaBase):
         "data.offset",
         "data.seismic.attribute",
         "data.spec.columns",
+        "data.spec.value_statistics",
         "data.standard_result.name",
         "data.stratigraphic",
         "data.tagname",

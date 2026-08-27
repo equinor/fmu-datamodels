@@ -50,6 +50,7 @@ class FmuResultsSchema(SchemaBase):
     #### 0.25.0
 
     - Bumped `ert_parameters.json` to version 0.2.0.
+    - Added `data.spec.value_statistics` to `$contractual`.
 
     #### 0.24.0
 

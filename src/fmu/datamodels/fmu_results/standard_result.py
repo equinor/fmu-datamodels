@@ -18,6 +18,7 @@ from fmu.datamodels.standard_results import (
     StandardResultName,
     StratigraphyMappingSchema,
     StructureDepthFaultLinesSchema,
+    WellboreMappingSchema,
 )
 from fmu.datamodels.standard_results.ert_observations_breakthrough import (
     ErtObservationsBreakthroughSchema,
@@ -189,6 +190,27 @@ class StratigraphyMappingStandardResult(StandardResult):
     )
     """
     The schema identifying the format of the 'stratigraphy_mapping'
+    standard result.
+    """
+
+
+class WellboreMappingStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'wellbore_mapping' standard result.
+    """
+
+    name: Literal[StandardResultName.wellbore_mapping]
+    """The identifying name for the 'wellbore_mapping' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=WellboreMappingSchema.VERSION,
+        url=AnyHttpUrl(WellboreMappingSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'wellbore_mapping'
     standard result.
     """
 
@@ -421,6 +443,7 @@ class AnyStandardResult(RootModel):
         | RftStandardResult
         | SimulationTimeseriesStandardResult
         | TransmissibilitiesStandardResult
-        | WellCompletionsStandardResult,
+        | WellCompletionsStandardResult
+        | WellboreMappingStandardResult,
         Field(discriminator="name"),
     ]

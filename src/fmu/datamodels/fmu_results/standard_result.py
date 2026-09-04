@@ -266,28 +266,6 @@ class WellboreMappingStandardResult(StandardResult):
     """
 
 
-class ModelStratigraphyHorizonsStandardResult(StandardResult):
-    """Metadata for the 'model_stratigraphy_horizons' standard result."""
-
-    name: Literal[StandardResultName.model_stratigraphy_horizons]
-
-    file_schema: FileSchema = FileSchema(
-        version=ModelStratigraphyHorizonsSchema.VERSION,
-        url=AnyHttpUrl(ModelStratigraphyHorizonsSchema.url()),
-    )
-
-
-class ModelStratigraphyZonesStandardResult(StandardResult):
-    """Metadata for the 'model_stratigraphy_zones' standard result."""
-
-    name: Literal[StandardResultName.model_stratigraphy_zones]
-
-    file_schema: FileSchema = FileSchema(
-        version=ModelStratigraphyZonesSchema.VERSION,
-        url=AnyHttpUrl(ModelStratigraphyZonesSchema.url()),
-    )
-
-
 class StructureDepthSurfaceStandardResult(StandardResult):
     """
     The ``standard_result`` field contains information about which standard results this

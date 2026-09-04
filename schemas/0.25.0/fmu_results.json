@@ -301,6 +301,9 @@
         },
         {
           "$ref": "#/$defs/WellCompletionsStandardResult"
+        },
+        {
+          "$ref": "#/$defs/WellboreMappingStandardResult"
         }
       ],
       "title": "AnyStandardResult"
@@ -13373,6 +13376,28 @@
         "is_prediction"
       ],
       "title": "WellPicksData",
+      "type": "object"
+    },
+    "WellboreMappingStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'wellbore_mapping' standard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/wellbore_mapping.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "wellbore_mapping",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "WellboreMappingStandardResult",
       "type": "object"
     },
     "Workflow": {

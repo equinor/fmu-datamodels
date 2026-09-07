@@ -17,6 +17,7 @@ class StandardResultName(StrEnum):
     observations_summary = "observations_summary"
     observations_rft = "observations_rft"
     observations_breakthrough = "observations_breakthrough"
+    observations_seismic = "observations_seismic"
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
     simulator_fipregions_mapping = "simulator_fipregions_mapping"
@@ -154,6 +155,13 @@ class ErtObservations:
 
         response_key = "response_key"
         time = "time"
+
+    class SeismicColumns(IndexColumnsStrEnum):
+        """The index columns for a seismic observations table."""
+
+        response_key = "response_key"
+        east = "east"
+        north = "north"
 
 
 class SimulatorFipregionsMapping:

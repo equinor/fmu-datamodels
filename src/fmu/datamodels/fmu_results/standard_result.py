@@ -27,6 +27,9 @@ from fmu.datamodels.standard_results.ert_observations_breakthrough import (
 from fmu.datamodels.standard_results.ert_observations_rft import (
     ErtObservationsRftSchema,
 )
+from fmu.datamodels.standard_results.ert_observations_seismic import (
+    ErtObservationsSeismicSchema,
+)
 from fmu.datamodels.standard_results.ert_observations_summary import (
     ErtObservationsSummarySchema,
 )
@@ -112,6 +115,27 @@ class ErtObservationsBreakthroughStandardResult(StandardResult):
     )
     """
     The schema identifying the format of the 'observations_breakthrough' standard
+    result.
+    """
+
+
+class ErtObservationsSeismicStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'observations_seismic' standard result.
+    """
+
+    name: Literal[StandardResultName.observations_seismic]
+    """The identifying name for the 'observations_seismic' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=ErtObservationsSeismicSchema.VERSION,
+        url=AnyHttpUrl(ErtObservationsSeismicSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'observations_seismic' standard
     result.
     """
 
@@ -429,6 +453,7 @@ class AnyStandardResult(RootModel):
         ErtObservationsRftStandardResult
         | ErtObservationsSummaryStandardResult
         | ErtObservationsBreakthroughStandardResult
+        | ErtObservationsSeismicStandardResult
         | ErtParametersStandardResult
         | FieldOutlineStandardResult
         | InplaceVolumesStandardResult

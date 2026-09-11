@@ -121,11 +121,12 @@ class Property(BaseModel):
 
                 warnings.warn(
                     f"The property attribute '{v.attribute}' is a known {attr_type} "
-                    "attribute. The 'is_discrete' field will be updated for this "
-                    "attribute. Either remove the 'is_discrete' field or update the "
-                    "value to silence this warning.",
+                    "attribute, but input 'is_discrete' does not match. "
+                    "Make sure this is intentional."
                 )
-            v.is_discrete = expected_is_discrete
+
+            if v.is_discrete is None:
+                v.is_discrete = expected_is_discrete
 
         return v
 

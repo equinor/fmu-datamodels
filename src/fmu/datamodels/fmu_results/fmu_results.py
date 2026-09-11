@@ -52,6 +52,7 @@ class FmuResultsSchema(SchemaBase):
     - Bumped `ert_parameters.json` to version 0.2.0.
     - Added `data.spec.value_statistics` to `$contractual`.
     - Added 'wellbore_mapping' standard result.
+    - Added 'observations_seismic' standard result for Ert seismic observations.
 
     #### 0.24.0
 

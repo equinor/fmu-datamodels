@@ -7,6 +7,10 @@ from .ert_observations_rft import (
     ErtObservationsRftResult,
     ErtObservationsRftSchema,
 )
+from .ert_observations_seismic import (
+    ErtObservationsSeismicResult,
+    ErtObservationsSeismicSchema,
+)
 from .ert_observations_summary import (
     ErtObservationsSummaryResult,
     ErtObservationsSummarySchema,
@@ -33,6 +37,8 @@ from .wellbore_mapping import WellboreMappingResult, WellboreMappingSchema
 
 __all__ = [
     "ErtDistribution",
+    "ErtObservationsSeismicResult",
+    "ErtObservationsSeismicSchema",
     "ErtObservationsRftResult",
     "ErtObservationsRftSchema",
     "ErtObservationsSummaryResult",

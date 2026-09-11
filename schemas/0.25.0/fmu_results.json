@@ -237,6 +237,9 @@
           "$ref": "#/$defs/ErtObservationsBreakthroughStandardResult"
         },
         {
+          "$ref": "#/$defs/ErtObservationsSeismicStandardResult"
+        },
+        {
           "$ref": "#/$defs/ErtParametersStandardResult"
         },
         {
@@ -1367,6 +1370,28 @@
         "name"
       ],
       "title": "ErtObservationsRftStandardResult",
+      "type": "object"
+    },
+    "ErtObservationsSeismicStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'observations_seismic' standard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_observations_seismic.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "observations_seismic",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ErtObservationsSeismicStandardResult",
       "type": "object"
     },
     "ErtObservationsSummaryStandardResult": {

@@ -160,8 +160,6 @@ class ErtObservations:
         """The index columns for a seismic observations table."""
 
         response_key = "response_key"
-        east = "east"
-        north = "north"
 
 
 class SimulatorFipregionsMapping:

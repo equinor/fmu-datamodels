@@ -30,6 +30,7 @@ class StandardResultName(StrEnum):
     structure_depth_fault_surface = "structure_depth_fault_surface"
     fluid_contact_surface = "fluid_contact_surface"
     fluid_contact_outline = "fluid_contact_outline"
+    wellbore_mapping = "wellbore_mapping"
 
     # Sim 2 Sumo
     lift_curves = "lift_curves"

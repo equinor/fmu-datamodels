@@ -29,6 +29,7 @@ from .structure_depth_fault_lines import (
     StructureDepthFaultLinesResult,
     StructureDepthFaultLinesSchema,
 )
+from .wellbore_mapping import WellboreMappingResult, WellboreMappingSchema
 
 __all__ = [
     "ErtDistribution",
@@ -53,5 +54,7 @@ __all__ = [
     "StructureDepthFaultLinesResult",
     "FluidContactOutlineSchema",
     "FluidContactOutlineResult",
+    "WellboreMappingResult",
+    "WellboreMappingSchema",
     "StandardResultName",
 ]

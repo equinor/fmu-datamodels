@@ -46,6 +46,8 @@ from .standard_results import (
     StratigraphyMappingSchema,
     StructureDepthFaultLinesResult,
     StructureDepthFaultLinesSchema,
+    WellboreMappingResult,
+    WellboreMappingSchema,
 )
 
 try:
@@ -98,6 +100,8 @@ __all__ = [
     "StratigraphyMappingSchema",
     "StructureDepthFaultLinesResult",
     "StructureDepthFaultLinesSchema",
+    "WellboreMappingResult",
+    "WellboreMappingSchema",
 ]
 
 schemas: list[type[SchemaBase]] = [
@@ -112,4 +116,5 @@ schemas: list[type[SchemaBase]] = [
     ErtObservationsBreakthroughSchema,
     StratigraphyMappingSchema,
     StructureDepthFaultLinesSchema,
+    WellboreMappingSchema,
 ]

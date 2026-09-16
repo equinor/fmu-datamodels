@@ -44,9 +44,15 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.24.0"
+    VERSION: VersionStr = "0.25.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.25.0
+
+    - Bumped `ert_parameters.json` to version 0.2.0.
+    - Added `data.spec.value_statistics` to `$contractual`.
+    - Added 'wellbore_mapping' standard result.
+
     #### 0.24.0
 
     - Added `fmu.ensemble.description` to `$contractual`.
@@ -228,6 +234,7 @@ class FmuResultsSchema(SchemaBase):
         "data.offset",
         "data.seismic.attribute",
         "data.spec.columns",
+        "data.spec.value_statistics",
         "data.standard_result.name",
         "data.stratigraphic",
         "data.tagname",

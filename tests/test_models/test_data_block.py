@@ -170,29 +170,29 @@ def test_content_property_known_attribute_sets_is_discrete(
     assert model_metadata["data"]["property"]["is_discrete"] is True
 
 
-def test_content_property_known_attribute_updates_is_discrete(
+def test_content_property_known_attribute_warns_on_mismatching_is_discrete(
     property_metadata: dict,
 ) -> None:
     """
-    Test is_discrete field is updated with a warning for a known attribute if an
-    incorrect is_discrete value is set.
+    Test a warning is raised for a known attribute if an incorrect
+    is_discrete value is set, and the provided value is preserved.
     """
 
     _metadata = deepcopy(property_metadata)
     _metadata["data"]["property"]["attribute"] = "porosity"
     _metadata["data"]["property"]["is_discrete"] = True  # incorrect value for porosity
 
-    with pytest.warns(UserWarning, match="'is_discrete' field will be updated"):
+    with pytest.warns(UserWarning, match="input 'is_discrete' does not match"):
         model_metadata = FmuResults.model_validate(_metadata).model_dump()
-        assert model_metadata["data"]["property"]["is_discrete"] is False
+        assert model_metadata["data"]["property"]["is_discrete"] is True
 
     _metadata = deepcopy(property_metadata)
     _metadata["data"]["property"]["attribute"] = "facies"
     _metadata["data"]["property"]["is_discrete"] = False  # incorrect value for facies
 
-    with pytest.warns(UserWarning, match="'is_discrete' field will be updated"):
+    with pytest.warns(UserWarning, match="input 'is_discrete' does not match"):
         model_metadata = FmuResults.model_validate(_metadata).model_dump()
-        assert model_metadata["data"]["property"]["is_discrete"] is True
+        assert model_metadata["data"]["property"]["is_discrete"] is False
 
 
 def test_content_property_unknown_attribute(property_metadata: dict) -> None:

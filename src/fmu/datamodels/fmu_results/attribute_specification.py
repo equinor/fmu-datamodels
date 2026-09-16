@@ -56,7 +56,7 @@ class NetToGrossAttributeSpecification(AttributeSpecification):
     """Specifications related to the net-to-gross attribute."""
 
     attribute: Literal[enums.PropertyAttribute.net_to_gross]
-    is_discrete: bool = True
+    is_discrete: bool = False
     min_value: float = 0
     max_value: float = 1
 

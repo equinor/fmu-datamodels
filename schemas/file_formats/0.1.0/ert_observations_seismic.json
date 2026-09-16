@@ -18,9 +18,14 @@
         "observation_value": {
           "title": "Observation Value",
           "type": "number"
+        },
+        "response_key": {
+          "title": "Response Key",
+          "type": "string"
         }
       },
       "required": [
+        "response_key",
         "observation_value",
         "observation_error",
         "east",

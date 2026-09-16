@@ -15,6 +15,9 @@ class ErtObservationsSeismicResultRow(BaseModel):
     increase the version number in a way that corresponds to the schema versioning
     specification (i.e. they are a patch, minor, or major change)."""
 
+    response_key: str
+    """The response key this row represents. Required."""
+
     observation_value: float
     """The observation value this row represents. Required."""
 

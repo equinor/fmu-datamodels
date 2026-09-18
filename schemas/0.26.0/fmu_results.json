@@ -249,6 +249,9 @@
           "$ref": "#/$defs/SimulatorFipregionsMappingStandardResult"
         },
         {
+          "$ref": "#/$defs/SimulatorInplaceVolumesStandardResult"
+        },
+        {
           "$ref": "#/$defs/StratigraphyMappingStandardResult"
         },
         {
@@ -9840,6 +9843,28 @@
         "name"
       ],
       "title": "SimulatorFipregionsMappingStandardResult",
+      "type": "object"
+    },
+    "SimulatorInplaceVolumesStandardResult": {
+      "description": "The ``standard_result`` field contains information about which standard results this\ndata object represents.\n\nThis class contains metadata for the 'simulator_inplace_volumes'\nstandard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_inplace_volumes.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "simulator_inplace_volumes",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SimulatorInplaceVolumesStandardResult",
       "type": "object"
     },
     "Smda": {

@@ -50,6 +50,7 @@ class FmuResultsSchema(SchemaBase):
     #### 0.26.0
 
     - Added 'pvt' standard result schema.
+    - Added 'simulator_inplace_volumes' standard result.
 
     #### 0.25.0
 

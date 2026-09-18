@@ -1,0 +1,121 @@
+{
+  "$defs": {
+    "SimulatorInplaceVolumesResultRow": {
+      "description": "Represents the columns of a row in a simulator inplace volumes export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "ASSOCIATEDGAS": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Associatedgas"
+        },
+        "ASSOCIATEDOIL": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Associatedoil"
+        },
+        "DATE": {
+          "format": "date-time",
+          "title": "Date",
+          "type": "string"
+        },
+        "FIPNUM": {
+          "minimum": 0.0,
+          "title": "Fipnum",
+          "type": "integer"
+        },
+        "FLUID": {
+          "enum": [
+            "gas",
+            "oil"
+          ],
+          "title": "Fluid",
+          "type": "string"
+        },
+        "GIIP": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Giip"
+        },
+        "HCPV": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hcpv"
+        },
+        "PORV": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Porv"
+        },
+        "STOIIP": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stoiip"
+        }
+      },
+      "required": [
+        "FLUID",
+        "DATE",
+        "FIPNUM"
+      ],
+      "title": "SimulatorInplaceVolumesResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_inplace_volumes.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant simulator inplace volumes parquet file, which is\nnaturally a list of rows.\n\nConsumers who retrieve this parquet file must read it into a json-dictionary\nequivalent format to validate it against the schema.",
+  "items": {
+    "$ref": "#/$defs/SimulatorInplaceVolumesResultRow"
+  },
+  "title": "SimulatorInplaceVolumesResult",
+  "type": "array",
+  "version": "0.1.0"
+}

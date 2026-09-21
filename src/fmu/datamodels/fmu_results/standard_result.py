@@ -14,6 +14,7 @@ from fmu.datamodels.standard_results import (
     FieldOutlineSchema,
     FluidContactOutlineSchema,
     InplaceVolumesSchema,
+    PvtSchema,
     SimulatorFipregionsMappingSchema,
     StandardResultName,
     StratigraphyMappingSchema,
@@ -370,6 +371,12 @@ class PvtStandardResult(StandardResult):
 
     name: Literal[StandardResultName.pvt]
     """The identifying name for the 'pvt' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=PvtSchema.VERSION,
+        url=AnyHttpUrl(PvtSchema.url()),
+    )
+    """The schema identifying the format of the 'pvt' standard result."""
 
 
 class RelpermStandardResult(StandardResult):

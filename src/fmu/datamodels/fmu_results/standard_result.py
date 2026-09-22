@@ -14,6 +14,7 @@ from fmu.datamodels.standard_results import (
     FieldOutlineSchema,
     FluidContactOutlineSchema,
     InplaceVolumesSchema,
+    SimulationTimeseriesSchema,
     SimulatorFipregionsMappingSchema,
     StandardResultName,
     StratigraphyMappingSchema,
@@ -391,6 +392,14 @@ class SimulationTimeseriesStandardResult(StandardResult):
 
     name: Literal[StandardResultName.simulationtimeseries]
     """The identifying name for the 'simulationtimeseries' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=SimulationTimeseriesSchema.VERSION,
+        url=AnyHttpUrl(SimulationTimeseriesSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'simulationtimeseries' standard result.
+    """
 
 
 class TransmissibilitiesStandardResult(StandardResult):

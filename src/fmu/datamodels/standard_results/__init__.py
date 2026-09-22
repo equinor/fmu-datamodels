@@ -20,6 +20,10 @@ from .ert_parameters import (
 from .field_outline import FieldOutlineResult, FieldOutlineSchema
 from .fluid_contact_outline import FluidContactOutlineResult, FluidContactOutlineSchema
 from .inplace_volumes import InplaceVolumesResult, InplaceVolumesSchema
+from .simulation_timeseries import (
+    SimulationTimeseriesResult,
+    SimulationTimeseriesSchema,
+)
 from .simulator_fipregions_mapping import (
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
@@ -46,6 +50,8 @@ __all__ = [
     "FieldOutlineSchema",
     "InplaceVolumesResult",
     "InplaceVolumesSchema",
+    "SimulationTimeseriesResult",
+    "SimulationTimeseriesSchema",
     "SimulatorFipregionsMappingResult",
     "SimulatorFipregionsMappingSchema",
     "StratigraphyMappingResult",

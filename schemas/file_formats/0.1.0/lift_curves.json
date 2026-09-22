@@ -1,0 +1,158 @@
+{
+  "$defs": {
+    "LiftCurvesResultRow": {
+      "description": "Represents the columns of a row in a lift curves export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "ALQ": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alq"
+        },
+        "ALQ_TYPE": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alq Type"
+        },
+        "DATUM": {
+          "title": "Datum",
+          "type": "number"
+        },
+        "GFR": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gfr"
+        },
+        "GFR_TYPE": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gfr Type"
+        },
+        "PRESSURE": {
+          "title": "Pressure",
+          "type": "number"
+        },
+        "PRESSURE_TYPE": {
+          "title": "Pressure Type",
+          "type": "string"
+        },
+        "RATE": {
+          "title": "Rate",
+          "type": "number"
+        },
+        "RATE_TYPE": {
+          "title": "Rate Type",
+          "type": "string"
+        },
+        "TAB": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tab"
+        },
+        "TABLE_NUMBER": {
+          "title": "Table Number",
+          "type": "integer"
+        },
+        "TAB_TYPE": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tab Type"
+        },
+        "UNIT_TYPE": {
+          "title": "Unit Type",
+          "type": "string"
+        },
+        "VFP_TYPE": {
+          "title": "Vfp Type",
+          "type": "string"
+        },
+        "WFR": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Wfr"
+        },
+        "WFR_TYPE": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Wfr Type"
+        }
+      },
+      "required": [
+        "RATE",
+        "PRESSURE",
+        "VFP_TYPE",
+        "TABLE_NUMBER",
+        "DATUM",
+        "RATE_TYPE",
+        "PRESSURE_TYPE",
+        "UNIT_TYPE"
+      ],
+      "title": "LiftCurvesResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/lift_curves.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant lift curves parquet file, which is\nnaturally a list of rows.\n\nConsumers who retrieve this parquet file must read it into a json-dictionary\nequivalent format to validate it against the schema.",
+  "items": {
+    "$ref": "#/$defs/LiftCurvesResultRow"
+  },
+  "title": "LiftCurvesResult",
+  "type": "array",
+  "version": "0.1.0"
+}

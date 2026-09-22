@@ -40,6 +40,8 @@ from .standard_results import (
     FluidContactOutlineSchema,
     InplaceVolumesResult,
     InplaceVolumesSchema,
+    LiftCurvesResult,
+    LiftCurvesSchema,
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
     StratigraphyMappingResult,
@@ -102,6 +104,8 @@ __all__ = [
     "StructureDepthFaultLinesSchema",
     "WellboreMappingResult",
     "WellboreMappingSchema",
+    "LiftCurvesResult",
+    "LiftCurvesSchema",
 ]
 
 schemas: list[type[SchemaBase]] = [
@@ -117,4 +121,5 @@ schemas: list[type[SchemaBase]] = [
     StratigraphyMappingSchema,
     StructureDepthFaultLinesSchema,
     WellboreMappingSchema,
+    LiftCurvesSchema,
 ]

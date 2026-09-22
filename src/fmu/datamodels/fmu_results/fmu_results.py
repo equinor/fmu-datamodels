@@ -44,9 +44,13 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.25.0"
+    VERSION: VersionStr = "0.26.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.26.0
+
+    - Added 'SimulationTimeseries' standard result schema.
+    
     #### 0.25.0
 
     - Bumped `ert_parameters.json` to version 0.2.0.

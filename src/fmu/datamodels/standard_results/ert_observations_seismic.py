@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, RootModel
+from pydantic import BaseModel, ConfigDict, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 from fmu.datamodels.types import VersionStr
@@ -14,6 +14,8 @@ class ErtObservationsSeismicResultRow(BaseModel):
     their validation should cause the version defined in the standard result schema to
     increase the version number in a way that corresponds to the schema versioning
     specification (i.e. they are a patch, minor, or major change)."""
+
+    model_config = ConfigDict(use_attribute_docstrings=True)
 
     response_key: str
     """The response key this row represents. Required."""

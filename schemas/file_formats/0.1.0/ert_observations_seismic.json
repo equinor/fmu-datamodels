@@ -4,22 +4,27 @@
       "description": "Represents the columns of a row in a Ert seismic observation export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
       "properties": {
         "east": {
+          "description": "The east coordinate this row represents. Required.",
           "title": "East",
           "type": "number"
         },
         "north": {
+          "description": "The north coordinate this row represents. Required.",
           "title": "North",
           "type": "number"
         },
         "observation_error": {
+          "description": "The observation error in std this row represents. Required.",
           "title": "Observation Error",
           "type": "number"
         },
         "observation_value": {
+          "description": "The observation value this row represents. Required.",
           "title": "Observation Value",
           "type": "number"
         },
         "response_key": {
+          "description": "The response key this row represents. Required.",
           "title": "Response Key",
           "type": "string"
         }

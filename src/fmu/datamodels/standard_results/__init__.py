@@ -25,6 +25,10 @@ from .simulator_fipregions_mapping import (
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
 )
+from .simulator_layer_mapping import (
+    SimulatorLayerMappingResult,
+    SimulatorLayerMappingSchema,
+)
 from .stratigraphy_mapping import StratigraphyMappingResult, StratigraphyMappingSchema
 from .structure_depth_fault_lines import (
     StructureDepthFaultLinesResult,
@@ -51,6 +55,8 @@ __all__ = [
     "PvtSchema",
     "SimulatorFipregionsMappingResult",
     "SimulatorFipregionsMappingSchema",
+    "SimulatorLayerMappingResult",
+    "SimulatorLayerMappingSchema",
     "StratigraphyMappingResult",
     "StratigraphyMappingSchema",
     "StructureDepthFaultLinesSchema",

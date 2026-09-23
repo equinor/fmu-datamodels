@@ -1,0 +1,33 @@
+{
+  "$defs": {
+    "SimulatorLayerMappingResultRow": {
+      "description": "Represents the columns of a row in a simulator layer mapping export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "LAYER": {
+          "minimum": 1,
+          "title": "Layer",
+          "type": "integer"
+        },
+        "ZONE": {
+          "title": "Zone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "LAYER",
+        "ZONE"
+      ],
+      "title": "SimulatorLayerMappingResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_layer_mapping.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant simulator layer mapping parquet file, which is\nnaturally a list of rows.\n\nConsumers who retrieve this parquet file must read it into a json-dictionary\nequivalent format to validate it against the schema.",
+  "items": {
+    "$ref": "#/$defs/SimulatorLayerMappingResultRow"
+  },
+  "title": "SimulatorLayerMappingResult",
+  "type": "array",
+  "version": "0.1.0"
+}

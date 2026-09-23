@@ -38,6 +38,10 @@ from .simulator_fipregions_mapping import (
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
 )
+from .simulator_zone_layer_mapping import (
+    SimulatorZoneLayerMappingResult,
+    SimulatorZoneLayerMappingSchema,
+)
 from .stratigraphy_mapping import StratigraphyMappingResult, StratigraphyMappingSchema
 from .structure_depth_fault_lines import (
     StructureDepthFaultLinesResult,
@@ -72,6 +76,8 @@ __all__ = [
     "RelpermSchema",
     "SimulatorFipregionsMappingResult",
     "SimulatorFipregionsMappingSchema",
+    "SimulatorZoneLayerMappingResult",
+    "SimulatorZoneLayerMappingSchema",
     "StratigraphyMappingResult",
     "StratigraphyMappingSchema",
     "StructureDepthFaultLinesSchema",

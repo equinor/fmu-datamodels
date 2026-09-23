@@ -14,6 +14,7 @@ from fmu.datamodels.standard_results import (
     FieldOutlineSchema,
     FluidContactOutlineSchema,
     InplaceVolumesSchema,
+    LiftCurvesSchema,
     SimulatorFipregionsMappingSchema,
     StandardResultName,
     StratigraphyMappingSchema,
@@ -356,6 +357,14 @@ class LiftCurvesStandardResult(StandardResult):
 
     name: Literal[StandardResultName.lift_curves]
     """The identifying name for the 'lift_curves' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=LiftCurvesSchema.VERSION,
+        url=AnyHttpUrl(LiftCurvesSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'lift_curves' standard result.
+    """
 
 
 class ProductionNetworkStandardResult(StandardResult):

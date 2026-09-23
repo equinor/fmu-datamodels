@@ -20,6 +20,7 @@ from .ert_parameters import (
 from .field_outline import FieldOutlineResult, FieldOutlineSchema
 from .fluid_contact_outline import FluidContactOutlineResult, FluidContactOutlineSchema
 from .inplace_volumes import InplaceVolumesResult, InplaceVolumesSchema
+from .lift_curves import LiftCurvesResult, LiftCurvesSchema
 from .simulator_fipregions_mapping import (
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
@@ -57,4 +58,6 @@ __all__ = [
     "WellboreMappingResult",
     "WellboreMappingSchema",
     "StandardResultName",
+    "LiftCurvesResult",
+    "LiftCurvesSchema",
 ]

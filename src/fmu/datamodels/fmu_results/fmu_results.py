@@ -55,7 +55,7 @@ class FmuResultsSchema(SchemaBase):
     - Added separate 'model_stratigraphy_horizons' and 'model_stratigraphy_zones'
     standard results.
     - Added attribute docstrings to all pydantic file schemas.
-
+    - Added 'simulator_zone_layer_mapping' standard result.
 
     #### 0.25.0
 

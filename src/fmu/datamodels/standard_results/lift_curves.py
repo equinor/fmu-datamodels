@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, Field, RootModel
+from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 from fmu.datamodels.types import VersionStr
@@ -14,6 +14,8 @@ class LiftCurvesResultRow(BaseModel):
     their validation should cause the version defined in the standard result schema to
     increase the version number in a way that corresponds to the schema versioning
     specification (i.e. they are a patch, minor, or major change)."""
+
+    model_config = ConfigDict(use_attribute_docstrings=True)
 
     RATE: float
     """Flow rate. Required."""
@@ -34,34 +36,34 @@ class LiftCurvesResultRow(BaseModel):
     """Tabulated pressure axis value. Optional."""
 
     VFP_TYPE: str
-    """The VFP table type. Required."""
+    """Index column. The VFP table type. Required."""
 
     TABLE_NUMBER: int
-    """The VFP table number. Required."""
+    """Index column. The VFP table number. Required."""
 
     DATUM: float
     """The table reference depth. Required."""
 
     RATE_TYPE: str
-    """The flow-rate type. Required."""
+    """Index column. The flow-rate type. Required."""
 
     WFR_TYPE: str | None = Field(default=None)
-    """The water-fraction type. Optional."""
+    """Index column. The water-fraction type. Optional."""
 
     GFR_TYPE: str | None = Field(default=None)
-    """The gas-fraction type. Optional."""
+    """Index column. The gas-fraction type. Optional."""
 
     ALQ_TYPE: str | None = Field(default=None)
-    """The artificial-lift quantity type. Optional."""
+    """Index column. The artificial-lift quantity type. Optional."""
 
     PRESSURE_TYPE: str
-    """The pressure type. Required."""
+    """Index column. The pressure type. Required."""
 
     TAB_TYPE: str | None = Field(default=None)
-    """The tabulated pressure type. Optional."""
+    """Index column. The tabulated pressure type. Optional."""
 
     UNIT_TYPE: str
-    """The unit system. Required."""
+    """Index column. The unit system. Required."""
 
 
 class LiftCurvesResult(RootModel):

@@ -13,6 +13,7 @@
             }
           ],
           "default": null,
+          "description": "Artificial lift quantity axis value. Optional.",
           "title": "Alq"
         },
         "ALQ_TYPE": {
@@ -25,9 +26,11 @@
             }
           ],
           "default": null,
+          "description": "Index column. The artificial-lift quantity type. Optional.",
           "title": "Alq Type"
         },
         "DATUM": {
+          "description": "The table reference depth. Required.",
           "title": "Datum",
           "type": "number"
         },
@@ -41,6 +44,7 @@
             }
           ],
           "default": null,
+          "description": "Gas fraction axis value. Optional.",
           "title": "Gfr"
         },
         "GFR_TYPE": {
@@ -53,21 +57,26 @@
             }
           ],
           "default": null,
+          "description": "Index column. The gas-fraction type. Optional.",
           "title": "Gfr Type"
         },
         "PRESSURE": {
+          "description": "Pressure value. Required.",
           "title": "Pressure",
           "type": "number"
         },
         "PRESSURE_TYPE": {
+          "description": "Index column. The pressure type. Required.",
           "title": "Pressure Type",
           "type": "string"
         },
         "RATE": {
+          "description": "Flow rate. Required.",
           "title": "Rate",
           "type": "number"
         },
         "RATE_TYPE": {
+          "description": "Index column. The flow-rate type. Required.",
           "title": "Rate Type",
           "type": "string"
         },
@@ -81,9 +90,11 @@
             }
           ],
           "default": null,
+          "description": "Tabulated pressure axis value. Optional.",
           "title": "Tab"
         },
         "TABLE_NUMBER": {
+          "description": "Index column. The VFP table number. Required.",
           "title": "Table Number",
           "type": "integer"
         },
@@ -97,13 +108,16 @@
             }
           ],
           "default": null,
+          "description": "Index column. The tabulated pressure type. Optional.",
           "title": "Tab Type"
         },
         "UNIT_TYPE": {
+          "description": "Index column. The unit system. Required.",
           "title": "Unit Type",
           "type": "string"
         },
         "VFP_TYPE": {
+          "description": "Index column. The VFP table type. Required.",
           "title": "Vfp Type",
           "type": "string"
         },
@@ -117,6 +131,7 @@
             }
           ],
           "default": null,
+          "description": "Water fraction axis value. Optional.",
           "title": "Wfr"
         },
         "WFR_TYPE": {
@@ -129,6 +144,7 @@
             }
           ],
           "default": null,
+          "description": "Index column. The water-fraction type. Optional.",
           "title": "Wfr Type"
         }
       },

@@ -21,6 +21,7 @@ class StandardResultName(StrEnum):
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
     simulator_fipregions_mapping = "simulator_fipregions_mapping"
+    simulator_zone_layer_mapping = "simulator_zone_layer_mapping"
     structure_depth_surface = "structure_depth_surface"
     structure_time_surface = "structure_time_surface"
     grid_extracted_depth_surface = "grid_extracted_depth_surface"
@@ -195,6 +196,21 @@ class SimulatorFipregionsMapping:
     def index_columns() -> list[str]:
         """Returns a list of the index columns."""
         return [k.value for k in SimulatorFipregionsMapping.TableIndexColumns]
+
+
+class SimulatorZoneLayerMapping:
+    """Enumerations relevant to simulator zone layer mapping tables."""
+
+    class TableIndexColumns(StrEnum):
+        """The index columns for a simulator zone layer mapping table."""
+
+        LAYER = "LAYER"
+        ZONE = "ZONE"
+
+    @staticmethod
+    def index_columns() -> list[str]:
+        """Returns a list of the index columns."""
+        return [k.value for k in SimulatorZoneLayerMapping.TableIndexColumns]
 
 
 class SimulatorTables:

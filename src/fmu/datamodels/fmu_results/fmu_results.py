@@ -50,6 +50,8 @@ class FmuResultsSchema(SchemaBase):
     #### 0.26.0
 
     - Added 'pvt' standard result schema.
+    - Added 'observations_seismic' standard result for Ert seismic observations.
+
 
     #### 0.25.0
 

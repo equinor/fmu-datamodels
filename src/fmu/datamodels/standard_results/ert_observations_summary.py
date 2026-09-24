@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, Field, RootModel
+from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 from fmu.datamodels.types import VersionStr
@@ -16,11 +16,14 @@ class ErtObservationsSummaryResultRow(BaseModel):
     increase the version number in a way that corresponds to the schema versioning
     specification (i.e. they are a patch, minor, or major change)."""
 
+    model_config = ConfigDict(use_attribute_docstrings=True)
+
     response_key: str
-    """The response key this row represents. Required."""
+    """Index column. The response key this row represents. Required."""
 
     time: datetime
-    """The datetime in millisecond precision this row represents. Required."""
+    """Index column. The datetime in millisecond precision this row represents. 
+    Required."""
 
     observation_value: float
     """The observation value this row represents. Required."""
@@ -51,10 +54,15 @@ class ErtObservationsSummarySchema(SchemaBase):
     and schema location corresponds directly with the values and their validation
     constraints, documented above."""
 
-    VERSION: VersionStr = "0.1.0"
+    VERSION: VersionStr = "0.1.1"
     """The version of this schema."""
 
     VERSION_CHANGELOG: str = """
+    #### 0.1.1
+
+    - Added attribute docstrings to all fields in the 
+    ErtObservationsSummaryResultRow model.
+
     #### 0.1.0
 
     This is the initial schema version.

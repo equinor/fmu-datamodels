@@ -16,6 +16,7 @@ from fmu.datamodels.standard_results import (
     InplaceVolumesSchema,
     PvtSchema,
     SimulatorFipregionsMappingSchema,
+    SimulatorLayerMappingSchema,
     StandardResultName,
     StratigraphyMappingSchema,
     StructureDepthFaultLinesSchema,
@@ -170,6 +171,28 @@ class SimulatorFipregionsMappingStandardResult(StandardResult):
     )
     """
     The schema identifying the format of the 'simulator_fipregions_mapping'
+    standard result.
+    """
+
+
+class SimulatorLayerMappingStandardResult(StandardResult):
+    """
+    The ``standard_result`` field contains information about which standard results this
+    data object represents.
+
+    This class contains metadata for the 'simulator_layer_mapping'
+    standard result.
+    """
+
+    name: Literal[StandardResultName.simulator_layer_mapping]
+    """The identifying name for the 'simulator_layer_mapping' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=SimulatorLayerMappingSchema.VERSION,
+        url=AnyHttpUrl(SimulatorLayerMappingSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'simulator_layer_mapping'
     standard result.
     """
 
@@ -433,6 +456,7 @@ class AnyStandardResult(RootModel):
         | FieldOutlineStandardResult
         | InplaceVolumesStandardResult
         | SimulatorFipregionsMappingStandardResult
+        | SimulatorLayerMappingStandardResult
         | StratigraphyMappingStandardResult
         | StructureDepthSurfaceStandardResult
         | StructureDepthFaultSurfaceStandardResult

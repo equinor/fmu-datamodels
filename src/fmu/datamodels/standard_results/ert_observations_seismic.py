@@ -18,7 +18,7 @@ class ErtObservationsSeismicResultRow(BaseModel):
     model_config = ConfigDict(use_attribute_docstrings=True)
 
     response_key: str
-    """The response key this row represents. Required."""
+    """Index column. The response key this row represents. Required."""
 
     observation_value: float
     """The observation value this row represents. Required."""

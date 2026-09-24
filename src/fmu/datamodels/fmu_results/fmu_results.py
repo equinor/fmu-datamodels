@@ -51,6 +51,7 @@ class FmuResultsSchema(SchemaBase):
 
     - Added 'pvt' standard result schema.
     - Added 'observations_seismic' standard result for Ert seismic observations.
+    - Added attribute docstrings to all pydantic file schemas. 
 
 
     #### 0.25.0

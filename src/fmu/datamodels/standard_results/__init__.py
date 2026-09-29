@@ -25,6 +25,7 @@ from .field_outline import FieldOutlineResult, FieldOutlineSchema
 from .fluid_contact_outline import FluidContactOutlineResult, FluidContactOutlineSchema
 from .inplace_volumes import InplaceVolumesResult, InplaceVolumesSchema
 from .pvt import PvtResult, PvtSchema
+from .relperm import RelpermResult, RelpermSchema
 from .simulator_fipregions_mapping import (
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
@@ -55,6 +56,8 @@ __all__ = [
     "InplaceVolumesSchema",
     "PvtResult",
     "PvtSchema",
+    "RelpermResult",
+    "RelpermSchema",
     "SimulatorFipregionsMappingResult",
     "SimulatorFipregionsMappingSchema",
     "StratigraphyMappingResult",

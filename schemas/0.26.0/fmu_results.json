@@ -9057,15 +9057,11 @@
       "description": "This class contains metadata for the 'relperm' standard result.",
       "properties": {
         "file_schema": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/FileSchema"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/relperm.json",
+            "version": "0.1.0"
+          }
         },
         "name": {
           "const": "relperm",

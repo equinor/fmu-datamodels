@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "RelpermResultRow": {
+      "description": "Represents the columns of a row in a relperm export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "KEYWORD": {
+          "description": "The Eclipse saturation function keyword this row is derived from. Required.",
+          "title": "Keyword",
+          "type": "string"
+        },
+        "KRG": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The gas relative permeability this row represents. Optional.",
+          "title": "Krg"
+        },
+        "KROG": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The oil-gas relative permeability this row represents. Optional.",
+          "title": "Krog"
+        },
+        "KROW": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The oil-water relative permeability this row represents. Optional.",
+          "title": "Krow"
+        },
+        "KRW": {
+          "anyOf": [
+            {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The water relative permeability this row represents. Optional.",
+          "title": "Krw"
+        },
+        "PCOG": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The oil-gas capillary pressure this row represents. Optional.",
+          "title": "Pcog"
+        },
+        "PCOW": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The oil-water capillary pressure this row represents. Optional.",
+          "title": "Pcow"
+        },
+        "SATNUM": {
+          "description": "Index column. The saturation function region this row represents. Required.",
+          "minimum": 0,
+          "title": "Satnum",
+          "type": "integer"
+        },
+        "SG": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The gas saturation this row represents. Optional.",
+          "title": "Sg"
+        },
+        "SW": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The water saturation this row represents. Optional.",
+          "title": "Sw"
+        }
+      },
+      "required": [
+        "SATNUM",
+        "KEYWORD"
+      ],
+      "title": "RelpermResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/relperm.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant relperm parquet file as a list of rows.",
+  "items": {
+    "$ref": "#/$defs/RelpermResultRow"
+  },
+  "title": "RelpermResult",
+  "type": "array",
+  "version": "0.1.0"
+}

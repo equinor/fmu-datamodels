@@ -15,6 +15,7 @@ from fmu.datamodels.standard_results import (
     FluidContactOutlineSchema,
     InplaceVolumesSchema,
     PvtSchema,
+    RelpermSchema,
     SimulatorFipregionsMappingSchema,
     StandardResultName,
     StratigraphyMappingSchema,
@@ -408,6 +409,12 @@ class RelpermStandardResult(StandardResult):
 
     name: Literal[StandardResultName.relperm]
     """The identifying name for the 'relperm' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=RelpermSchema.VERSION,
+        url=AnyHttpUrl(RelpermSchema.url()),
+    )
+    """The schema identifying the format of the 'relperm' standard result."""
 
 
 class RftStandardResult(StandardResult):

@@ -1,0 +1,56 @@
+{
+  "$defs": {
+    "ModelStratigraphyZonesResultRow": {
+      "description": "Represents a zone in an RMS model stratigraphy.",
+      "properties": {
+        "base_horizon_name": {
+          "description": "Index column. Name of the horizon at the base of the zone. Required.",
+          "title": "Base Horizon Name",
+          "type": "string"
+        },
+        "name": {
+          "description": "Index column. Name of the zone. Required.",
+          "title": "Name",
+          "type": "string"
+        },
+        "stratigraphic_column_name": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Names of the stratigraphic columns the zone belongs to. Required.",
+          "title": "Stratigraphic Column Name"
+        },
+        "top_horizon_name": {
+          "description": "Index column. Name of the horizon at the top of the zone. Required.",
+          "title": "Top Horizon Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "top_horizon_name",
+        "base_horizon_name",
+        "stratigraphic_column_name"
+      ],
+      "title": "ModelStratigraphyZonesResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/model_stratigraphy_zones.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the model stratigraphy zones table as a list of rows.",
+  "items": {
+    "$ref": "#/$defs/ModelStratigraphyZonesResultRow"
+  },
+  "title": "ModelStratigraphyZonesResult",
+  "type": "array",
+  "version": "0.1.0"
+}

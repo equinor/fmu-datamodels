@@ -52,6 +52,8 @@ class FmuResultsSchema(SchemaBase):
     - Added 'pvt' standard result schema.
     - Added 'relperm' standard result schema.
     - Added 'observations_seismic' standard result for Ert seismic observations.
+    - Added separate 'model_stratigraphy_horizons' and 'model_stratigraphy_zones' 
+    standard results.
 
 
     #### 0.25.0

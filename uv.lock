@@ -360,6 +360,18 @@ wheels = [
 ]
 
 [[package]]
+name = "fmu-config"
+version = "1.7.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyyaml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/09/d5/51e7503c5a47d325581bee2b9cbf624f8243d115a4580989126e98468239/fmu_config-1.7.3.tar.gz", hash = "sha256:40683912cb9d02018c9775f83052c4d888e370d18b4444076649bef345e69325", size = 200264, upload-time = "2026-08-10T10:04:28.34Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9a/18/994bfc684c8659377f1609a39cb2cebd6db9126bdd1893740c5e7b511d57/fmu_config-1.7.3-py3-none-any.whl", hash = "sha256:7db419a39293fef47266bd54be621c959dda97cf31f5fc46872b972ce7c09514", size = 27050, upload-time = "2026-08-10T10:04:26.941Z" },
+]
+
+[[package]]
 name = "fmu-datamodels"
 source = { editable = "." }
 dependencies = [
@@ -369,6 +381,7 @@ dependencies = [
 [package.optional-dependencies]
 dev = [
     { name = "coverage" },
+    { name = "fmu-settings" },
     { name = "hypothesis" },
     { name = "mypy" },
     { name = "pyarrow" },
@@ -388,6 +401,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "coverage", marker = "extra == 'dev'", specifier = ">=4.1" },
+    { name = "fmu-settings", marker = "extra == 'dev'" },
     { name = "hypothesis", marker = "extra == 'dev'" },
     { name = "mypy", marker = "extra == 'dev'" },
     { name = "pyarrow", marker = "extra == 'dev'" },
@@ -403,6 +417,23 @@ requires-dist = [
     { name = "xtgeo", marker = "extra == 'dev'", specifier = ">=2.16" },
 ]
 provides-extras = ["dev", "docs"]
+
+[[package]]
+name = "fmu-settings"
+version = "1.4.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "annotated-types" },
+    { name = "fmu-config" },
+    { name = "fmu-datamodels" },
+    { name = "pandas" },
+    { name = "pydantic" },
+    { name = "pyyaml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/71/17/09a3752007f34b2abf66bf6b9661e17c87c91aeb5c7d83e3d1b56ec61c21/fmu_settings-1.4.2.tar.gz", hash = "sha256:f0e53d696a272e70aa773eebe0e1217599db53b5b29e6a6892abfa9db1ca564e", size = 823091, upload-time = "2026-09-25T06:44:55.475Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/53/cb/167c7486f2df1decb288cd7b713067533bbe4e8e7381cfde81f729fa47d5/fmu_settings-1.4.2-py3-none-any.whl", hash = "sha256:3c5baa4ebac33e17639320ecf5abc78cc383bd224e4cddca57e8bea4790a4405", size = 76134, upload-time = "2026-09-25T06:44:54.205Z" },
+]
 
 [[package]]
 name = "fonttools"
@@ -1928,7 +1959,7 @@ resolution-markers = [
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" } },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7a/97/5a3609c4f8d58b039179648e62dd220f89864f56f7357f5d4f45c29eb2cc/scipy-1.17.1.tar.gz", hash = "sha256:95d8e012d8cb8816c226aef832200b1d45109ed4464303e997c5b13122b297c0", size = 30573822, upload-time = "2026-02-23T00:26:24.851Z" }
 wheels = [
@@ -2010,7 +2041,7 @@ resolution-markers = [
     "python_full_version >= '3.12' and python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "numpy", version = "2.5.2", source = { registry = "https://pypi.org/simple" } },
+    { name = "numpy", version = "2.5.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7e/74/66de6258867beb2ef08f35f9f2ac017a52cacd5081714d239ff1a442d458/scipy-1.18.1.tar.gz", hash = "sha256:52c4b7422442aba924d03ad4019852b08a92e64ea187b933135687bfe2747307", size = 30781235, upload-time = "2026-08-21T23:28:50.599Z" }
 wheels = [

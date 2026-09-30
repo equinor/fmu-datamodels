@@ -14,6 +14,7 @@
             }
           ],
           "default": null,
+          "description": "The fluid compressibility this row represents. Optional.",
           "title": "Compressibility"
         },
         "GASDENSITY": {
@@ -27,9 +28,11 @@
             }
           ],
           "default": null,
+          "description": "The gas density this row represents. Optional.",
           "title": "Gasdensity"
         },
         "KEYWORD": {
+          "description": "Index column. The Eclipse PVT keyword this row is derived from (e.g. PVTO,\nPVDG, PVTW). Required.",
           "title": "Keyword",
           "type": "string"
         },
@@ -44,6 +47,7 @@
             }
           ],
           "default": null,
+          "description": "The vaporized oil-gas ratio this row represents. Optional.",
           "title": "Ogr"
         },
         "OILDENSITY": {
@@ -57,6 +61,7 @@
             }
           ],
           "default": null,
+          "description": "The oil density this row represents. Optional.",
           "title": "Oildensity"
         },
         "PRESSURE": {
@@ -70,9 +75,11 @@
             }
           ],
           "default": null,
+          "description": "The pressure this row represents. Optional.",
           "title": "Pressure"
         },
         "PVTNUM": {
+          "description": "Index column. The PVT region this row represents. Required.",
           "minimum": 0,
           "title": "Pvtnum",
           "type": "integer"
@@ -88,6 +95,7 @@
             }
           ],
           "default": null,
+          "description": "The solution gas-oil ratio this row represents. Optional.",
           "title": "Rs"
         },
         "VISCOSIBILITY": {
@@ -101,6 +109,7 @@
             }
           ],
           "default": null,
+          "description": "The viscosibility (viscosity compressibility) this row represents. Optional.",
           "title": "Viscosibility"
         },
         "VISCOSITY": {
@@ -114,6 +123,7 @@
             }
           ],
           "default": null,
+          "description": "The viscosity this row represents. Optional.",
           "title": "Viscosity"
         },
         "VOLUMEFACTOR": {
@@ -127,6 +137,7 @@
             }
           ],
           "default": null,
+          "description": "The formation volume factor this row represents. Optional.",
           "title": "Volumefactor"
         },
         "WATERDENSITY": {
@@ -140,6 +151,7 @@
             }
           ],
           "default": null,
+          "description": "The water density this row represents. Optional.",
           "title": "Waterdensity"
         }
       },

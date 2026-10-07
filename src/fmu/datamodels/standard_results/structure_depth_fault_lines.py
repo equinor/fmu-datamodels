@@ -2,15 +2,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, Field, RootModel
+from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
+from fmu.datamodels.types import VersionStr
 
 if TYPE_CHECKING:
     from pathlib import Path
     from typing import Any
-
-    from fmu.datamodels.types import VersionStr
 
 
 class StructureDepthFaultLinesResultRow(BaseModel):
@@ -20,6 +19,8 @@ class StructureDepthFaultLinesResultRow(BaseModel):
     their validation should cause the version defined in the standard result schema to
     increase the version number in a way that corresponds to the schema versioning
     specification (i.e. they are a patch, minor, or major change)."""
+
+    model_config = ConfigDict(use_attribute_docstrings=True)
 
     X_UTME: float
     """The X coordinate this row represents. Required."""
@@ -48,15 +49,20 @@ class StructureDepthFaultLinesResult(RootModel):
 
 
 class StructureDepthFaultLinesSchema(SchemaBase):
-    """This class represents the schema that is used to validate the fault lines
-    table being exported. This means that the version, schema filename, and schema
-    location corresponds directly with the values and their validation constraints,
-    documented above."""
+    """This class represents the schema that is used to validate the structure depth
+    fault lines table being exported. This means that the version, schema filename, and
+    schema location corresponds directly with the values and their validation
+    constraints, documented above."""
 
-    VERSION: VersionStr = "0.1.0"
+    VERSION: VersionStr = "0.1.1"
     """The version of this schema."""
 
     VERSION_CHANGELOG: str = """
+    #### 0.1.1
+
+    - Added attribute docstrings to all fields in the 
+    StructureDepthFaultLinesResultRow model.
+
     #### 0.1.0
 
     This is the initial schema version.

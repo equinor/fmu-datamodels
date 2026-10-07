@@ -24,7 +24,7 @@
           "type": "number"
         },
         "response_key": {
-          "description": "The response key this row represents. Required.",
+          "description": "Index column. The response key this row represents. Required.",
           "title": "Response Key",
           "type": "string"
         }

@@ -28,10 +28,8 @@ class ModelStratigraphyZonesResultRow(BaseModel):
     """Index column. Name of the horizon at the base of the zone. Required."""
 
     stratigraphic_column_names: list[str] | None
-    """Names of the stratigraphic columns the zone belongs to. Required.
-
-    None indicates that stratigraphic column information is unavailable.
-    """
+    """A list of stratigraphic columns the zone belongs to, or None if column
+    information is unavailable. Required."""
 
 
 class ModelStratigraphyZonesResult(RootModel):

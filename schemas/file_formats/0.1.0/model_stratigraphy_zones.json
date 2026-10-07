@@ -25,7 +25,7 @@
               "type": "null"
             }
           ],
-          "description": "Names of the stratigraphic columns the zone belongs to. Required.\n\nNone indicates that stratigraphic column information is unavailable.",
+          "description": "A list of stratigraphic columns the zone belongs to, or None if column\ninformation is unavailable. Required.",
           "title": "Stratigraphic Column Names"
         },
         "top_horizon_name": {

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, Field, RootModel
+from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 
@@ -20,6 +20,8 @@ class PvtResultRow(BaseModel):
     their validation should cause the version defined in the standard result schema to
     increase the version number in a way that corresponds to the schema versioning
     specification (i.e. they are a patch, minor, or major change)."""
+
+    model_config = ConfigDict(use_attribute_docstrings=True)
 
     PVTNUM: int = Field(ge=0)
     """Index column. The PVT region this row represents. Required."""

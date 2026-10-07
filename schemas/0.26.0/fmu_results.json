@@ -1340,8 +1340,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_observations_breakthrough.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/ert_observations_breakthrough.json",
+            "version": "0.1.1"
           }
         },
         "name": {
@@ -1362,8 +1362,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_observations_rft.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/ert_observations_rft.json",
+            "version": "0.1.1"
           }
         },
         "name": {
@@ -1406,8 +1406,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/ert_observations_summary.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/ert_observations_summary.json",
+            "version": "0.1.1"
           }
         },
         "name": {
@@ -3366,8 +3366,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/field_outline.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/field_outline.json",
+            "version": "0.1.1"
           }
         },
         "name": {
@@ -4161,8 +4161,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/fluid_contact_outline.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/fluid_contact_outline.json",
+            "version": "0.1.1"
           }
         },
         "name": {
@@ -4315,8 +4315,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/inplace_volumes.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/inplace_volumes.json",
+            "version": "0.1.1"
           }
         },
         "name": {
@@ -9897,8 +9897,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/simulator_fipregions_mapping.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/simulator_fipregions_mapping.json",
+            "version": "0.1.1"
           }
         },
         "name": {
@@ -10118,8 +10118,8 @@
         "file_schema": {
           "$ref": "#/$defs/FileSchema",
           "default": {
-            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/structure_depth_fault_lines.json",
-            "version": "0.1.0"
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/structure_depth_fault_lines.json",
+            "version": "0.1.1"
           }
         },
         "name": {

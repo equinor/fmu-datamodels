@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, Field, RootModel
+from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 from fmu.datamodels.types import VersionStr
@@ -19,6 +19,8 @@ class SimulatorFipregionsMappingResultRow(BaseModel):
     their validation should cause the version defined in the standard result schema to
     increase the version number in a way that corresponds to the schema versioning
     specification (i.e. they are a patch, minor, or major change)."""
+
+    model_config = ConfigDict(use_attribute_docstrings=True)
 
     FIPNUM: int = Field(ge=0)
     """Index column. The id of the fipregion this row represents. Required."""
@@ -46,9 +48,15 @@ class SimulatorFipregionsMappingSchema(SchemaBase):
     schema location corresponds directly with the values and their validation
     constraints, documented above."""
 
-    VERSION: VersionStr = "0.1.0"
+    VERSION: VersionStr = "0.1.1"
+    """The version of this schema."""
 
     VERSION_CHANGELOG: str = """
+    #### 0.1.1
+
+    - Added attribute docstrings to all fields in the 
+    SimulatorFipregionsMappingResultRow model.
+
     #### 0.1.0
 
     This is the initial schema version.

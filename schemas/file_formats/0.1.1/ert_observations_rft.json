@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "ErtObservationsRftResultRow": {
+      "description": "Represents the columns of a row in a Ert rft observation export.\n\nThese fields are the current agreed upon standard result. Changes to the fields or\ntheir validation should cause the version defined in the standard result schema to\nincrease the version number in a way that corresponds to the schema versioning\nspecification (i.e. they are a patch, minor, or major change).",
+      "properties": {
+        "date": {
+          "description": "Index column. The date in ISO 8601 format this row represents. Required.",
+          "title": "Date",
+          "type": "string"
+        },
+        "east": {
+          "description": "The east coordinate this row represents. Required.",
+          "title": "East",
+          "type": "number"
+        },
+        "md": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The measured depth along the well this row represents. Optional.",
+          "title": "Md"
+        },
+        "north": {
+          "description": "The north coordinate this row represents. Required.",
+          "title": "North",
+          "type": "number"
+        },
+        "observation_error": {
+          "description": "The observation error in std this row represents. Required.",
+          "title": "Observation Error",
+          "type": "number"
+        },
+        "observation_value": {
+          "description": "The observation value this row represents. Required.",
+          "title": "Observation Value",
+          "type": "number"
+        },
+        "property": {
+          "description": "Index column. The property this row represents, e.g. 'PRESSURE' or 'SWAT'. \nRequired.",
+          "title": "Property",
+          "type": "string"
+        },
+        "response_key": {
+          "description": "Index column. The response key this row represents. Required.",
+          "title": "Response Key",
+          "type": "string"
+        },
+        "tvd": {
+          "description": "The depth coordinate this row represents. Required.",
+          "title": "Tvd",
+          "type": "number"
+        },
+        "well": {
+          "description": "Index column. The well this row represents. Required.",
+          "title": "Well",
+          "type": "string"
+        },
+        "zone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Index column. The zone this row represents. Optional.",
+          "title": "Zone"
+        }
+      },
+      "required": [
+        "response_key",
+        "property",
+        "well",
+        "date",
+        "observation_value",
+        "observation_error",
+        "east",
+        "north",
+        "tvd"
+      ],
+      "title": "ErtObservationsRftResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.1/ert_observations_rft.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the resultant Ert rft observations parquet file, which is\nnaturally a list of rows.\n\nConsumers who retrieve this parquet file must read it into a json-dictionary\nequivalent format to validate it against the schema.",
+  "items": {
+    "$ref": "#/$defs/ErtObservationsRftResultRow"
+  },
+  "title": "ErtObservationsRftResult",
+  "type": "array",
+  "version": "0.1.1"
+}

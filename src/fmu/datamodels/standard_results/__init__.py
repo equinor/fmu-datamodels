@@ -24,6 +24,14 @@ from .ert_parameters import (
 from .field_outline import FieldOutlineResult, FieldOutlineSchema
 from .fluid_contact_outline import FluidContactOutlineResult, FluidContactOutlineSchema
 from .inplace_volumes import InplaceVolumesResult, InplaceVolumesSchema
+from .model_stratigraphy_horizons import (
+    ModelStratigraphyHorizonsResult,
+    ModelStratigraphyHorizonsSchema,
+)
+from .model_stratigraphy_zones import (
+    ModelStratigraphyZonesResult,
+    ModelStratigraphyZonesSchema,
+)
 from .pvt import PvtResult, PvtSchema
 from .relperm import RelpermResult, RelpermSchema
 from .simulator_fipregions_mapping import (
@@ -54,6 +62,10 @@ __all__ = [
     "FieldOutlineSchema",
     "InplaceVolumesResult",
     "InplaceVolumesSchema",
+    "ModelStratigraphyHorizonsResult",
+    "ModelStratigraphyHorizonsSchema",
+    "ModelStratigraphyZonesResult",
+    "ModelStratigraphyZonesSchema",
     "PvtResult",
     "PvtSchema",
     "RelpermResult",

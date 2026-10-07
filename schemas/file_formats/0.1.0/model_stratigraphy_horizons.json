@@ -1,0 +1,48 @@
+{
+  "$defs": {
+    "ModelStratigraphyHorizonsResultRow": {
+      "description": "Represents a horizon in an RMS model stratigraphy.",
+      "properties": {
+        "name": {
+          "description": "Index column. Name of the horizon. Required.",
+          "title": "Name",
+          "type": "string"
+        },
+        "stratigraphic_order": {
+          "description": "The zero-based order of the horizon in the stratigraphic column. Required.",
+          "minimum": 0,
+          "title": "Stratigraphic Order",
+          "type": "integer"
+        },
+        "type": {
+          "description": "Index column. Type of the horizon. Required.",
+          "enum": [
+            "calculated",
+            "calculated_unconformity",
+            "interpreted",
+            "interpreted_unconformity",
+            "interpreted_intrusion"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "stratigraphic_order"
+      ],
+      "title": "ModelStratigraphyHorizonsResultRow",
+      "type": "object"
+    }
+  },
+  "$id": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/model_stratigraphy_horizons.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents the model stratigraphy horizons table as a list of rows.",
+  "items": {
+    "$ref": "#/$defs/ModelStratigraphyHorizonsResultRow"
+  },
+  "title": "ModelStratigraphyHorizonsResult",
+  "type": "array",
+  "version": "0.1.0"
+}

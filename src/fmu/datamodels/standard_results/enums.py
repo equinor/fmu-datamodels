@@ -25,6 +25,8 @@ class StandardResultName(StrEnum):
     structure_time_surface = "structure_time_surface"
     grid_extracted_depth_surface = "grid_extracted_depth_surface"
     grid_model_static = "grid_model_static"
+    model_stratigraphy_horizons = "model_stratigraphy_horizons"
+    model_stratigraphy_zones = "model_stratigraphy_zones"
     stratigraphy_mapping = "stratigraphy_mapping"
     structure_depth_isochore = "structure_depth_isochore"
     structure_depth_fault_lines = "structure_depth_fault_lines"
@@ -160,6 +162,23 @@ class ErtObservations:
         """The index columns for a seismic observations table."""
 
         response_key = "response_key"
+
+
+class ModelStratigraphy:
+    """Enumerations relevant to model stratigraphy tables."""
+
+    class ZonesColumns(IndexColumnsStrEnum):
+        """The index columns for a model stratigraphy zones table."""
+
+        name = "name"
+        top_horizon_name = "top_horizon_name"
+        base_horizon_name = "base_horizon_name"
+
+    class HorizonsColumns(IndexColumnsStrEnum):
+        """The index columns for a model stratigraphy horizons table."""
+
+        name = "name"
+        type = "type"
 
 
 class SimulatorFipregionsMapping:

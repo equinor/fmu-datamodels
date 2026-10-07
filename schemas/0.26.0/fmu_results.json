@@ -249,6 +249,12 @@
           "$ref": "#/$defs/InplaceVolumesStandardResult"
         },
         {
+          "$ref": "#/$defs/ModelStratigraphyHorizonsStandardResult"
+        },
+        {
+          "$ref": "#/$defs/ModelStratigraphyZonesStandardResult"
+        },
+        {
           "$ref": "#/$defs/SimulatorFipregionsMappingStandardResult"
         },
         {
@@ -5436,6 +5442,50 @@
         "revision"
       ],
       "title": "Model",
+      "type": "object"
+    },
+    "ModelStratigraphyHorizonsStandardResult": {
+      "description": "Metadata for the 'model_stratigraphy_horizons' standard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/model_stratigraphy_horizons.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "model_stratigraphy_horizons",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ModelStratigraphyHorizonsStandardResult",
+      "type": "object"
+    },
+    "ModelStratigraphyZonesStandardResult": {
+      "description": "Metadata for the 'model_stratigraphy_zones' standard result.",
+      "properties": {
+        "file_schema": {
+          "$ref": "#/$defs/FileSchema",
+          "default": {
+            "url": "https://main-fmu-schemas-dev.radix.equinor.com/schemas/file_formats/0.1.0/model_stratigraphy_zones.json",
+            "version": "0.1.0"
+          }
+        },
+        "name": {
+          "const": "model_stratigraphy_zones",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ModelStratigraphyZonesStandardResult",
       "type": "object"
     },
     "NamedAreaData": {

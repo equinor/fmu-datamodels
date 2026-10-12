@@ -18,6 +18,8 @@ class StandardResultName(StrEnum):
     observations_rft = "observations_rft"
     observations_breakthrough = "observations_breakthrough"
     observations_seismic = "observations_seismic"
+    responses_summary = "responses_summary"
+    responses_rft = "responses_rft"
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
     simulator_fipregions_mapping = "simulator_fipregions_mapping"
@@ -163,6 +165,22 @@ class ErtObservations:
         """The index columns for a seismic observations table."""
 
         response_key = "response_key"
+
+    class SummaryResponseColumns(IndexColumnsStrEnum):
+        """The index columns for a summary responses table."""
+
+        realization = "realization"
+        response_key = "response_key"
+        time = "time"
+
+    class RftResponseColumns(IndexColumnsStrEnum):
+        """The index columns for a rft responses table."""
+
+        realization = "realization"
+        response_key = "response_key"
+        well = "well"
+        date = "date"
+        property = "property"
 
 
 class ModelStratigraphy:

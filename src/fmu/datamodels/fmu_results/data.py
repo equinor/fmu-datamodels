@@ -633,6 +633,16 @@ class SeismicData(Data):
     """A block describing seismic data. See :class:`Seismic`."""
 
 
+class StratigraphyData(Data):
+    """
+    The ``data`` block contains information about the data contained in this object.
+    This class contains metadata for stratigraphy.
+    """
+
+    content: Literal[enums.Content.stratigraphy]
+    """The type of content these data represent."""
+
+
 class SimulationTimeSeriesData(Data):
     """
     The ``data`` block contains information about the data contained in this object.
@@ -783,6 +793,7 @@ class AnyData(RootModel):
         | RelpermData
         | RFTData
         | SeismicData
+        | StratigraphyData
         | SimulationTimeSeriesData
         | SubcropData
         | ThicknessData

@@ -37,12 +37,6 @@ from fmu.datamodels.standard_results.ert_observations_seismic import (
 from fmu.datamodels.standard_results.ert_observations_summary import (
     ErtObservationsSummarySchema,
 )
-from fmu.datamodels.standard_results.ert_responses_rft import (
-    ErtResponsesRftSchema,
-)
-from fmu.datamodels.standard_results.ert_responses_summary import (
-    ErtResponsesSummarySchema,
-)
 from fmu.datamodels.types import VersionStr
 
 
@@ -498,42 +492,6 @@ class WellCompletionsStandardResult(StandardResult):
     """The identifying name for the 'well_completions' standard result."""
 
 
-class ErtResponsesSummaryStandardResult(StandardResult):
-    """
-    The ``standard_result`` field contains information about which standard results this
-    data object represents.
-
-    This class contains metadata for the 'responses_summary' standard result.
-    """
-
-    name: Literal[StandardResultName.responses_summary]
-    """The identifying name for the 'responses_summary' standard result."""
-
-    file_schema: FileSchema = FileSchema(
-        version=ErtResponsesSummarySchema.VERSION,
-        url=AnyHttpUrl(ErtResponsesSummarySchema.url()),
-    )
-    """The schema identifying the format of the 'responses_summary' standard result."""
-
-
-class ErtResponsesRftStandardResult(StandardResult):
-    """
-    The ``standard_result`` field contains information about which standard results this
-    data object represents.
-
-    This class contains metadata for the 'responses_rft' standard result.
-    """
-
-    name: Literal[StandardResultName.responses_rft]
-    """The identifying name for the 'responses_rft' standard result."""
-
-    file_schema: FileSchema = FileSchema(
-        version=ErtResponsesRftSchema.VERSION,
-        url=AnyHttpUrl(ErtResponsesRftSchema.url()),
-    )
-    """The schema identifying the format of the 'responses_rft' standard result."""
-
-
 class AnyStandardResult(RootModel):
     """
     The ``standard result`` field contains information about which standard result this
@@ -550,8 +508,6 @@ class AnyStandardResult(RootModel):
         | ErtObservationsSummaryStandardResult
         | ErtObservationsBreakthroughStandardResult
         | ErtObservationsSeismicStandardResult
-        | ErtResponsesSummaryStandardResult
-        | ErtResponsesRftStandardResult
         | ErtParametersStandardResult
         | FieldOutlineStandardResult
         | InplaceVolumesStandardResult

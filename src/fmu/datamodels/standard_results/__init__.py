@@ -21,14 +21,6 @@ from .ert_parameters import (
     ErtParametersResult,
     ErtParametersSchema,
 )
-from .ert_responses_rft import (
-    ErtResponsesRftResult,
-    ErtResponsesRftSchema,
-)
-from .ert_responses_summary import (
-    ErtResponsesSummaryResult,
-    ErtResponsesSummarySchema,
-)
 from .field_outline import FieldOutlineResult, FieldOutlineSchema
 from .fluid_contact_outline import FluidContactOutlineResult, FluidContactOutlineSchema
 from .inplace_volumes import InplaceVolumesResult, InplaceVolumesSchema
@@ -70,10 +62,6 @@ __all__ = [
     "ErtParameterMetadata",
     "ErtParametersResult",
     "ErtParametersSchema",
-    "ErtResponsesRftResult",
-    "ErtResponsesRftSchema",
-    "ErtResponsesSummaryResult",
-    "ErtResponsesSummarySchema",
     "FieldOutlineResult",
     "FieldOutlineSchema",
     "InplaceVolumesResult",

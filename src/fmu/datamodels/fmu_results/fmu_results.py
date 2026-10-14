@@ -56,8 +56,6 @@ class FmuResultsSchema(SchemaBase):
     standard results.
     - Added attribute docstrings to all pydantic file schemas.
     - Added 'simulator_zone_layer_mapping' standard result.
-    - Added 'responses_summary' standard result
-    - Added 'responses_rft' standard result
     - Added new content 'stratigraphy'
 
     #### 0.25.0

@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.15' and sys_platform == 'win32'",
@@ -496,7 +496,7 @@ docs = [
 [package.metadata]
 requires-dist = [
     { name = "coverage", marker = "extra == 'dev'", specifier = ">=4.1" },
-    { name = "fmu-settings", marker = "extra == 'dev'" },
+    { name = "fmu-settings", marker = "extra == 'dev'", specifier = ">=1.5.0" },
     { name = "hypothesis", marker = "extra == 'dev'" },
     { name = "mypy", marker = "extra == 'dev'" },
     { name = "pyarrow", marker = "extra == 'dev'" },
@@ -515,7 +515,7 @@ provides-extras = ["dev", "docs"]
 
 [[package]]
 name = "fmu-settings"
-version = "0.33.0"
+version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "annotated-types" },
@@ -525,9 +525,9 @@ dependencies = [
     { name = "pydantic" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/ae/b7e86f87d43341425a0a264668eb40341fc78cd3a9f5b288793abc6a9d2d/fmu_settings-0.33.0.tar.gz", hash = "sha256:5b62bb2c57f01183ddcf49ff45fc682864d4d0cbfb8110d5bb05b494af22851f", size = 779399, upload-time = "2026-06-16T12:09:58.499Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1d/00/3cc17990b93dcf3f46faa4f53dadebaa1e0c4ca1af3b6f82e53146b8deba/fmu_settings-1.6.0.tar.gz", hash = "sha256:8560f88486e4474d14d962e954f0650a4dad4300e47393846fe0484281003c64", size = 826837, upload-time = "2026-10-07T08:20:21.422Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/df/57/e0233760fac9d60c7a99fcccc81330b88ee327128642383568e0f4992e99/fmu_settings-0.33.0-py3-none-any.whl", hash = "sha256:489e79c9eceb00c35d2a69940556e4e7bfaacac4b8cd36a8b50abd3804dd949c", size = 61308, upload-time = "2026-06-16T12:09:57.01Z" },
+    { url = "https://files.pythonhosted.org/packages/77/20/388a976e50cd6f38aea1c128e87814e427d6e812bfc6d75995d32d2bc7ae/fmu_settings-1.6.0-py3-none-any.whl", hash = "sha256:28018d7a35c01a9029bc6d9f9816b1a1856cf59d495c531b312b0ff8271d7676", size = 77141, upload-time = "2026-10-07T08:20:19.924Z" },
 ]
 
 [[package]]

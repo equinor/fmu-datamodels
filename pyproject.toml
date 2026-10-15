@@ -41,7 +41,7 @@ Documentation = "https://fmu-dataio.readthedocs.io"
 [project.optional-dependencies]
 dev = [
     "coverage>=4.1",
-    "fmu-settings",
+    "fmu-settings>=1.5.0",
     "hypothesis",
     "mypy",
     "pyarrow",
@@ -60,6 +60,7 @@ docs = [
 
 [tool.setuptools_scm]
 write_to = "src/fmu/datamodels/version.py"
+fallback_version = "0.26.4"
 
 [tool.pytest.ini_options]
 minversion = "6.0"

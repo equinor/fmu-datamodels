@@ -57,8 +57,8 @@ class File(BaseModel):
     For files exported with the fmu.context ``case`` the field will be None.
     """
 
-    checksum_md5: MD5HashStr = Field(examples=["fa4d055b113ae5282796e328cde0ffa4"])
-    """A valid MD5 checksum of the file."""
+    checksum_md5: MD5HashStr = Field(examples=["XUFAKrxLKna5cZ2REBfFkg=="])
+    """The MD5 checksum of the file, encoded as base64 or hexadecimal."""
 
     size_bytes: int | None = Field(default=None)
     """Size of file object in bytes"""

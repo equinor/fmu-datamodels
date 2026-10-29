@@ -44,9 +44,14 @@ if TYPE_CHECKING:
 class FmuResultsSchema(SchemaBase):
     """The main metadata export describing the results."""
 
-    VERSION: VersionStr = "0.26.0"
+    VERSION: VersionStr = "0.27.0"
 
     VERSION_CHANGELOG: str = """
+    #### 0.27.0
+
+    - Accept base64 MD5 checksums in `file.checksum_md5` in addition to
+      hexadecimal checksums.
+
     #### 0.26.0
 
     - Added 'pvt' standard result schema.

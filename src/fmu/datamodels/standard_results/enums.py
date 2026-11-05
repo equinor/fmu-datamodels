@@ -21,6 +21,7 @@ class StandardResultName(StrEnum):
     field_outline = "field_outline"
     inplace_volumes = "inplace_volumes"
     simulator_fipregions_mapping = "simulator_fipregions_mapping"
+    simulator_inplace_volumes = "simulator_inplace_volumes"
     simulator_zone_layer_mapping = "simulator_zone_layer_mapping"
     structure_depth_surface = "structure_depth_surface"
     structure_time_surface = "structure_time_surface"

@@ -37,6 +37,9 @@ from fmu.datamodels.standard_results.ert_observations_seismic import (
 from fmu.datamodels.standard_results.ert_observations_summary import (
     ErtObservationsSummarySchema,
 )
+from fmu.datamodels.standard_results.simulator_inplace_volumes import (
+    SimulatorInplaceVolumesSchema,
+)
 from fmu.datamodels.types import VersionStr
 
 
@@ -198,6 +201,25 @@ class SimulatorFipregionsMappingStandardResult(StandardResult):
     )
     """
     The schema identifying the format of the 'simulator_fipregions_mapping'
+    standard result.
+    """
+
+
+class SimulatorInplaceVolumesStandardResult(StandardResult):
+    """
+    This class contains metadata for the 'simulator_inplace_volumes'
+    standard result.
+    """
+
+    name: Literal[StandardResultName.simulator_inplace_volumes]
+    """The identifying name for the 'simulator_inplace_volumes' standard result."""
+
+    file_schema: FileSchema = FileSchema(
+        version=SimulatorInplaceVolumesSchema.VERSION,
+        url=AnyHttpUrl(SimulatorInplaceVolumesSchema.url()),
+    )
+    """
+    The schema identifying the format of the 'simulator_inplace_volumes'
     standard result.
     """
 
@@ -515,6 +537,7 @@ class AnyStandardResult(RootModel):
         | ModelStratigraphyZonesStandardResult
         | SimulatorFipregionsMappingStandardResult
         | SimulatorZoneLayerMappingStandardResult
+        | SimulatorInplaceVolumesStandardResult
         | StratigraphyMappingStandardResult
         | StructureDepthSurfaceStandardResult
         | StructureDepthFaultSurfaceStandardResult

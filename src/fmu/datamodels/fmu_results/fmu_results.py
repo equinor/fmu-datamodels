@@ -52,6 +52,7 @@ class FmuResultsSchema(SchemaBase):
     - Accept base64 MD5 checksums in `file.checksum_md5` in addition to
       hexadecimal checksums.
     - Added new content 'co2_plume'.
+    - Added 'simulator_inplace_volumes' standard result.
 
     #### 0.26.0
 

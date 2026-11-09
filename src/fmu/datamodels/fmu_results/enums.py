@@ -16,8 +16,8 @@ class AxisOrientation(IntEnum):
 class Content(StrEnum):
     """The content type of a given data object."""
 
-    co2_plume = "co2_plume"
-    """Properties describing CO2 plumes in a CCS context.
+    co2_migration = "co2_migration"
+    """Properties describing CO2 migration in a CCS context.
 
     Typically provided as a Pandas ``DataFrame`` for export.
     """

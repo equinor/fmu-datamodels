@@ -123,7 +123,7 @@
       },
       "oneOf": [
         {
-          "$ref": "#/$defs/Co2PlumeData"
+          "$ref": "#/$defs/Co2MigrationData"
         },
         {
           "$ref": "#/$defs/DepthData"
@@ -657,8 +657,8 @@
       "title": "Classification",
       "type": "string"
     },
-    "Co2PlumeData": {
-      "description": "The ``data`` block contains information about the data contained in this object.\nThis class contains metadata for CO2 plumes.",
+    "Co2MigrationData": {
+      "description": "The ``data`` block contains information about the data contained in this object.\nThis class contains metadata for CO2 migration.",
       "properties": {
         "alias": {
           "anyOf": [
@@ -702,7 +702,7 @@
           "title": "Bbox"
         },
         "content": {
-          "const": "co2_plume",
+          "const": "co2_migration",
           "title": "Content",
           "type": "string"
         },
@@ -965,7 +965,7 @@
         "is_observation",
         "is_prediction"
       ],
-      "title": "Co2PlumeData",
+      "title": "Co2MigrationData",
       "type": "object"
     },
     "Context": {

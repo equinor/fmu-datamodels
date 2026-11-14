@@ -271,3 +271,10 @@ class SimulatorTables:
         WELL = "WELL"
         DATE = "DATE"
         ZONE = "ZONE"
+
+    class SimulatorInplaceVolumesColumns(IndexColumnsStrEnum):
+        """The index columns for a simulator inplace volumes table."""
+
+        FIPNUM = "FIPNUM"
+        DATE = "DATE"
+        FLUID = "FLUID"

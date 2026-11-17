@@ -18,6 +18,9 @@ class ErtObservationsSummaryResultRow(BaseModel):
 
     model_config = ConfigDict(use_attribute_docstrings=True)
 
+    observation_id: int | None = Field(default=None)
+    """Identifier used to relate this observation to its response. Optional."""
+
     response_key: str
     """Index column. The response key this row represents. Required."""
 
@@ -54,10 +57,14 @@ class ErtObservationsSummarySchema(SchemaBase):
     and schema location corresponds directly with the values and their validation
     constraints, documented above."""
 
-    VERSION: VersionStr = "0.1.1"
+    VERSION: VersionStr = "0.2.0"
     """The version of this schema."""
 
     VERSION_CHANGELOG: str = """
+    #### 0.2.0
+
+    - Added optional `observation_id` field to relate observations to responses.
+
     #### 0.1.1
 
     - Added attribute docstrings to all fields in the 

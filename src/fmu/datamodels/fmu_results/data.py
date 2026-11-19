@@ -385,6 +385,16 @@ class Data(BaseModel):
     .. note:: ``base`` is required to use with this."""
 
 
+class Co2MigrationData(Data):
+    """
+    The ``data`` block contains information about the data contained in this object.
+    This class contains metadata for CO2 migration.
+    """
+
+    content: Literal[enums.Content.co2_migration]
+    """The type of content these data represent."""
+
+
 class DepthData(Data):
     """
     The ``data`` block contains information about the data contained in this object.
@@ -771,7 +781,8 @@ class AnyData(RootModel):
     """
 
     root: Annotated[
-        DepthData
+        Co2MigrationData
+        | DepthData
         | FaciesThicknessData
         | FaultSurfaceData
         | FaultLinesData

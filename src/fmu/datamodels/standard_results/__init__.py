@@ -38,6 +38,10 @@ from .simulator_fipregions_mapping import (
     SimulatorFipregionsMappingResult,
     SimulatorFipregionsMappingSchema,
 )
+from .simulator_inplace_volumes import (
+    SimulatorInplaceVolumesResult,
+    SimulatorInplaceVolumesSchema,
+)
 from .simulator_zone_layer_mapping import (
     SimulatorZoneLayerMappingResult,
     SimulatorZoneLayerMappingSchema,
@@ -76,6 +80,8 @@ __all__ = [
     "RelpermSchema",
     "SimulatorFipregionsMappingResult",
     "SimulatorFipregionsMappingSchema",
+    "SimulatorInplaceVolumesResult",
+    "SimulatorInplaceVolumesSchema",
     "SimulatorZoneLayerMappingResult",
     "SimulatorZoneLayerMappingSchema",
     "StratigraphyMappingResult",

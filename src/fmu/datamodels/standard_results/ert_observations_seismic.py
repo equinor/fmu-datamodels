@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, RootModel
+from pydantic import BaseModel, ConfigDict, Field, RootModel
 
 from fmu.datamodels._schema_base import FMU_SCHEMAS_PATH, SchemaBase
 from fmu.datamodels.types import VersionStr
@@ -16,6 +16,9 @@ class ErtObservationsSeismicResultRow(BaseModel):
     specification (i.e. they are a patch, minor, or major change)."""
 
     model_config = ConfigDict(use_attribute_docstrings=True)
+
+    observation_id: int | None = Field(default=None)
+    """Identifier used to relate this observation to its response. Optional."""
 
     response_key: str
     """Index column. The response key this row represents. Required."""
@@ -49,10 +52,14 @@ class ErtObservationsSeismicSchema(SchemaBase):
     and schema location corresponds directly with the values and their validation
     constraints, documented above."""
 
-    VERSION: VersionStr = "0.1.0"
+    VERSION: VersionStr = "0.2.0"
     """The version of this schema."""
 
     VERSION_CHANGELOG: str = """
+    #### 0.2.0
+
+    - Added optional `observation_id` field to relate observations to responses.
+
     #### 0.1.0
 
     This is the initial schema version.
